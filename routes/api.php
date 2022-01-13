@@ -45,8 +45,8 @@ Route::post('login', 'AuthController@login');
 // Route::get('users', 'UserController@index');
 // Route::get('arrangeuser/{cate}/{type}',  [UserController::class, 'arrangeUser']);
 
-// // Banners
-// Route::get('banners', [BannerController::class, 'index']);
+// Banners
+Route::get('banners', 'BannerController@index');
 
 // // News 
 // Route::get('news/{number}', [NewController::class, 'index']);
