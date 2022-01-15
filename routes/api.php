@@ -31,13 +31,15 @@ Route::post('login', 'AuthController@login');
 //     Route::post('me', 'AuthController@me');
 
 // });
+
 // Products
+Route::get('products', 'ProductController@index');
 // Route::apiResource('products', ProductController::class);
 // Route::get('products/{id}', [ProductController::class, 'getCourse']);
 // Route::get('product/{id}', [ProductController::class, 'getACourse']);
 
-// // Category
-// Route::get('categories', [CategoryController::class, 'index']);
+// Category
+Route::get('categories', 'CategoryController@index');
 // Route::get('categories/show/{id}', [CategoryController::class, 'show']);
 // Route::get('categories/{id}', [CategoryController::class, 'getAcategory']);
 
