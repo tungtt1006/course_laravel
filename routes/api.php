@@ -50,8 +50,8 @@ Route::get('categories', 'CategoryController@index');
 // Banners
 Route::get('banners', 'BannerController@index');
 
-// // News 
-// Route::get('news/{number}', [NewController::class, 'index']);
+// News 
+Route::get('news', 'NewController@index');
 // Route::get('new/{id}', [NewController::class, 'getNew']);
 // Route::get('newslist', [NewController::class, 'getNews']);
 
