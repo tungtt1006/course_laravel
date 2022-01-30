@@ -32,7 +32,16 @@ use App\Models\Order;
 //     // Auth::Logout(); 
 //     return redirect(url('/login')); 
 // });
+Route::group(["prefix"=>"admin"], function() {
+    Route::get('/', function() {
+        return view('welcome');
+    })->name('home');
 
+    /**
+     * Users
+     */
+    Route::resource('users', 'UserController');
+});
 // Route::group(["prefix"=>"admin"], function() {
 //     Route::get('/', [App\Http\Controllers\HomeController::class,'index'])->name('home');
 
@@ -40,7 +49,7 @@ use App\Models\Order;
 //         return view('backend.403');
 //     });
 //     // Users
-//     Route::resource('users', UsersController::class)->middleware('permission.checker:admin');
+    // Route::resource('users', UsersController::class)->middleware('permission.checker:admin');
 //     Route::get('arrangeuser/{cate}/{type}',  [UsersController::class, 'arrangeUser'])
 //         ->name('users.arrangeuser'); 
 

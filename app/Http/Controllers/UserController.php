@@ -9,50 +9,26 @@ use App\Models\User;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a list of the resource
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $user_list = User::all();
-        $html = $this->ajax($user_list);
-        return (["html" => $html, "status" => "200 OK"]); 
+        $userList = User::all();
+        return view('backend.UserRead', ['data' => $userList]);
     }
 
     /**
-     * Cấu hình khối html trả về
+     * Show the form for editing the specified resource.
      *
-     * @param Collection
-     * @return String
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function ajax($user_list)
+    public function edit($id)
     {
-        $html = '';
-        foreach($user_list as $rows) {
-            $src_image = asset('backend/images/avatar/'. $rows->photo .'');
-            $action = url('admin/users/'. $rows->id .'');
-            $update_link = url('admin/users/'. $rows->id .'/edit');
-
-            $html .= '<tr>';
-            $html .= '<td>'. $rows->id. '</td>';
-            $html .= '<td class="avatar"><div class="round-img">';
-            $html .= '<a href="#">';
-            $html .= '<img style="width: 100%;" class="rounded-circle" src="'.$src_image.'" alt="">';
-            $html .= '</a></div>';
-            $html .= '</td>';
-            $html .= '<td>'. $rows->name    .'</td>';
-            $html .= '<td>'. $rows->email   .'</td>';
-            $html .= '<td>'. $rows->address .'</td>';
-            $html .= '<td>'. $rows->phone   .'</td>';
-            $html .= '<td>';
-            $html .= '<a class="badge badge-complete" style="color:white;" href="'.$update_link.'">';
-            $html .= '<i class="fas fa-pencil-alt"></i></a>';
-            $html .= '<p id='. $rows->id .' style="background-color:gray;border:none;cursor:pointer;" class="badge">';
-            $html .= '<i class="fas fa-trash-alt"></i></p>';
-            $html .= '</td></tr>';
-        }
-        return $html;
+        $user = User::find($id);
+        return view("backend.UserCreateUpdate", ["data" => $user, "action" => "update"]);
     }
 
     /** 
@@ -97,7 +73,34 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $users = User::find($id);
+        $users->name = $request->name;
+        if ($request->password != "") {
+            $users->password = FacadesHash::make($request->password);
+        }
+        $users->address = $request->address;
+        $users->phone = $request->phone;
+        $users->role = $request->role;
+        $users->gender = 1;
+        if ($request->photo != '') {        
+            $path = public_path().'/upload/users/';
+            // code for remove old file
+            if ($users->photo != '' && $users->photo != null) {
+               unlink($path.$users->photo);
+            }
+
+            //upload new file
+            $image = $request->file('photo');
+            $storedPath = $image->move('upload/users', $image->getClientOriginalName());
+          
+            if ($image->getClientOriginalName() != null) 
+                $users->photo = $image->getClientOriginalName(); 
+            else 
+                $users->photo = '';
+
+        }
+        $users->save();
+        return redirect(route("users.index"));
     }
 
     /**

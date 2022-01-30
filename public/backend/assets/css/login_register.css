@@ -1,0 +1,47 @@
+@font-face {
+  font-family: Gilroy-Extrabold;
+  src: url('../fonts/gilroy-extrabold.otf');
+}
+@font-face {
+  font-family: Gilroy-Light;
+  src: url('../fonts/gilroy-light.otf');
+}
+/*Login*/
+body {
+	background-color: #00c292;
+}
+.body {
+	padding-bottom: 50px;
+}
+input.text {
+   height: 50px;
+}
+input.btn_login {
+   background-color: #00c292;
+   color: white;
+   font-size: 20px;
+   padding: 5px 30px;
+   font-family: Gilroy-Light;
+   border-radius: 10px;
+   font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.forgot_pass {
+   color: black;
+}
+.forgot_pass:hover {
+   color: black;
+}
+i {
+   font-size: 35px;
+}
+.title_login i {
+   color: black;
+   font-size: 50px;
+}
+.link_signup {
+   color: black;
+   font-weight: 700;
+   margin-top: 10px;
+   margin-bottom: 20px;
+}
+/*Register*/
