@@ -75,13 +75,16 @@ class UserController extends Controller
     {
         $users = User::find($id);
         $users->name = $request->name;
-        if ($request->password != "") {
-            $users->password = FacadesHash::make($request->password);
+        if ($request->password != "" && $users->password === $request->confirm_password) {
+            $users->password = bcrypt($request->password);
         }
         $users->address = $request->address;
         $users->phone = $request->phone;
         $users->role = $request->role;
         $users->gender = 1;
+        /**
+         * Upload file
+         */
         if ($request->photo != '') {        
             $path = public_path().'/upload/users/';
             // code for remove old file
