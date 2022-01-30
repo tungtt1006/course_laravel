@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -28,7 +29,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view("backend.UserCreateUpdate", ["data" => $user, "action" => "update"]);
+        return view("backend.UserCreateUpdate", ["data" => $user]);
     }
 
     /** 
@@ -43,14 +44,25 @@ class UserController extends Controller
     }
 
     /**
+     * Show the form for creating the specified resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view("backend.UserCreateUpdate", ["action" => "update"]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        echo "hello world";
     }
 
     /**

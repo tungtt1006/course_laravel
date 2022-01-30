@@ -12,6 +12,15 @@
                             <div class="col-md-10">
                                 <strong class="card-title" >Quản lý tài khoản</strong>
                             </div>
+                            <div class="col-md-2 text-right">
+                                <a 
+                                    href="{{ route('users.create') }}"
+                                    class="btn btn-success py-1 px-3" 
+                                    style="color:white;"
+                                >
+                                    <i class="fas fa-plus"></i> Create
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">

@@ -7,23 +7,54 @@
     </div>
 
     <div class="card-body">
-        @if ($action == 'update')
+        @if (isset($data))
             <form method="post" action="{{ route('users.update', ['user' => $data->id]) }}" enctype="multipart/form-data">
                 @method('PUT')
-        @elseif ($action == 'create')
+        @else
             <form method="post" action="{{ route('users.store') }}" enctype="multipart/form-data">
         @endif
             @csrf
+            @php
+                /**
+                 * Name
+                 */
+                if (isset($data))
+                    $name = $data->name;
+                elseif (old('name') != '')
+                    $name = old('name');
+                else
+                    $name = '';
+                
+                /**
+                 * Email
+                 */
+                if (isset($data))
+                    $email = $data->name;
+                elseif (old('name') != '')
+                    $email = old('email');
+                else
+                    $email = '';
+
+                /**
+                 * Phone
+                 */
+                if (isset($data))
+                    $phone = $data->phone;
+                elseif (old('phone') != '')
+                    $phone = old('phone');
+                else
+                    $phone = '';
+            @endphp
             <!-- Name -->
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Tên</div>
                 <div class="col-md-10 pl-0">
                     <input 
-                        type="text" 
-                        value="{{ isset($data->name) ? $data->name : '' }}" 
+                        type="text"  
                         name="name" 
                         class="form-control" 
                         required
+                        value="{{ $name }}"
                     >
                 </div>
             </div>
@@ -34,7 +65,7 @@
                 <div class="col-md-10 pl-0">
                     <input 
                         type="email" 
-                        value="{{ isset($data->email) ? $data->email : '' }}"
+                        value="{{ $email }}"
                         name="email"
                         class="form-control" 
                         required
@@ -50,11 +81,11 @@
                         type="password" 
                         name="password"
                         class="form-control" 
-                        {{ ($action == 'create') ? required : '' }}
+                        {{ (!isset($data)) ? 'required' : '' }}
                     >
                 </div>
                 <div class="col-md-2">
-                    {{ ($action == 'update') ? 'Mẫu khẩu cũ' : 'Nhập lại' }}
+                    {{ isset($data) ? 'Mẫu khẩu cũ' : 'Nhập lại mật khẩu' }}
                 </div>
                 <div class="col-md-4 pl-0">
                     <input 
@@ -71,7 +102,7 @@
                 <div class="col-md-10 pl-0">
                     <input 
                         type="text" 
-                        value="{{ isset($data->phone) ? $data->phone : '' }}" 
+                        value="{{ $phone }}" 
                         name="phone" 
                         class="form-control" 
                         required
@@ -97,19 +128,15 @@
                 <div class="col-md-2">Quyền</div>
                 <div class="col-md-3 pl-0">
                     <select name="role" class="form-control" required>
-                        <option 
+                       <option 
                             value="1" 
-                            @if ($data->role == 1 && $action == 'update')
-                                selected
-                            @endif
+                            {{ (isset($data) && $data->role == 1) ? 'selected' : '' }}
                         >
                             Người quản trị
                         </option>
                         <option 
                             value="0"
-                            @if ($data->role == 0 && $action == 'update')
-                                selected
-                            @endif
+                            {{ (isset($data) && $data->role == 1) ? 'selected' : '' }}
                         >
                             Nhân viên
                         </option>
@@ -138,7 +165,7 @@
                     </a>
                     <input 
                         type="submit" 
-                        value="{{ ($action == 'update') ? 'Cập nhật' : 'Thêm mới' }}" 
+                        value="{{ isset($data) ? 'Cập nhật' : 'Thêm mới' }}" 
                         class="btn btn-success"
                     >
                 </div>
