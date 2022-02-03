@@ -1,9 +1,8 @@
 <ul class="nav navbar-nav">
-    <li class="active">
-        <a href="{{ route('home') }}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+    <li class="{{ Route::currentRouteNamed('home') ? 'active' : '' }}">
+        <a href="{{ route('home') }}"><i class="menu-icon fa fa-laptop"></i>Trang chủ </a>
     </li>
-    <li class="menu-title">Data Management</li>
-    <li>
+    <li class="{{ Route::currentRouteNamed('users.index') ? 'active' : '' }}">
         <a href="{{ route('users.index') }}">
             <i class="menu-icon fas fa-users"></i> Tài khoản 
         </a>
@@ -28,7 +27,6 @@
         <i class="menu-icon fas fa-images"></i> Banners
         </a>
     </li>
-    <li class="menu-title">Customers Management</li>
     <li>
         <a href="">
         <i class="menu-icon fas fa-chart-bar"></i> Orders  

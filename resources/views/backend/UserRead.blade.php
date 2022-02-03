@@ -29,10 +29,11 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th><div class="round-img">Avatar</div></th>
+                                        <th>
+                                            <div class="round-img">Avatar</div>
+                                        </th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Address</th>
                                         <th>Phone</th>
                                         <th>Role</th>
                                         <th></th>
@@ -47,7 +48,6 @@
                                         </td>
                                         <td>{{ $rows->name }}</td>
                                         <td>{{ $rows->email }}</td>
-                                        <td>{{ $rows->address }}</td>
                                         <td>{{ $rows->phone }}</td> 
                                         <td>
                                             {{ ($rows->role == 1) ? 'Người quản trị' : 'Nhân viên' }} 

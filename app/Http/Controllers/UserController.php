@@ -31,51 +31,7 @@ class UserController extends Controller
         $user = User::find($id);
         return view("backend.UserCreateUpdate", ["data" => $user]);
     }
-
-    /** 
-     * Sắp xếp
-     *  
-     */
-    public function arrangeUser($cate, $type)
-    {
-        $user_list = User::orderBy($cate,$type)->get();
-        $html = $this->ajax($user_list);
-        return (["html" => $html, "status" => "200 OK"]);
-    }
-
-    /**
-     * Show the form for creating the specified resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view("backend.UserCreateUpdate", ["action" => "update"]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(UserRequest $request)
-    {
-        echo "hello world";
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -93,7 +49,7 @@ class UserController extends Controller
         $users->address = $request->address;
         $users->phone = $request->phone;
         $users->role = $request->role;
-        $users->gender = 1;
+        $users->gender = $request->gender;
         /**
          * Upload file
          */
@@ -116,6 +72,63 @@ class UserController extends Controller
         }
         $users->save();
         return redirect(route("users.index"));
+    }
+
+    /** 
+     * Sắp xếp
+     *  
+     */
+    public function arrangeUser($cate, $type)
+    {
+        $user_list = User::orderBy($cate,$type)->get();
+        $html = $this->ajax($user_list);
+        return (["html" => $html, "status" => "200 OK"]);
+    }
+
+    /**
+     * Show the form for creating the specified resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view("backend.UserCreateUpdate");
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(UserRequest $request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->role = $request->role;
+        $user->gender = $request->gender;
+        // $user->file = '';
+        if ($user->save()) {
+            return redirect(route("users.index"));
+        } else {
+            return redirect(route("403"));
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
     }
 
     /**

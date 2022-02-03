@@ -24,11 +24,12 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail| required| alpha| min:1| max:10',
+            'name' => 'bail| required| alpha| between: 1, 10',
             'email' => 'bail| required| email',
-            'password' => 'bail| required| confirmed| min:8| max:11',
-            'phone' => 'bail| required| numeric| size:10',
-            'role' => 'bail| required| numeric'
+            'password' => 'bail| required| confirmed| between: 8, 11',
+            'phone' => 'bail| required| regex: /[0-9]/| size: 10',
+            'role' => 'bail| required| numeric',
+            'gender' => 'bail| required| numeric| between: 0,2'
         ];
     }
 
@@ -41,18 +42,19 @@ class UserRequest extends FormRequest
     {
         return [
             'name.required' => 'Tên không được bỏ trống',
-            'name.min' => 'Tên phải có độ dài từ 1 đến 10 chữ cái',
-            'name.max' => 'Tên phải có độ dài từ 1 đến 10 chữ cái',
+            'name.between' => 'Tên phải có độ dài từ 1 đến 10 chữ cái',
             'name.alpha' => 'Tên chỉ được chứa chữ cái',
             'email.required' => 'Email không được bỏ trống',
             'email.required' => 'Bạn chưa nhập đúng định dạng email',
             'password.required' => 'Mật khẩu không được bỏ trống',
-            'password.min' => 'Mật khẩu phải có độ dài từ 1 đến 10 kí tự',
-            'password.max' => 'Mật khẩu phải có độ dài từ 1 đến 10 kí tự',
+            'password.between' => 'Mật khẩu phải có độ dài từ 8 đến 10 kí tự',
             'password.confirmed' => 'Mật khẩu nhập lại không khớp',
             'phone.required' => 'Số điện thoại không được bỏ trống',
-            'phone.numeric' => 'Số điện thoại không được là chữ',
-            'phone.size' => 'Số điện thoại không được quá 10 chữ số',
+            'phone.regex' => 'Số điện thoại chưa đúng định dạng',
+            'phone.size' => 'Số điện thoại phải đủ 10 chữ số',
+            'gender.required' => 'Giới tính không được bỏ trống',
+            'gender.numeric' => 'Giới tính không được là chữ',
+            'gender.between' => 'Chỉ được chọn các giá trị cho sẵn',
         ];
     }
 }

@@ -29,8 +29,8 @@
                  * Email
                  */
                 if (isset($data))
-                    $email = $data->name;
-                elseif (old('name') != '')
+                    $email = $data->email;
+                elseif (old('email') != '')
                     $email = old('email');
                 else
                     $email = '';
@@ -44,6 +44,36 @@
                     $phone = old('phone');
                 else
                     $phone = '';
+                
+                /**
+                 * Address
+                 */
+                if (isset($data))
+                    $address = $data->address;
+                elseif (old('address') != '')
+                    $address = old('address');
+                else
+                    $address = '';
+
+                /**
+                 * Role
+                 */
+                if (isset($data))
+                    $role = $data->role;
+                elseif (old('role') != '')
+                    $role = old('role');
+                else
+                    $role = 1;
+                
+                /**
+                 * Gender
+                 */
+                if (isset($data))
+                    $gender = $data->gender;
+                elseif (old('gender') != '')
+                    $gender = old('gender');
+                else
+                    $gender = 1;
             @endphp
             <!-- Name -->
             <div class="row" style="margin-top:5px;">
@@ -90,7 +120,7 @@
                 <div class="col-md-4 pl-0">
                     <input 
                         type="password" 
-                        name="confirm_password"
+                        name="password_confirmation"
                         class="form-control"
                     >
                 </div>
@@ -119,28 +149,54 @@
                         name="address" 
                         class="form-control"
                         rows="2" 
-                    >{{ isset($data->address) ? $data->address : '' }}</textarea>
+                    >{{ $address }}</textarea>
                 </div>
             </div>
             
-            <!-- Role -->
+            <!-- Role & Gender -->
             <div class="row mt-3">
                 <div class="col-md-2">Quyền</div>
                 <div class="col-md-3 pl-0">
                     <select name="role" class="form-control" required>
                        <option 
                             value="1" 
-                            {{ (isset($data) && $data->role == 1) ? 'selected' : '' }}
+                            {{ ($role == 1) ? 'selected' : '' }}
                         >
                             Người quản trị
                         </option>
                         <option 
                             value="0"
-                            {{ (isset($data) && $data->role == 1) ? 'selected' : '' }}
+                            {{ ($role == 0) ? 'selected' : '' }}
                         >
                             Nhân viên
                         </option>
                     </select>
+                </div>
+                <div class="col-md-1">Giới tính</div>
+                <div class="col-md-3 pl-0">
+                    <div class="form-check">
+                        <input 
+                            type="radio" 
+                            name="gender" 
+                            value="1" 
+                            {{ ($gender == 1) ? 'checked' : '' }}
+                        >
+                        <label class="form-check-label mr-3">Nam</label>
+                        <input 
+                            type="radio" 
+                            name="gender" 
+                            value="0"
+                            {{ ($gender == 0) ? 'checked' : '' }}
+                        >
+                        <label class="form-check-label mr-3">Nữ</label>
+                        <input 
+                            type="radio" 
+                            name="gender" 
+                            value="2"
+                            {{ ($gender == 2) ? 'checked' : '' }}
+                        >
+                        <label class="form-check-label">Khác</label>
+                    </div>
                 </div>
             </div>
             

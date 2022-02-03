@@ -36,6 +36,10 @@ Route::group(["prefix"=>"admin"], function() {
     Route::get('/', function() {
         return view('welcome');
     })->name('home');
+    
+    Route::get('/403',function() {
+        return view('backend.403');
+    })->name('403');
 
     /**
      * Users
@@ -45,9 +49,6 @@ Route::group(["prefix"=>"admin"], function() {
 // Route::group(["prefix"=>"admin"], function() {
 //     Route::get('/', [App\Http\Controllers\HomeController::class,'index'])->name('home');
 
-//     Route::get('/403',function() {
-//         return view('backend.403');
-//     });
 //     // Users
     // Route::resource('users', UsersController::class)->middleware('permission.checker:admin');
 //     Route::get('arrangeuser/{cate}/{type}',  [UsersController::class, 'arrangeUser'])
