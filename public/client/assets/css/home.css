@@ -1,0 +1,38 @@
+.banner-list {
+    padding-bottom: 30px;
+}
+.title-category {
+    font-weight: 500;
+    font-size: 35px;
+}
+.course-item {
+    width: 23%;
+    color: black;
+    text-decoration: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.course-item:hover {
+    color: black;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.course-item img {
+    border-bottom: 1px solid lightgray;
+}
+.course-item .course-item-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    color: #757575;
+    margin: 0;
+}
+.course-item .course-item-discount-price {
+    text-decoration: line-through;
+    color: darkgray;
+    font-size: 12px;
+}
+.course-item .course-item-price {
+    font-weight: 500;
+    font-size: 20px;
+}

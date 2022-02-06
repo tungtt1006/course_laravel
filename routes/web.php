@@ -1,20 +1,5 @@
 <?php
-
-use App\Http\Controllers\BannerController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UsersController;
-use App\Http\Controllers\ProductController;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\DiscountController;
-use App\Http\Controllers\NewsController;
-use App\Http\Controllers\OrderController;
-use App\Models\Customer;
-use App\Models\Order;
-
-// use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +17,9 @@ use App\Models\Order;
 //     // Auth::Logout(); 
 //     return redirect(url('/login')); 
 // });
+
+Route::get('/', 'Client\HomeController@index');
+
 Route::group(["prefix"=>"admin"], function() {
     Route::get('/', function() {
         return view('welcome');
@@ -45,6 +33,11 @@ Route::group(["prefix"=>"admin"], function() {
      * Users
      */
     Route::resource('users', 'UserController');
+
+    /**
+     * Category
+     */
+    Route::resource('category', 'CategoryController');
 });
 // Route::group(["prefix"=>"admin"], function() {
 //     Route::get('/', [App\Http\Controllers\HomeController::class,'index'])->name('home');

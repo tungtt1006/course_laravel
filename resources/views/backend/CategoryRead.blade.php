@@ -1,7 +1,7 @@
 @extends("layouts.layout")
 
 @section("main")
-<link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/user.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/category.css') }}">
 <div class="content">
     <div class="animated fadeIn">
         <div class="row">
@@ -10,11 +10,11 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-10">
-                                <strong class="card-title">Quản lý tài khoản</strong>
+                                <strong class="card-title">Quản lý khóa học</strong>
                             </div>
                             <div class="col-md-2 text-right">
                                 <a 
-                                    href="{{ route('users.create') }}"
+                                    href="{{ route('category.create') }}"
                                     class="btn btn-success py-1 px-3" 
                                     style="color:white;"
                                 >
@@ -29,13 +29,8 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>
-                                            <div class="round-img">Avatar</div>
-                                        </th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Role</th>
+                                        <th class="text-center">Tên</th>
+                                        <th class="text-center">Hiển thị</th>
                                         <th></th>
                                     </tr>   
                                 </thead>
@@ -43,19 +38,18 @@
                                     @foreach($data as $rows)
                                     <tr>
                                         <td>{{ $rows->id }}</td>
-                                        <td>
-                                            <img class="rounded-circle" src="{{ asset('upload/users/'.$rows->photo) }}">
-                                        </td>
-                                        <td>{{ $rows->name }}</td>
-                                        <td>{{ $rows->email }}</td>
-                                        <td>{{ $rows->phone }}</td> 
-                                        <td>
-                                            {{ ($rows->role == 1) ? 'Người quản trị' : 'Nhân viên' }} 
+                                        <td class="text-center">{{ $rows->name }}</td>
+                                        <td class="text-center">
+                                            @if ($rows->display == 1)
+                                                <i class="fas fa-check" style="color:green;"></i>
+                                            @elseif ($rows->display == 0)
+                                                <i class="fas fa-times" style="color:red;"></i>
+                                            @endif
                                         </td>
                                         <td>
                                             <form 
                                                 style="display:inline;" 
-                                                action="{{ route('users.destroy', ['user' => $rows->id]) }}" 
+                                                action="{{ route('category.destroy', ['category' => $rows->id]) }}" 
                                                 method="POST" 
                                                 onsubmit="return confirm('Are you sure you want to delete?');"
                                             >
@@ -64,7 +58,7 @@
                                                 <a 
                                                     class="badge badge-complete" 
                                                     style="color:white;" 
-                                                    href="{{ url('admin/users/'.$rows->id.'/edit') }}"
+                                                    href="{{ url('admin/category/'.$rows->id.'/edit') }}"
                                                 >
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>

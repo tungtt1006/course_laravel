@@ -12,7 +12,7 @@ class BannerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public static function index()
     {
         return Banner::where('display', '=', 1)->limit(3)->get();
     }

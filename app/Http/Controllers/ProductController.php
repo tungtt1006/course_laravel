@@ -40,4 +40,29 @@ class ProductController extends Controller
         }
         return $data;
     }
+
+    /**
+     * Get highlight course list
+     *
+     * 
+     */
+    public static function getHighlightCourse()
+    {
+        return Product::where('display', '=', 1)
+            ->limit(4)
+            ->get();
+    }
+
+    /**
+     * Get newest course list
+     *
+     * 
+     */
+    public static function getNewestCourse()
+    {
+        return Product::where('display', '=', 1)
+            ->orderBy('created_at', 'desc')
+            ->limit(4)
+            ->get();
+    }
 }

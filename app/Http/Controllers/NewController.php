@@ -22,4 +22,18 @@ class NewController extends Controller
                         ->get();
         return $data;
     }
+
+    /**
+     * Get highlight news
+     *
+     * @return Collection
+     */
+    public static function getHighlightNews()
+    {
+        return News::select('id', 'name', 'description', 'created_at', 'photo')
+            ->where('display', '=', 1)
+            ->orderBy('created_at', 'desc')
+            ->limit(4)
+            ->get();
+    }   
 }

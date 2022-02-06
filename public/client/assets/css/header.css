@@ -1,0 +1,14 @@
+.header {
+    background-color: #00c292;
+}
+.nav_brand, .nav_item {
+    color: white !important;
+}
+.sign_in, .sign_up {
+    color: white;
+    text-decoration: none;
+}
+.sign_in:hover, .sign_up:hover {
+    color: white;
+    text-decoration: underline;
+}

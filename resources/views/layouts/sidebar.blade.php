@@ -7,9 +7,9 @@
             <i class="menu-icon fas fa-users"></i> Tài khoản 
         </a>
     </li>
-    <li>
-        <a href="">
-        <i class="menu-icon fas fa-book"></i></i> Danh mục 
+    <li class="{{ Route::currentRouteNamed('category.index') ? 'active' : '' }}">
+        <a href="{{ route('category.index') }}">
+            <i class="menu-icon fas fa-book"></i></i> Danh mục 
         </a>
     </li>
     <li>
