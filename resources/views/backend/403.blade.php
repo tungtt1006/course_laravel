@@ -1,6 +1,7 @@
 @extends("layouts.layout")
-@section("do-du-lieu")
+
+@section("main")
 <div style="padding-bottom: 400px;">
-<h4>You do not have permission to access this function!</h4>
+    <h4>Not Found!!</h4>
 </div>
 @endsection

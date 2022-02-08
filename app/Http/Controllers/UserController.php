@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends Controller
 {
@@ -16,8 +17,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $userList = User::all();
-        return view('backend.UserRead', ['data' => $userList]);
+        $userList = User::limit(5)->get();
+        if ($userList) {
+            return view('backend.UserRead', ['data' => $userList]);
+        } else {
+            return redirect(route("403"));
+        }
     }
 
     /**
@@ -29,9 +34,13 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view("backend.UserCreateUpdate", ["data" => $user]);
+        if ($user) {
+            return view("backend.UserCreateUpdate", ["data" => $user]);
+        } else {
+            return redirect(route("403"));
+        }
     }
-    
+
     /**
      * Update the specified resource in storage.
      *
@@ -39,11 +48,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         $users = User::find($id);
         $users->name = $request->name;
-        if ($request->password != "" && $users->password === $request->confirm_password) {
+        $users->email = $request->email;
+        if ($request->password != "" && $users->password === $request->password_confirmation) {
             $users->password = bcrypt($request->password);
         }
         $users->address = $request->address;
@@ -53,34 +63,38 @@ class UserController extends Controller
         /**
          * Upload file
          */
-        if ($request->photo != '') {        
+        if ($request->photo != '') {
             $path = public_path().'/upload/users/';
             // code for remove old file
             if ($users->photo != '' && $users->photo != null) {
-               unlink($path.$users->photo);
+                unlink($path.$users->photo);
             }
 
-            //upload new file
+            // Upload new file
             $image = $request->file('photo');
             $storedPath = $image->move('upload/users', $image->getClientOriginalName());
-          
-            if ($image->getClientOriginalName() != null) 
-                $users->photo = $image->getClientOriginalName(); 
-            else 
-                $users->photo = '';
 
+            if ($image->getClientOriginalName() != null) {
+                $users->photo = $image->getClientOriginalName();
+            } else {
+                $users->photo = '';
+            }
         }
-        $users->save();
-        return redirect(route("users.index"));
+        if ($users->save()) {
+            // return redirect(route("users.index"));
+            return redirect(route("users.index"));
+        } else {
+            return redirect(route("403"));
+        }
     }
 
-    /** 
-     * Sắp xếp
-     *  
+    /**
+     * Arrange User
+     *
      */
     public function arrangeUser($cate, $type)
     {
-        $user_list = User::orderBy($cate,$type)->get();
+        $user_list = User::orderBy($cate, $type)->get();
         $html = $this->ajax($user_list);
         return (["html" => $html, "status" => "200 OK"]);
     }
@@ -144,6 +158,6 @@ class UserController extends Controller
             return redirect(route("users.index"));
         } else {
             return redirect(route("403"));
-        } 
+        }
     }
 }

@@ -27,7 +27,7 @@ class CategoryController extends Controller
     public function arrangeCategory($cate, $type)
     {
         $data = Category::select('id', 'name', 'display')
-            ->orderBy($cate,$type)
+            ->orderBy($cate, $type)
             ->paginate(5);
         return view('backend.category_read', ["data" => $data]);
     }
@@ -119,6 +119,6 @@ class CategoryController extends Controller
             return redirect(route("category.index"));
         } else {
             return redirect(route("403"));
-        } 
+        }
     }
 }

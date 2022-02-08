@@ -8,20 +8,20 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     /**
-     * Lấy danh sách danh mục 
+     * Get category
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        if(isset($request->exceptId)) {
+        if (isset($request->exceptId)) {
             $x = $request->exceptId;
         } else {
             $x = '';
         }
         $pagesize = isset($request->pagesize) ? $request->pagesize : 5;
         $type = isset($request->type) ? $request->type : 'all';
-        
+
         switch ($type) {
             case 'hightlight':
                 $data = Product::where('display', '=', 1)
@@ -44,7 +44,7 @@ class ProductController extends Controller
     /**
      * Get highlight course list
      *
-     * 
+     *
      */
     public static function getHighlightCourse()
     {
@@ -56,7 +56,7 @@ class ProductController extends Controller
     /**
      * Get newest course list
      *
-     * 
+     *
      */
     public static function getNewestCourse()
     {

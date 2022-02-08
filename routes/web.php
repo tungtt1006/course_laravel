@@ -14,18 +14,17 @@ use Illuminate\Support\Facades\Route;
 
 // Auth::routes();
 // Route::get('/logout', function() {
-//     // Auth::Logout(); 
-//     return redirect(url('/login')); 
+//     // Auth::Logout();
+//     return redirect(url('/login'));
 // });
 
-Route::get('/', 'Client\HomeController@index');
+Route::get('/', 'Client\HomeController@index')->name('home.index');
 
-Route::group(["prefix"=>"admin"], function() {
-    Route::get('/', function() {
+Route::group(["prefix" => "admin"], function () {
+    Route::get('/', function () {
         return view('welcome');
     })->name('home');
-    
-    Route::get('/403',function() {
+    Route::get('/403', function () {
         return view('backend.403');
     })->name('403');
 
@@ -45,7 +44,7 @@ Route::group(["prefix"=>"admin"], function() {
 //     // Users
     // Route::resource('users', UsersController::class)->middleware('permission.checker:admin');
 //     Route::get('arrangeuser/{cate}/{type}',  [UsersController::class, 'arrangeUser'])
-//         ->name('users.arrangeuser'); 
+//         ->name('users.arrangeuser');
 
 //     // Product
 //     Route::resource('products', ProductController::class);
@@ -54,7 +53,6 @@ Route::group(["prefix"=>"admin"], function() {
 
 //     Route::get('arrangecategory/{cate}/{type}',  [ProductController::class, 'arrangeCategory'])
 //         ->name('products.arrangecategory');
-        
 //     // Category
 //     Route::resource('categories', CategoryController::class);
 //     Route::get('arrangecategory/{cate}/{type}',  [CategoryController::class, 'arrangeCategory'])
@@ -62,7 +60,7 @@ Route::group(["prefix"=>"admin"], function() {
 
 //     // New
 //     Route::resource('news', NewsController::class);
-    
+
 //     // Discount
 //     Route::resource('discounts', DiscountController::class);
 
@@ -76,5 +74,3 @@ Route::group(["prefix"=>"admin"], function() {
 //     // Customer
 //     Route::resource('customers', CustomerController::class);
 // });
-
-

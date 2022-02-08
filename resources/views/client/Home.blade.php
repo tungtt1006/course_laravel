@@ -6,7 +6,7 @@
 
 @section("main")
     <!-- Banner List -->
-    <div 
+    <div
         class="row pt-4 banner-list"
     >
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -34,7 +34,7 @@
             </button>
         </div>
     </div>
-    
+
     <!-- Highlight Course -->
     <div class="row d-flex justify-content-around">
         <h1 class="mt-3 title-category">Khóa học nổi bật</h1>
@@ -54,7 +54,7 @@
             </a>
         @endforeach
     </div>
-    
+
     <!-- Newest Course -->
     <div class="row mt-3 d-flex justify-content-around">
         <h1 class="mt-3 title-category">Khóa học Mới nhất</h1>
@@ -82,7 +82,7 @@
             <a href="" class="card mb-3 p-0 card-news">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img 
+                        <img
                             src="{{ asset('upload/products/'.$highlightNew->photo) }}" 
                             class=" img-fluid rounded-start" 
                         >

@@ -13,7 +13,7 @@
                                 <strong class="card-title">Quản lý tài khoản</strong>
                             </div>
                             <div class="col-md-2 text-right">
-                                <a 
+                                <a
                                     href="{{ route('users.create') }}"
                                     class="btn btn-success py-1 px-3" 
                                     style="color:white;"
@@ -48,22 +48,22 @@
                                         </td>
                                         <td>{{ $rows->name }}</td>
                                         <td>{{ $rows->email }}</td>
-                                        <td>{{ $rows->phone }}</td> 
+                                        <td>{{ $rows->phone }}</td>
                                         <td>
                                             {{ ($rows->role == 1) ? 'Người quản trị' : 'Nhân viên' }} 
                                         </td>
                                         <td>
-                                            <form 
-                                                style="display:inline;" 
-                                                action="{{ route('users.destroy', ['user' => $rows->id]) }}" 
-                                                method="POST" 
+                                            <form
+                                                style="display:inline;"
+                                                action="{{ route('users.destroy', ['user' => $rows->id]) }}"
+                                                method="POST"
                                                 onsubmit="return confirm('Are you sure you want to delete?');"
                                             >
                                                 @csrf
                                                 @method('DELETE')
-                                                <a 
-                                                    class="badge badge-complete" 
-                                                    style="color:white;" 
+                                                <a
+                                                    class="badge badge-complete"
+                                                    style="color:white;"
                                                     href="{{ url('admin/users/'.$rows->id.'/edit') }}"
                                                 >
                                                     <i class="fas fa-pencil-alt"></i>
@@ -71,7 +71,7 @@
                                                 <button type="submit" style="background-color:gray;border:none;cursor:pointer;" class="badge badge-complete">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
-                                            </form>  
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach

@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable  implements JWTSubject
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
     use SoftDeletes;
@@ -25,7 +25,7 @@ class User extends Authenticatable  implements JWTSubject
         'address',
         'phone',
         'gender',
-        'role' 
+        'role'
     ];
 
     /**
@@ -57,7 +57,8 @@ class User extends Authenticatable  implements JWTSubject
      *
      * @return mixed
      */
-    public function getJWTIdentifier() {
+    public function getJWTIdentifier()
+    {
         return $this->getKey();
     }
 
@@ -66,7 +67,8 @@ class User extends Authenticatable  implements JWTSubject
      *
      * @return array
      */
-    public function getJWTCustomClaims() {
+    public function getJWTCustomClaims()
+    {
         return [];
-    }   
+    }
 }

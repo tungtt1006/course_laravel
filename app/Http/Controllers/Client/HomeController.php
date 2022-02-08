@@ -10,7 +10,8 @@ use App\Http\Controllers\NewController as Newss;
 
 class HomeController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $banners = Banner::index();
         $highlightCourses = Product::getHighlightCourse();
         $newestCourses = Product::getNewestCourse();

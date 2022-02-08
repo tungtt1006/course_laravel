@@ -44,7 +44,7 @@
                     $phone = old('phone');
                 else
                     $phone = '';
-                
+
                 /**
                  * Address
                  */
@@ -64,7 +64,7 @@
                     $role = old('role');
                 else
                     $role = 1;
-                
+
                 /**
                  * Gender
                  */
@@ -79,10 +79,10 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Tên</div>
                 <div class="col-md-10 pl-0">
-                    <input 
-                        type="text"  
-                        name="name" 
-                        class="form-control" 
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control"
                         required
                         value="{{ $name }}"
                     >
@@ -93,13 +93,13 @@
             <div class="row mt-3">
                 <div class="col-md-2">Email</div>
                 <div class="col-md-10 pl-0">
-                    <input 
-                        type="email" 
+                    <input
+                        type="email"
                         value="{{ $email }}"
                         name="email"
-                        class="form-control" 
+                        class="form-control"
                         required
-                    >  
+                    >
                 </div>
             </div>
 
@@ -107,10 +107,10 @@
             <div class="row mt-3">
                 <div class="col-md-2">Mật khẩu</div>
                 <div class="col-md-4 pl-0">
-                    <input 
-                        type="password" 
+                    <input
+                        type="password"
                         name="password"
-                        class="form-control" 
+                        class="form-control"
                         {{ (!isset($data)) ? 'required' : '' }}
                     >
                 </div>
@@ -118,14 +118,14 @@
                     {{ isset($data) ? 'Mẫu khẩu cũ' : 'Nhập lại mật khẩu' }}
                 </div>
                 <div class="col-md-4 pl-0">
-                    <input 
-                        type="password" 
+                    <input
+                        type="password"
                         name="password_confirmation"
                         class="form-control"
                     >
                 </div>
             </div>
-            
+
             <!-- Phone -->
             <div class="row mt-3">
                 <div class="col-md-2">Điện thoại</div>
@@ -139,7 +139,7 @@
                     >
                 </div>
             </div>
-            
+
             <!-- Address -->
             <div class="row mt-3">
                 <div class="col-md-2">Địa chỉ</div>
@@ -152,7 +152,7 @@
                     >{{ $address }}</textarea>
                 </div>
             </div>
-            
+
             <!-- Role & Gender -->
             <div class="row mt-3">
                 <div class="col-md-2">Quyền</div>
@@ -175,23 +175,23 @@
                 <div class="col-md-1">Giới tính</div>
                 <div class="col-md-3 pl-0">
                     <div class="form-check">
-                        <input 
-                            type="radio" 
-                            name="gender" 
-                            value="1" 
+                        <input
+                            type="radio"
+                            name="gender"
+                            value="1"
                             {{ ($gender == 1) ? 'checked' : '' }}
                         >
                         <label class="form-check-label mr-3">Nam</label>
-                        <input 
-                            type="radio" 
-                            name="gender" 
+                        <input
+                            type="radio"
+                            name="gender"
                             value="0"
                             {{ ($gender == 0) ? 'checked' : '' }}
                         >
                         <label class="form-check-label mr-3">Nữ</label>
-                        <input 
-                            type="radio" 
-                            name="gender" 
+                        <input
+                            type="radio"
+                            name="gender"
                             value="2"
                             {{ ($gender == 2) ? 'checked' : '' }}
                         >
@@ -199,7 +199,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Upload image -->
             <div class="row mt-3">
                 <div class="col-md-2">Ảnh đại diện</div>
