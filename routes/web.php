@@ -18,15 +18,25 @@ use Illuminate\Support\Facades\Route;
 //     return redirect(url('/login'));
 // });
 
-Route::get('/', 'Client\HomeController@index')->name('home.index');
+Route::get('/', 'client\HomeController@index')->name('home.index');
+Route::get('/category', 'CategoryController@getCategoryWId')->name('category.getCategoryWId');
 
 Route::group(["prefix" => "admin"], function () {
     Route::get('/', function () {
         return view('welcome');
     })->name('home');
+
     Route::get('/403', function () {
         return view('backend.403');
     })->name('403');
+
+    /**
+     * Auth
+     */
+    Route::get('/login', 'backend\auth\AuthController@login')->name('auth.login');
+    Route::post('/login', 'backend\auth\AuthController@authLogin')->name('auth.authLogin');
+    Route::get('/register', 'backend\auth\AuthController@register')->name('auth.register');
+    Route::post('/register', 'backend\auth\AuthController@authRegister')->name('auth.authRegister');
 
     /**
      * Users

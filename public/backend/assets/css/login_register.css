@@ -1,36 +1,47 @@
-@font-face {
+.main-auth {
+   margin: auto;
+   margin-top: 50px;
+   width: 50%;
+   border-radius: 10px;
+   border: 1px solid lightgray;
+   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+/* @font-face {
   font-family: Gilroy-Extrabold;
   src: url('../fonts/gilroy-extrabold.otf');
 }
 @font-face {
   font-family: Gilroy-Light;
   src: url('../fonts/gilroy-light.otf');
-}
+} */
 /*Login*/
-body {
+/* body {
 	background-color: #00c292;
-}
-.body {
+} */
+/* .body {e
 	padding-bottom: 50px;
 }
 input.text {
    height: 50px;
+} */
+input.btn-login, input.btn-register {
+    background-color: #00c292;
+    color: white;
+    font-size: 20px;
+    padding: 5px 30px;
+    font-family: Gilroy-Light;
+    border-radius: 5px;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-input.btn_login {
-   background-color: #00c292;
-   color: white;
-   font-size: 20px;
-   padding: 5px 30px;
-   font-family: Gilroy-Light;
-   border-radius: 10px;
-   font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-.forgot_pass {
+.forgot-pass {
    color: black;
+   text-decoration: none;
 }
-.forgot_pass:hover {
+.forgot-pass:hover {
    color: black;
+   text-decoration: underline;
 }
+/*
 i {
    font-size: 35px;
 }
@@ -43,5 +54,5 @@ i {
    font-weight: 700;
    margin-top: 10px;
    margin-bottom: 20px;
-}
+} */
 /*Register*/

@@ -76,15 +76,15 @@
     </div>
 
     <!-- Highlight News -->
-    <div class="row">
+    <div class="row mt-5 highlight-news-list">
         @foreach ($highlightNews as $highlightNew)
         <div class="col-md-11">
             <a href="" class="card mb-3 p-0 card-news">
                 <div class="row g-0">
                     <div class="col-md-4">
                         <img
-                            src="{{ asset('upload/products/'.$highlightNew->photo) }}" 
-                            class=" img-fluid rounded-start" 
+                            src="{{ asset('upload/news/'.$highlightNew->photo) }}"
+                            class=" img-fluid rounded-start"
                         >
                     </div>
                     <div class="col-md-8">

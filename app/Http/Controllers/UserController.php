@@ -53,35 +53,34 @@ class UserController extends Controller
         $users = User::find($id);
         $users->name = $request->name;
         $users->email = $request->email;
-        if ($request->password != "" && $users->password === $request->password_confirmation) {
+        if (isset($request->password)
+            && $users->password === $request->password_confirmation
+        ) {
             $users->password = bcrypt($request->password);
         }
         $users->address = $request->address;
         $users->phone = $request->phone;
         $users->role = $request->role;
         $users->gender = $request->gender;
-        /**
-         * Upload file
-         */
-        if ($request->photo != '') {
-            $path = public_path().'/upload/users/';
-            // code for remove old file
-            if ($users->photo != '' && $users->photo != null) {
-                unlink($path.$users->photo);
-            }
+        // Upload file
+        // if ($request->photo != '') {
+        //     $path = public_path().'/upload/users/';
+        //     // code for remove old file
+        //     if ($users->photo != '' && $users->photo != null) {
+        //         unlink($path.$users->photo);
+        //     }
 
-            // Upload new file
-            $image = $request->file('photo');
-            $storedPath = $image->move('upload/users', $image->getClientOriginalName());
+        //     // Upload new file
+        //     $image = $request->file('photo');
+        //     $storedPath = $image->move('upload/users', $image->getClientOriginalName());
 
-            if ($image->getClientOriginalName() != null) {
-                $users->photo = $image->getClientOriginalName();
-            } else {
-                $users->photo = '';
-            }
-        }
+        //     if ($image->getClientOriginalName() != null) {
+        //         $users->photo = $image->getClientOriginalName();
+        //     } else {
+        //         $users->photo = '';
+        //     }
+        // }
         if ($users->save()) {
-            // return redirect(route("users.index"));
             return redirect(route("users.index"));
         } else {
             return redirect(route("403"));
@@ -122,16 +121,13 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->address = $request->address;
+        $user->address = isset($request->address) ? $request->address : '';
         $user->phone = $request->phone;
         $user->role = $request->role;
         $user->gender = $request->gender;
         // $user->file = '';
-        if ($user->save()) {
-            return redirect(route("users.index"));
-        } else {
-            return redirect(route("403"));
-        }
+        $user->save();
+        return redirect(route("users.index"));
     }
 
     /**
@@ -140,10 +136,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+    // public function show($id)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -154,7 +150,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        if ($user->delete()) {
+        if ($user != null) {
+            $user->delete();
             return redirect(route("users.index"));
         } else {
             return redirect(route("403"));

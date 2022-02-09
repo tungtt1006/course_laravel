@@ -14,14 +14,27 @@
     </nav>
     <nav class="navbar navbar-expand-lg header">
         <div class="container-fluid">
-            <a class="navbar-brand nav_brand" href="">Trang chủ</a>
+            <a class="navbar-brand nav_brand" href="{{ route('home.index') }}">Trang chủ</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle nav_item" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Khóa học
                         </a>
+                        @php
+                            $categoryList = App\Models\Category::select('id', 'name')->get();
+                        @endphp
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @foreach ($categoryList as $category)
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        href="{{ route('category.getCategoryWId', ['category' => $category->id, 'type' => 'name', 'order' => 'asc']) }}"
+                                    >
+                                        {{ $category->name }}
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -35,8 +48,8 @@
             <div></div>
             <div v-else class="pe-3" style="color:white">
                 <a class="sign_in" href="">Đăng nhập</a> /
-                <a class="sign_up" href="">Đăng kí</a>    
+                <a class="sign_up" href="">Đăng kí</a>
             </div>
         </div>
-    </nav>    
+    </nav>
 </div>

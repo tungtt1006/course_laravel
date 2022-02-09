@@ -24,7 +24,7 @@
                     $name = old('name');
                 else
                     $name = '';
-                
+
                 /**
                  * Email
                  */

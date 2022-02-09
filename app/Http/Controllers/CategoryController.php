@@ -8,7 +8,7 @@ use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -69,8 +69,26 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $data = Category::find($id)->products1()->paginate(5);
-        return view('backend.product_read', ["data" => $data, "id" => $id]);
+        $products = Category::find($id)->products()->paginate(5);
+        $category = Category::find($id);
+        // dd($data);
+        return view('client.DetailCategory', ["products" => $products, "category" => $category]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @param  string $order
+     * @return \Illuminate\Http\Response
+     */
+    public function getCategoryWId(Request $request)
+    {
+
+        $products = Category::find($request->category)->products($request->order, $request->type)->paginate(5);
+        $category = Category::find($request->category);
+        // dd($data);
+        return view('client.DetailCategory', ["products" => $products, "category" => $category]);
     }
 
     /**
