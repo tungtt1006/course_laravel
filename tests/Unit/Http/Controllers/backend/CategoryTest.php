@@ -91,7 +91,7 @@ class CategoryTest extends TestCase
      * Test function store fail in validate
      * @param string $name
      * @param string $description
-     * @param int display
+     * @param int $display
      *
      * @dataProvider providerTestStoreFailInValidate
      */
