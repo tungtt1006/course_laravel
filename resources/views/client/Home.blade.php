@@ -39,7 +39,7 @@
     <div class="row d-flex justify-content-around">
         <h1 class="mt-3 title-category">Khóa học nổi bật</h1>
         @foreach ($highlightCourses as $highlightCourse)
-            <a href="" class="card p-0 course-item">
+            <a href="{{ route('client.product.getDetailProduct', ['product' => $highlightCourse->id]) }}" class="card p-0 course-item">
                 <img src="{{ asset('upload/products/'.$highlightCourse->photo) }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ $highlightCourse->name }}</h5>
@@ -59,7 +59,7 @@
     <div class="row mt-3 d-flex justify-content-around">
         <h1 class="mt-3 title-category">Khóa học Mới nhất</h1>
         @foreach ($newestCourses as $newestCourse)
-            <a href="" class="card p-0 course-item">
+            <a href="{{ route('client.product.getDetailProduct', ['product' => $newestCourse->id]) }}" class="card p-0 course-item">
                 <img src="{{ asset('upload/products/'.$newestCourse->photo) }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ $newestCourse->name }}</h5>

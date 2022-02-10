@@ -26,7 +26,7 @@ class CategoryRequest extends FormRequest
         return [
             'name' => 'bail| required| alpha| between: 1, 10',
             'description' => 'bail| between: 1, 100',
-            'display' => 'bail| required| numeric| between: 0,1'
+            'display' => 'bail| required| numeric| between: 0, 1'
         ];
     }
 

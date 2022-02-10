@@ -17,7 +17,7 @@
                     <li>
                         <a
                             class="dropdown-item"
-                            href="{{ route('category.getCategoryWId', ['category' => $category->id, 'type' => 'name', 'order' => 'asc']) }}"
+                            href="{{ route('client.category.getCategoryWId', ['category' => $category->id, 'type' => 'name', 'order' => 'asc']) }}"
                         >
                             A-Z
                         </a>
@@ -25,7 +25,7 @@
                     <li>
                         <a
                             class="dropdown-item"
-                            href="{{ route('category.getCategoryWId', ['category' => $category->id, 'type' => 'name', 'order' => 'desc']) }}"
+                            href="{{ route('client.category.getCategoryWId', ['category' => $category->id, 'type' => 'name', 'order' => 'desc']) }}"
                         >
                             Z-A
                         </a>
@@ -42,7 +42,7 @@
                     <li>
                         <a
                             class="dropdown-item"
-                            href="{{ route('category.getCategoryWId', ['category' => $category->id, 'type' => 'price', 'order' => 'asc']) }}"
+                            href="{{ route('client.category.getCategoryWId', ['category' => $category->id, 'type' => 'price', 'order' => 'asc']) }}"
                         >
                             Tăng dần
                         </a>
@@ -50,7 +50,7 @@
                     <li>
                         <a
                             class="dropdown-item"
-                            href="{{ route('category.getCategoryWId', ['category' => $category->id, 'type' => 'price', 'order' => 'desc']) }}"
+                            href="{{ route('client.category.getCategoryWId', ['category' => $category->id, 'type' => 'price', 'order' => 'desc']) }}"
                         >
                             Giảm dần
                         </a>
@@ -81,18 +81,33 @@
     </div>
 
     <div class="row mt-4 mx-3 d-flex justify-content-between">
-        @foreach ($products as $highlightCourse)
+        @foreach ($products as $product)
             <a href="" class="mt-3 card p-0 course-item">
-                <img src="{{ asset('upload/products/'.$highlightCourse->photo) }}" class="card-img-top" alt="...">
+                <img src="{{ asset('upload/products/'.$product->photo) }}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $highlightCourse->name }}</h5>
-                    <p class="card-text course-item-description">{{ $highlightCourse->description }}</p>
+                    <h5 class="card-title">{{ $product->name }}</h5>
+                    <p class="card-text course-item-description">{{ $product->description }}</p>
                     <p class="mt-5 mb-0 card-text course-item-discount-price">
-                        {{ number_format($highlightCourse->price) }} VND
+                        {{ number_format($product->price) }} VND
                     </p>
                     <p class="mt-0 card-text course-item-price">
-                        {{ number_format($highlightCourse->price * (100 - $highlightCourse->discount) /100) }} VND
+                        {{ number_format($product->price * (100 - $product->discount) /100) }} VND
                     </p>
+                </div>
+            </a>
+        @endforeach
+    </div>
+
+    <div class="row mt-5 mx-3 d-flex justify-content-between">
+        <h2>Một số khóa học khác</h2>
+        @foreach ($anotherCategory as $category)
+            <a
+                href="{{ route('client.category.getCategoryWId', ['category' => $category->id, 'type' => 'name', 'order' => 'asc']) }}"
+                class="mt-3 card p-0 category-item"
+            >
+                <img src="{{ asset('upload/products/'.$product->photo) }}" class="card-img-top" style="border-bottom: 1px solid lightgray;" alt="...">
+                <div class="card-body">
+                    <h4 class="card-title text-center fw-normal">{{ $category->name }}</h4>
                 </div>
             </a>
         @endforeach

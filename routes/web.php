@@ -18,8 +18,17 @@ use Illuminate\Support\Facades\Route;
 //     return redirect(url('/login'));
 // });
 
-Route::get('/', 'client\HomeController@index')->name('home.index');
-Route::get('/category', 'CategoryController@getCategoryWId')->name('category.getCategoryWId');
+Route::get('/', 'client\HomeController@index')->name('client.home.index');
+
+/**
+ * Category
+ */
+Route::get('/category', 'client\CategoryController@getCategoryWId')->name('client.category.getCategoryWId');
+
+/**
+ * Product
+ */
+Route::get('/product/{product}', 'client\ProductController@getDetailProduct')->name('client.product.getDetailProduct');
 
 Route::group(["prefix" => "admin"], function () {
     Route::get('/', function () {
@@ -46,7 +55,7 @@ Route::group(["prefix" => "admin"], function () {
     /**
      * Category
      */
-    Route::resource('category', 'CategoryController');
+    Route::resource('category', 'backend\CategoryController');
 });
 // Route::group(["prefix"=>"admin"], function() {
 //     Route::get('/', [App\Http\Controllers\HomeController::class,'index'])->name('home');

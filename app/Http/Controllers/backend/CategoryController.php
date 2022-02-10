@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\backend;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
@@ -15,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::all();
+        $category = Category::paginate(5);
         return view('backend.CategoryRead', ["data" => $category]);
     }
 
@@ -24,13 +25,13 @@ class CategoryController extends Controller
      *
      * return data được sắp xếp
      */
-    public function arrangeCategory($cate, $type)
-    {
-        $data = Category::select('id', 'name', 'display')
-            ->orderBy($cate, $type)
-            ->paginate(5);
-        return view('backend.category_read', ["data" => $data]);
-    }
+    // public function arrangeCategory($cate, $type)
+    // {
+    //     $data = Category::select('id', 'name', 'display')
+    //         ->orderBy($cate, $type)
+    //         ->paginate(5);
+    //     return view('backend.category_read', ["data" => $data]);
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -52,7 +53,7 @@ class CategoryController extends Controller
     {
         $category = new Category;
         $category->name = $request->name;
-        $category->description = $request->description;
+        $category->description = isset($request->description) ? $request->description : '';
         $category->display = $request->display;
         if ($category->save()) {
             return redirect(route('category.index'));
@@ -67,29 +68,13 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $products = Category::find($id)->products()->paginate(5);
-        $category = Category::find($id);
-        // dd($data);
-        return view('client.DetailCategory', ["products" => $products, "category" => $category]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @param  string $order
-     * @return \Illuminate\Http\Response
-     */
-    public function getCategoryWId(Request $request)
-    {
-
-        $products = Category::find($request->category)->products($request->order, $request->type)->paginate(5);
-        $category = Category::find($request->category);
-        // dd($data);
-        return view('client.DetailCategory', ["products" => $products, "category" => $category]);
-    }
+    // public function show($id)
+    // {
+    //     $products = Category::find($id)->products()->paginate(5);
+    //     $category = Category::find($id);
+    //     // dd($data);
+    //     return view('client.DetailCategory', ["products" => $products, "category" => $category]);
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -100,7 +85,11 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::find($id);
-        return view('backend.CategoryCreateUpdate', ['data' => $category]);
+        if ($category) {
+            return view('backend.CategoryCreateUpdate', ['data' => $category]);
+        } else {
+            return redirect(route("403"));
+        }
     }
 
     /**
@@ -114,9 +103,8 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $category->name = $request->name;
-        $category->description = $request->description;
+        $category->description = isset($request->description) ? $request->description : '';
         $category->display = $request->display;
-        $category->save();
         if ($category->save()) {
             return redirect(route('category.index'));
         } else {
@@ -133,7 +121,8 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
-        if ($category->delete()) {
+        if ($category != null) {
+            $category->delete();
             return redirect(route("category.index"));
         } else {
             return redirect(route("403"));

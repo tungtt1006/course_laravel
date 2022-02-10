@@ -14,7 +14,7 @@
     </nav>
     <nav class="navbar navbar-expand-lg header">
         <div class="container-fluid">
-            <a class="navbar-brand nav_brand" href="{{ route('home.index') }}">Trang chủ</a>
+            <a class="navbar-brand nav_brand" href="{{ route('client.home.index') }}">Trang chủ</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
@@ -29,7 +29,7 @@
                                 <li>
                                     <a
                                         class="dropdown-item"
-                                        href="{{ route('category.getCategoryWId', ['category' => $category->id, 'type' => 'name', 'order' => 'asc']) }}"
+                                        href="{{ route('client.category.getCategoryWId', ['category' => $category->id, 'type' => 'name', 'order' => 'asc']) }}"
                                     >
                                         {{ $category->name }}
                                     </a>

@@ -18,11 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $userList = User::limit(5)->get();
-        if ($userList) {
-            return view('backend.UserRead', ['data' => $userList]);
-        } else {
-            return redirect(route("403"));
-        }
+        return view('backend.UserRead', ['data' => $userList]);
     }
 
     /**
