@@ -13,35 +13,39 @@ class AuthController extends Controller
     /**
      * show form login
      */
-    public function login() {
+    public function login()
+    {
         return view('backend.auth.Login');
     }
 
     /**
      * authentic account
      */
-    public function authLogin(LoginRequest $request) {
+    public function authLogin(LoginRequest $request)
+    {
         $user = User::where('email', '=', $request->email)->first();
         if ($user != null
             && Hash::check($request->password, $user->password)
         ) {
             return redirect(route('users.index'));
         } else {
-            return redirect()->back()->withInput()->withErrors(['msg' => 'Kiểm tra lại mất khẩu hoặc email']);;
+            return redirect()->back()->withInput()->withErrors(['msg' => 'Kiểm tra lại mất khẩu hoặc email']);
         }
     }
 
     /**
      * show form register
      */
-    public function register() {
+    public function register()
+    {
         return view('backend.auth.Register');
     }
 
     /**
      * insert an account into db
      */
-    public function authRegister(RegisterRequest $request) {
+    public function authRegister(RegisterRequest $request)
+    {
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;

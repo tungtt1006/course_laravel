@@ -217,7 +217,7 @@ class UserTest extends TestCase
         $response = $this->delete('admin/users/'.$user->id, [
             '_token' => csrf_token()
         ]);
-        $user1 = User::withTrashed()->where('id', '=', $user->id)->first(); 
+        $user1 = User::withTrashed()->where('id', '=', $user->id)->first();
         $this->assertNotEquals(null, $user1->deleted_at);
         $response->assertStatus(302);
         $response->assertRedirect('admin/users');

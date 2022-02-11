@@ -13,11 +13,6 @@ class ProductController extends Controller
      *
      */
     public function getDetailProduct($id)
-
-
-
-
-    
     {
         $product = Product::find($id);
         return view('client.DetailProduct', ['product' => $product]);
