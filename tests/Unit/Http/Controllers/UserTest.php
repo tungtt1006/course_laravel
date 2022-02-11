@@ -210,7 +210,6 @@ class UserTest extends TestCase
      * @return void
      */
     public function testDeleteSuccess()
-    
     {
         $this->markTestSkipped('This test case was skipped  .');
         Session::start();
