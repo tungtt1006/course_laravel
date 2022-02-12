@@ -137,6 +137,8 @@ class AuthTest extends TestCase
             'phone' => '0989842021',
             'gender' => 1
         ]);
+        $response->assertStatus(302);
+        $response->assertRedirect('admin/users');
         $this->assertDatabaseHas('users', [
             'name' => 'Minh',
             'email' => $email,
@@ -144,8 +146,6 @@ class AuthTest extends TestCase
             'phone' => '0989842021',
             'gender' => 1
         ]);
-        $response->assertStatus(302);
-        $response->assertRedirect('admin/users');
     }
 
     /**
