@@ -35,7 +35,7 @@ class AuthTest extends TestCase
         $user = User::first();
         $response = $this->post('admin/login', [
             '_token' => csrf_token(),
-            'email' => $user->id,
+            'email' => $user->email,
             'password' => '12345678',
         ]);
         $response->assertStatus(302);
