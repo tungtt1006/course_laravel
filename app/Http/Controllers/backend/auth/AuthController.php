@@ -46,7 +46,6 @@ class AuthController extends Controller
      */
     public function authRegister(RegisterRequest $request)
     {
-        dd("hello word");
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;

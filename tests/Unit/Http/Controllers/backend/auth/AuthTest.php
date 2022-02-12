@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\User;
-// use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthTest extends TestCase
 {
     use WithFaker;
-    // use DatabaseTransactions;
+    use DatabaseTransactions;
 
     /**
      * Test function login
@@ -119,36 +119,6 @@ class AuthTest extends TestCase
     }
 
     /**
-     * Test function authRegister successfully
-     *
-     * @return void
-     */
-    public function testAuthRegisterSuccess()
-    {
-        Session::start();
-        $email = $this->faker->email();
-        $response = $this->post('admin/register', [
-            '_token' => csrf_token(),
-            'name' => 'Minh',
-            'password' => '12345678',
-            'password_confirmation' => '12345678',
-            'email' => $email,
-            'address' => '80 Hao Nam',
-            'phone' => '0989842021',
-            'gender' => 1
-        ]);
-        $response->assertStatus(302);
-        $response->assertRedirect('admin/users');
-        $this->assertDatabaseHas('users', [
-            'name' => 'Minh',
-            'email' => $email,
-            'address' => '80 Hao Nam',
-            'phone' => '0989842021',
-            'gender' => 1
-        ]);
-    }
-
-    /**
      * Test function authRegister fail in validate
      * @param string $email
      * @param string $password
@@ -182,5 +152,35 @@ class AuthTest extends TestCase
             [' ', ' '],
             ['kuphal.estellahotmail.com', '12345678'],
         ];
+    }
+
+    /**
+     * Test function authRegister successfully
+     *
+     * @return void
+     */
+    public function testAuthRegisterSuccess()
+    {
+        Session::start();
+        $email = $this->faker->email();
+        $response = $this->post('admin/register', [
+            '_token' => csrf_token(),
+            'name' => 'Minh',
+            'password' => '12345678',
+            'password_confirmation' => '12345678',
+            'email' => $email,
+            'address' => '80 Hao Nam',
+            'phone' => '0989842021',
+            'gender' => 1
+        ]);
+        $response->assertStatus(302);
+        $response->assertRedirect('admin/users');
+        $this->assertDatabaseHas('users', [
+            'name' => 'Minh',
+            'email' => $email,
+            'address' => '80 Hao Nam',
+            'phone' => '0989842021',
+            'gender' => 1
+        ]);
     }
 }
