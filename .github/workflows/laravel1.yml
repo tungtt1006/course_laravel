@@ -61,13 +61,12 @@ jobs:
       - name: Clear Config
         run: php artisan config:clear
 
-      - name: Run Migration
-        run: php artisan migrate -v
+      - name: Setup DB
+        run: 
+          php artisan migrate -v
+          php artisan db:seed
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-          
-      - name: Run Seeder
-        run: php artisan db:seed
 
       - name: Test with phpunit
         run: vendor/bin/phpunit --coverage-text
