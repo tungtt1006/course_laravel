@@ -5,6 +5,7 @@ namespace Tests\Unit\Http\Controllers\backend\auth;
 use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\User;
 // use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthTest extends TestCase
