@@ -64,7 +64,6 @@ class AuthTest extends TestCase
     public function providerTestAuthLoginFailInValidate()
     {
         return [
-            ['kuphal.estella@hotmail.com', '12345678op'],
             ['', '12345678'],
             ['kuphal.estella@hotmail.com', ''],
             ['', ''],
@@ -145,7 +144,7 @@ class AuthTest extends TestCase
     public function providerTestAuthRegisterFailInValidate()
     {
         return [
-            ['kuphal.estella@hotmail.com', '12345678op'],
+            ['kuphal.estella@hotmail.com', '12345678op3kk'],
             ['', '12345678'],
             ['kuphal.est23ella@hotmail.com', ''],
             ['', ''],
