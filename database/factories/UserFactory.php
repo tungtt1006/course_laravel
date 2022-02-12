@@ -25,6 +25,7 @@ $factory->define(User::class, function (Faker $faker) {
         'password' => Hash::make('12345678'),
         'phone' => '0989842021',
         'photo' => "kk.jpg",
+        'remember_token' => null,
         'address' => $faker->address,
         'role' => 1,
         'gender' => 1,
