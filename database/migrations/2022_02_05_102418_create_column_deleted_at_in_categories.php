@@ -26,7 +26,7 @@ class CreateColumnDeletedAtInCategories extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('deleted_at')->default(null);
+            $table->dropColumn('deleted_at')->default(null)->nullable();
         });
     }
 }

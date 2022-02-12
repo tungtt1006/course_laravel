@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
             $table->char('password', 60);
             $table->char('address', 255);
             $table->char('phone', 11);
-            $table->char('photo', 255)->default(null );
-            $table->char('remember_token', 255)->default(null);
+            $table->char('photo', 255)->default(null)->nullable();
+            $table->char('remember_token', 255)->default(null)->nullable();
             $table->tinyInteger('role')->default(0);
             $table->timestamps();
         });
