@@ -10,11 +10,11 @@ jobs:
   phpunittest:
     runs-on: ubuntu-latest
     
-    env:
-      DB_DATABASE: course_laravel
-      DB_USERNAME: root
-      DB_PASSWORD: 12345
-      DB_PORT: 3306
+#     env:
+#       DB_DATABASE: course_laravel
+#       DB_USERNAME: root
+#       DB_PASSWORD: 12345
+#       DB_PORT: 3306
 
     services:
       mysql:
