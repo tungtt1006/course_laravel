@@ -61,9 +61,14 @@ jobs:
       - name: Clear Config
         run: php artisan config:clear
 
-      - name: Setup DB
+      - name: Run Migration
         run: 
           php artisan migrate -v
+        env:
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          
+      - name: Run Seeder
+        run: 
           php artisan db:seed
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
