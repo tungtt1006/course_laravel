@@ -5,12 +5,12 @@ namespace Tests\Unit\Http\Controllers\backend\auth;
 use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+// use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthTest extends TestCase
 {
     use WithFaker;
-    use DatabaseTransactions;
+    // use DatabaseTransactions;
 
     /**
      * Test function login
@@ -31,9 +31,10 @@ class AuthTest extends TestCase
     public function testAuthLoginSuccess()
     {
         Session::start();
+        $user = User::first();
         $response = $this->post('admin/login', [
             '_token' => csrf_token(),
-            'email' => 'kuphal.estella@hotmail.com',
+            'email' => $user->id,
             'password' => '12345678',
         ]);
         $response->assertStatus(302);
