@@ -53,9 +53,12 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
+#       - name: Prepare the application
+#         run: |
+#           php -r "file_exists('.env') || copy('.env.example', '.env');"
+#           php artisan key:generate
       - name: Prepare the application
-        run: |
-          php -r "file_exists('.env') || copy('.env.example', '.env');"
+        run:
           php artisan key:generate
 
       - name: Clear Config
