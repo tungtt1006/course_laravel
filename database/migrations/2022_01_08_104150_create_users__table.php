@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->char('name', 50);
             $table->char('email', 50);
             $table->char('password', 60);
-            $table->char('address', 500);
+            $table->char('address', 255);
             $table->char('phone', 11);
             $table->char('photo', 255);
             $table->char('remember_token', 255);
