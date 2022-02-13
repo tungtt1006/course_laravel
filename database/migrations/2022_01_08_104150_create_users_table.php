@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id')->first();
+            $table->increments('id');
             $table->char('name', 50);
             $table->char('email', 50)->unique();
             $table->char('password', 20);
@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->char('remember_token', 255)->default(null)->nullable();
             $table->softDeletes(); // Create columns: deleted_at
             $table->timestamps(); // Create fields: created_at, updated_at
-            $table->primary('id'); // Set primary key
+            // $table->primary('id'); // Set primary key
         });
     }
 

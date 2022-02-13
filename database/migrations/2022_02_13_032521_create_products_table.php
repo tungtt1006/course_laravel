@@ -14,22 +14,21 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->increments('id')->first();
+            $table->increments('id');
             $table->char('name', 50);
-            $table->integer('categories_id');
-            $table->integer('certificates_id');
+            $table->integer('categories_id')->unsigned();
+            $table->integer('certificates_id')->unsigned();
             $table->mediumText('description');
             $table->text('content');
             $table->tinyInteger('display');
             $table->tinyInteger('hot');
-            $table->timestamp('time_start');
-            $table->timestamp('time_end');
+            $table->timestamp('time_start')->default(null)->nullable();
+            $table->timestamp('time_end')->default(null)->nullable();
             $table->integer('sessions');
             $table->char('photo', 255)->default(null)->nullable();
             $table->integer('price');
             $table->timestamps(); // Create fields: created_at, updated_at
             $table->softDeletes(); // Create columns: deleted_at
-            $table->primary('id'); // Set primary key
             $table->foreign('categories_id')->references('id')->on('categories'); // Set foreign key
             $table->foreign('certificates_id')->references('id')->on('certificates'); // Set foreign key
         });

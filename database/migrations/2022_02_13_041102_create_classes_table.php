@@ -16,13 +16,12 @@ class CreateClassesTable extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->increments('id');
             $table->char('name', 50);
-            $table->integer('products_id');
+            $table->integer('products_id')->unsigned();
             $table->timestamp('start_day');
             $table->integer('sessions');
-            $table->integer('teachers_id');
+            $table->integer('teachers_id')->unsigned();
             $table->timestamps(); // Create fields: created_at, updated_at
             $table->softDeletes(); // Create columns: deleted_at
-            $table->primary('id'); // Set primary key
             $table->foreign('teachers_id')->references('id')->on('teachers'); // Set foreign key
             $table->foreign('products_id')->references('id')->on('products'); // Set foreign key
         });

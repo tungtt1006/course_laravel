@@ -14,12 +14,12 @@ class CreateTeachersTable extends Migration
     public function up()
     {
         Schema::create('teachers', function (Blueprint $table) {
-            $table->increments('id')->first();
+            $table->increments('id');
             $table->char('name', 50);
             $table->mediumText('description');
             $table->timestamps();
             $table->softDeletes(); // Create columns: deleted_at
-            $table->primary('id'); // Set primary key
+            // $table->primary('id'); // Set primary key
         });
     }
 

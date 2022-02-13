@@ -15,16 +15,15 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('classes_id');
-            $table->integer('users_id');
+            $table->integer('classes_id')->unsigned();
+            $table->integer('users_id')->unsigned();
             $table->integer('price');
             $table->tinyInteger('status');
             $table->timestamps(); // Create fields: created_at, updated_at
             $table->softDeletes(); // Create columns: deleted_at
-            $table->primary('id'); // Set primary key
             $table->foreign('classes_id')->references('id')->on('classes'); // Set foreign key
             $table->foreign('users_id')->references('id')->on('users'); // Set foreign key
-            $table->unique('id', 'classes_id', 'users_id'); // Set unique key
+            $table->unique('classes_id', 'users_id'); // Set unique key
         });
     }
 
