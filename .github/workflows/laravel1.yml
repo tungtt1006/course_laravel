@@ -10,21 +10,21 @@ jobs:
   phpunittest:
     runs-on: ubuntu-latest
 
-    env:
-      DB_DATABASE: course_laravel
-      DB_USERNAME: root
-      DB_PASSWORD: 12345
-      DB_PORT: 3306
+#     env:
+#       DB_DATABASE: course_laravel
+#       DB_USERNAME: root
+#       DB_PASSWORD: 12345
+#       DB_PORT: 3306
 
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD: 12345
-          MYSQL_DATABASE: course_laravel
-        ports:
-          - 3306/tcp
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+#     services:
+#       mysql:
+#         image: mysql:5.7
+#         env:
+#           MYSQL_ROOT_PASSWORD: 12345
+#           MYSQL_DATABASE: course_laravel
+#         ports:
+#           - 3306/tcp
+#         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
@@ -34,8 +34,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Start mysql service
-        run: sudo systemctl start mysql
+#       - name: Start mysql service
+#         run: sudo systemctl start mysql
 
 #       - name: Get composer cache directory
 #         id: composer-cache
@@ -61,19 +61,19 @@ jobs:
       - name: Clear Config
         run: php artisan config:clear
 
-      - name: Run Migration
-        run: 
-          php artisan migrate -v
-        env:
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+#       - name: Run Migration
+#         run:
+#           php artisan migrate -v
+#         env:
+#           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
 
-      - name: Run Seeder
-        run:
-          php artisan db:seed
-        env:
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+#       - name: Run Seeder
+#         run:
+#           php artisan db:seed
+#         env:
+#           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
 
-      - name: Test with phpunit
-        run: vendor/bin/phpunit --coverage-text
-        env:
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+#       - name: Test with phpunit
+#         run: vendor/bin/phpunit --coverage-text
+#         env:
+#           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
