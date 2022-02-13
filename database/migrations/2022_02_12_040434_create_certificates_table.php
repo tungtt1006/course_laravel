@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriesTable extends Migration
+class CreateCertificatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('certificates', function (Blueprint $table) {
             $table->increments('id');
             $table->char('name', 50);
             $table->mediumText('description');
-            $table->tinyInteger('display');
             $table->char('photo', 255)->default(null)->nullable();
-            $table->softDeletes(); // Create columns: deleted_at
             $table->timestamps(); // Create fields: created_at, updated_at
+            $table->softDeletes(); // Create columns: deleted_at
             $table->primary('id'); // Set primary key
         });
     }
@@ -32,6 +31,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('certificates');
     }
 }

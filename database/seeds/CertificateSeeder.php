@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class CategorySeeder extends Seeder
+class CertificateSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,26 +12,26 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->insert([
+        DB::table('certificates')->insert([
             [
-                'name' => 'Frontend',
+                'name' => 'Bằng xuấst sắc',
                 'description' => str_random(255),
-                'display' => 1,
             ],
             [
-                'name' => 'Backend',
+                'name' => 'Bằng giỏi',
                 'description' => str_random(255),
-                'display' => 1,
             ],
             [
-                'name' => 'Tester',
+                'name' => 'Bằng khá',
                 'description' => str_random(255),
-                'display' => 1,
             ],
             [
-                'name' => 'Data Engine',
+                'name' => 'Bằng trung bình',
                 'description' => str_random(255),
-                'display' => 1,
+            ],
+            [
+                'name' => 'Bằng đặc biệt',
+                'description' => str_random(255),
             ],
         ]);
     }

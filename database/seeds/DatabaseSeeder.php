@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(CertificateSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(CategorySeeder::class);
     }

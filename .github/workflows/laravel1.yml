@@ -9,7 +9,7 @@ on:
 jobs:
   phpunittest:
     runs-on: ubuntu-latest
-    
+
     env:
       DB_DATABASE: course_laravel
       DB_USERNAME: root
@@ -30,7 +30,7 @@ jobs:
       - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
         with:
           php-version: '7.4'
-        
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -66,9 +66,9 @@ jobs:
           php artisan migrate -v
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-          
+
       - name: Run Seeder
-        run: 
+        run:
           php artisan db:seed
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}

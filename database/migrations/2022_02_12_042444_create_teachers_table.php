@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriesTable extends Migration
+class CreateTeachersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('teachers', function (Blueprint $table) {
+            $table->increments('id')->first();
             $table->char('name', 50);
             $table->mediumText('description');
-            $table->tinyInteger('display');
-            $table->char('photo', 255)->default(null)->nullable();
+            $table->timestamps();
             $table->softDeletes(); // Create columns: deleted_at
-            $table->timestamps(); // Create fields: created_at, updated_at
             $table->primary('id'); // Set primary key
         });
     }
@@ -32,6 +30,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('teachers');
     }
 }

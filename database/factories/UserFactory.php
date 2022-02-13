@@ -24,10 +24,9 @@ $factory->define(User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => Hash::make('12345678'),
         'phone' => '0989842021',
-        'photo' => "kk.jpg",
-        'remember_token' => Str::random(30),
         'address' => $faker->address,
-        'role' => 1,
-        'gender' => 1,
+        'remember_token' => Str::random(30),
+        'role' => 0,
+        'gender' => rand(0, 2),
     ];
 });
