@@ -21,9 +21,9 @@ class CreateOrdersTable extends Migration
             $table->tinyInteger('status');
             $table->timestamps(); // Create fields: created_at, updated_at
             $table->softDeletes(); // Create columns: deleted_at
-            $table->foreign('classes_id')->references('id')->on('classes'); // Set foreign key
-            $table->foreign('users_id')->references('id')->on('users'); // Set foreign key
-            $table->unique('classes_id', 'users_id'); // Set unique key
+            // $table->foreign('classes_id')->references('id')->on('classes'); // Set foreign key
+            // $table->foreign('users_id')->references('id')->on('users'); // Set foreign key
+            // $table->unique('classes_id', 'users_id'); // Set unique key
         });
     }
 

@@ -14,31 +14,31 @@ class OrderSeeder extends Seeder
     {
         DB::table('orders')->insert([
             [
-                'customers_id' => 1,
+                'users_id' => 1,
                 'classes_id' => 2,
                 'price' => 300000,
                 'status' => 0
             ],
             [
-                'customers_id' => 1,
+                'users_id' => 1,
                 'classes_id' => 2,
                 'price' => 300000,
                 'status' => 0
             ],
             [
-                'customers_id' => 2,
+                'users_id' => 2,
                 'classes_id' => 1,
                 'price' => 300000,
                 'status' => 0
             ],
             [
-                'customers_id' => 3,
+                'users_id' => 3,
                 'classes_id' => 1,
                 'price' => 300000,
                 'status' => 0
             ],
             [
-                'customers_id' => 4,
+                'users_id' => 4,
                 'classes_id' => 2,
                 'price' => 300000,
                 'status' => 0

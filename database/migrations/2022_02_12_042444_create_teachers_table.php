@@ -19,7 +19,6 @@ class CreateTeachersTable extends Migration
             $table->mediumText('description');
             $table->timestamps();
             $table->softDeletes(); // Create columns: deleted_at
-            // $table->primary('id'); // Set primary key
         });
     }
 

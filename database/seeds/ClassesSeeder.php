@@ -12,36 +12,34 @@ class ClassesSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('periods')->insert([
+        DB::table('classes')->insert([
             [
-                'classes_id' => 1,
-                'day_in' => date('Y-m-d H:i:s'),
-                'day_out' => date('Y-m-d H:i:s'),
-                'order' => 1
+                'name' => 'PHP-1',
+                'products_id' => 2,
+                'start_day' => date('Y-m-d H:i:s'),
+                'sessions' => 72,
+                'teachers_id' => 1
             ],
             [
-                'classes_id' => 1,
-                'day_in' => date('Y-m-d H:i:s'),
-                'day_out' => date('Y-m-d H:i:s'),
-                'order' => 2
+                'name' => 'VUEJS-1',
+                'products_id' => 1,
+                'start_day' => date('Y-m-d H:i:s'),
+                'sessions' => 72,
+                'teachers_id' => 2
             ],
             [
-                'classes_id' => 1,
-                'day_in' => date('Y-m-d H:i:s'),
-                'day_out' => date('Y-m-d H:i:s'),
-                'order' => 3
+                'name' => 'PHP-2',
+                'products_id' => 2,
+                'start_day' => date('Y-m-d H:i:s'),
+                'sessions' => 72,
+                'teachers_id' => 3
             ],
             [
-                'classes_id' => 1,
-                'day_in' => date('Y-m-d H:i:s'),
-                'day_out' => date('Y-m-d H:i:s'),
-                'order' => 4
-            ],
-            [
-                'classes_id' => 1,
-                'day_in' => date('Y-m-d H:i:s'),
-                'day_out' => date('Y-m-d H:i:s'),
-                'order' => 5
+                'name' => 'HTMLCSS-1',
+                'products_id' => 1,
+                'start_day' => date('Y-m-d H:i:s'),
+                'sessions' => 72,
+                'teachers_id' => 1
             ],
         ]);
     }

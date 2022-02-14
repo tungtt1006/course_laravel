@@ -29,8 +29,8 @@ class CreateProductsTable extends Migration
             $table->integer('price');
             $table->timestamps(); // Create fields: created_at, updated_at
             $table->softDeletes(); // Create columns: deleted_at
-            $table->foreign('categories_id')->references('id')->on('categories'); // Set foreign key
-            $table->foreign('certificates_id')->references('id')->on('certificates'); // Set foreign key
+            // $table->foreign('categories_id')->references('id')->on('categories'); // Set foreign key
+            // $table->foreign('certificates_id')->references('id')->on('certificates'); // Set foreign key
         });
     }
 

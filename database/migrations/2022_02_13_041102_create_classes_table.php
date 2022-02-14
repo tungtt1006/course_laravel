@@ -22,8 +22,8 @@ class CreateClassesTable extends Migration
             $table->integer('teachers_id')->unsigned();
             $table->timestamps(); // Create fields: created_at, updated_at
             $table->softDeletes(); // Create columns: deleted_at
-            $table->foreign('teachers_id')->references('id')->on('teachers'); // Set foreign key
-            $table->foreign('products_id')->references('id')->on('products'); // Set foreign key
+            // $table->foreign('teachers_id')->references('id')->on('teachers'); // Set foreign key
+            // $table->foreign('products_id')->references('id')->on('products'); // Set foreign key
         });
     }
 

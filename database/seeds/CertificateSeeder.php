@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CertificateSeeder extends Seeder
 {
@@ -15,23 +16,23 @@ class CertificateSeeder extends Seeder
         DB::table('certificates')->insert([
             [
                 'name' => 'Bằng xuấst sắc',
-                'description' => str_random(255),
+                'description' => Str::random(255),
             ],
             [
                 'name' => 'Bằng giỏi',
-                'description' => str_random(255),
+                'description' => Str::random(255),
             ],
             [
                 'name' => 'Bằng khá',
-                'description' => str_random(255),
+                'description' => Str::random(255),
             ],
             [
                 'name' => 'Bằng trung bình',
-                'description' => str_random(255),
+                'description' => Str::random(255),
             ],
             [
                 'name' => 'Bằng đặc biệt',
-                'description' => str_random(255),
+                'description' => Str::random(255),
             ],
         ]);
     }

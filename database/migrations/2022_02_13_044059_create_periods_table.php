@@ -21,9 +21,8 @@ class CreatePeriodsTable extends Migration
             $table->integer('order');
             $table->timestamps(); // Create fields: created_at, updated_at
             $table->softDeletes(); // Create columns: deleted_at
-            // $table->primary('id'); // Set primary key
-            $table->foreign('classes_id')->references('id')->on('classes'); // Set foreign key
-            $table->unique('classes_id', 'order'); // Set unique key
+            // $table->foreign('classes_id')->references('id')->on('classes'); // Set foreign key
+            // $table->unique('classes_id', 'order'); // Set unique key
         });
     }
 

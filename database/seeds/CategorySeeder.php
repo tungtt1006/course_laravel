@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CategorySeeder extends Seeder
 {
@@ -15,22 +16,22 @@ class CategorySeeder extends Seeder
         DB::table('categories')->insert([
             [
                 'name' => 'Frontend',
-                'description' => str_random(255),
+                'description' => Str::random(255),
                 'display' => 1,
             ],
             [
                 'name' => 'Backend',
-                'description' => str_random(255),
+                'description' => Str::random(255),
                 'display' => 1,
             ],
             [
                 'name' => 'Tester',
-                'description' => str_random(255),
+                'description' => Str::random(255),
                 'display' => 1,
             ],
             [
                 'name' => 'Data Engine',
-                'description' => str_random(255),
+                'description' => Str::random(255),
                 'display' => 1,
             ],
         ]);

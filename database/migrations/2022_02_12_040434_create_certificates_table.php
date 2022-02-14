@@ -20,7 +20,6 @@ class CreateCertificatesTable extends Migration
             $table->char('photo', 255)->default(null)->nullable();
             $table->timestamps(); // Create fields: created_at, updated_at
             $table->softDeletes(); // Create columns: deleted_at
-            // $table->primary('id'); // Set primary key
         });
     }
 
