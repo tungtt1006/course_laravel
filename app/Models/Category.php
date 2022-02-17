@@ -31,7 +31,7 @@ class Category extends Model
      */
     public function products($order, $type)
     {
-        $products = $this->hasMany('App\Models\Product', 'parent_id');
+        $products = $this->hasMany('App\Models\Product', 'products_id');
         return $products->orderBy($type, $order);
     }
 }

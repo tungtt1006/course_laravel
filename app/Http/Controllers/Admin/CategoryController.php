@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\backend;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         $category = Category::paginate(5);
-        return view('backend.CategoryRead', ["data" => $category]);
+        return view('admin.CategoryRead', ["data" => $category]);
     }
 
     /**
@@ -30,7 +30,7 @@ class CategoryController extends Controller
     //     $data = Category::select('id', 'name', 'display')
     //         ->orderBy($cate, $type)
     //         ->paginate(5);
-    //     return view('backend.category_read', ["data" => $data]);
+    //     return view('admin.category_read', ["data" => $data]);
     // }
 
     /**
@@ -40,7 +40,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('backend.CategoryCreateUpdate');
+        return view('admin.CategoryCreateUpdate');
     }
 
     /**
@@ -86,7 +86,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         if ($category) {
-            return view('backend.CategoryCreateUpdate', ['data' => $category]);
+            return view('admin.CategoryCreateUpdate', ['data' => $category]);
         } else {
             return redirect(route("403"));
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,8 +17,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $userList = User::limit(5)->get();
-        return view('backend.UserRead', ['data' => $userList]);
+        $userList = User::paginate(50);
+        return view('admin.user.user-read', ['data' => $userList]);
     }
 
     /**
@@ -31,7 +31,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if ($user) {
-            return view("backend.UserCreateUpdate", ["data" => $user]);
+            return view("admin.user.user-create-update", ["data" => $user]);
         } else {
             return redirect(route("403"));
         }
@@ -97,12 +97,11 @@ class UserController extends Controller
     /**
      * Show the form for creating the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return view("backend.UserCreateUpdate");
+        return view("admin.user.user-create-update");
     }
 
     /**

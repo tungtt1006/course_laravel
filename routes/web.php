@@ -50,12 +50,12 @@ Route::group(["prefix" => "admin"], function () {
     /**
      * Users
      */
-    Route::resource('users', 'UserController');
+    Route::resource('users', 'Admin\UserController');
 
     /**
      * Category
      */
-    Route::resource('category', 'backend\CategoryController');
+    Route::resource('category', 'Admin\CategoryController');
 });
 // Route::group(["prefix"=>"admin"], function() {
 //     Route::get('/', [App\Http\Controllers\HomeController::class,'index'])->name('home');
