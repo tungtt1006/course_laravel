@@ -14,10 +14,12 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $category = Category::paginate(5);
-        return view('admin.CategoryRead', ["data" => $category]);
+        $type = isset($request->type) ? $request->type : 'display';
+        $order = isset($request->order) ? $request->order : 'desc';
+        $category = Category::orderBy($type, $order)->paginate(5);
+        return view('admin.category.category-read', ["data" => $category]);
     }
 
     /**
@@ -40,7 +42,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.CategoryCreateUpdate');
+        return view('admin.category.category-create-update');
     }
 
     /**
@@ -86,7 +88,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         if ($category) {
-            return view('admin.CategoryCreateUpdate', ['data' => $category]);
+            return view('admin.category.category-create-update', ['data' => $category]);
         } else {
             return redirect(route("403"));
         }

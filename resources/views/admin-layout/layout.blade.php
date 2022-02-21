@@ -17,7 +17,9 @@
                 @include('admin-layout.sidebar')
             </div>
             <div class="col-9 border">
-                @yield('main')
+                <div class="container-fluid">
+                    @yield('main')
+                </div>
             </div>
         </div>
     </div>

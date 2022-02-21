@@ -20,14 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'Client\HomeController@index')->name('client.home.index');
 
-/**
- * Category
- */
 Route::get('/category', 'Client\CategoryController@getCategoryWId')->name('client.category.getCategoryWId');
 
-/**
- * Product
- */
 Route::get('/product/{product}', 'Client\ProductController@getDetailProduct')->name('client.product.get_detail_product');
 
 Route::group(["prefix" => "admin"], function () {
@@ -39,22 +33,13 @@ Route::group(["prefix" => "admin"], function () {
         return view('backend.403');
     })->name('403');
 
-    /**
-     * Auth
-     */
     Route::get('/login', 'backend\auth\AuthController@login')->name('auth.login');
     Route::post('/login', 'backend\auth\AuthController@authLogin')->name('auth.authLogin');
     Route::get('/register', 'backend\auth\AuthController@register')->name('auth.register');
     Route::post('/register', 'backend\auth\AuthController@authRegister')->name('auth.authRegister');
 
-    /**
-     * Users
-     */
     Route::resource('users', 'Admin\UserController');
 
-    /**
-     * Category
-     */
     Route::resource('category', 'Admin\CategoryController');
 });
 // Route::group(["prefix"=>"admin"], function() {
