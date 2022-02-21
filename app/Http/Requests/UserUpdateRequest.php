@@ -24,7 +24,7 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail| required| alpha| between: 1, 10',
+            'name' => 'bail| required| max: 50',
             'email' => 'bail| required| email',
             'phone' => 'bail| required| regex: /[0-9]/| size: 10',
             'role' => 'bail| required| numeric',

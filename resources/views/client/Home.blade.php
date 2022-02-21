@@ -12,13 +12,13 @@
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 @foreach ($banners as $key => $banner)
-                <div 
+                <div
                     class="carousel-item {{ $key == 0 ? 'active' : '' }}"
                 >
-                    <img 
-                        src="{{ asset('upload/banners/'.$banner->photo) }}" 
-                        style="height: 420px;" 
-                        class="d-block w-100" 
+                    <img
+                        src="{{ asset('upload/banners/'.$banner->photo) }}"
+                        style="height: 420px;"
+                        class="d-block w-100"
                         alt="Lỗi ảnh banner"
                     >
                 </div>

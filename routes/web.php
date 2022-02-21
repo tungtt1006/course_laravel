@@ -18,17 +18,17 @@ use Illuminate\Support\Facades\Route;
 //     return redirect(url('/login'));
 // });
 
-Route::get('/', 'client\HomeController@index')->name('client.home.index');
+Route::get('/', 'Client\HomeController@index')->name('client.home.index');
 
 /**
  * Category
  */
-Route::get('/category', 'client\CategoryController@getCategoryWId')->name('client.category.getCategoryWId');
+Route::get('/category', 'Client\CategoryController@getCategoryWId')->name('client.category.getCategoryWId');
 
 /**
  * Product
  */
-Route::get('/product/{product}', 'client\ProductController@getDetailProduct')->name('client.product.getDetailProduct');
+Route::get('/product/{product}', 'Client\ProductController@getDetailProduct')->name('client.product.get_detail_product');
 
 Route::group(["prefix" => "admin"], function () {
     Route::get('/', function () {

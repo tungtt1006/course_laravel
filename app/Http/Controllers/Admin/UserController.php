@@ -15,9 +15,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $userList = User::paginate(50);
+        $type = isset($request->type) ? $request->type : 'id';
+        $order = isset($request->order) ? $request->order : 'asc';
+        $userList = User::orderBy($type, $order)->paginate(50);
         return view('admin.user.user-read', ['data' => $userList]);
     }
 
