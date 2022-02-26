@@ -11,14 +11,23 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid bg-light">
         <div class="row">
             <div class="col-3 ps-0 h-100">
                 @include('admin-layout.sidebar')
             </div>
-            <div class="col-9 border">
-                <div class="container-fluid">
-                    @yield('main')
+            <div class="col-9">
+                <div class="container-fluid p-0">
+                    <div class="container shadow-sm p-0 mt-3">
+                        <div class="card">
+                            <div class="card-header text-white bg-success">
+                                @yield('header')
+                            </div>
+                            <div class="card-body p-0">
+                                @yield('main')
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

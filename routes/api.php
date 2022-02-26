@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('register', 'AuthController@register');
-Route::post('login', 'AuthController@login');
+// Route::post('register', 'AuthController@register');
+// Route::post('login', 'AuthController@login');
 
 // Route::group([], function ($router) {
 //     Route::post('login', 'AuthController@login');
@@ -25,13 +25,13 @@ Route::post('login', 'AuthController@login');
 // });
 
 // Products
-Route::get('products', 'ProductController@index');
+// Route::get('products', 'ProductController@index');
 // Route::apiResource('products', ProductController::class);
 // Route::get('products/{id}', [ProductController::class, 'getCourse']);
 // Route::get('product/{id}', [ProductController::class, 'getACourse']);
 
 // Category
-Route::get('categories', 'CategoryController@index');
+// Route::get('categories', 'CategoryController@index');
 // Route::get('categories/show/{id}', [CategoryController::class, 'show']);
 // Route::get('categories/{id}', [CategoryController::class, 'getAcategory']);
 
@@ -40,10 +40,10 @@ Route::get('categories', 'CategoryController@index');
 // Route::get('arrangeuser/{cate}/{type}',  [UserController::class, 'arrangeUser']);
 
 // Banners
-Route::get('banners', 'BannerController@index');
+// Route::get('banners', 'BannerController@index');
 
 // News
-Route::get('news', 'NewController@index');
+// Route::get('news', 'NewController@index');
 // Route::get('new/{id}', [NewController::class, 'getNew']);
 // Route::get('newslist', [NewController::class, 'getNews']);
 

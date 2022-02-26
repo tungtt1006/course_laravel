@@ -3,13 +3,15 @@
 @section("header")
 <div class="row">
     <div class="col-10">
-        <h3>Quản lý tài khoản</h3>
+        <h3>Thêm sản phẩm mới</h3>
     </div>
 </div>
 @endsection
 
 @section("main")
 <div class="row m-3">
+    <div class="col-4"></div>
+    <div class="col-8">
     @if (isset($data))
         <form method="post" action="{{ route('category.update', ['category' => $data->id]) }}" enctype="multipart/form-data">
             @method('PUT')
@@ -48,9 +50,9 @@
                 $display = 1;
         @endphp
         <!-- Name -->
-        <div class="row" style="margin-top:5px;">
-            <div class="col-md-1">Tên</div>
-            <div class="col-md-10 pl-0">
+        <div class="row">
+            <div class="col-6">
+                <label class="form-label fw-bolder">Tên</label>
                 <input
                     type="text"
                     name="name"
@@ -59,36 +61,66 @@
                     value="{{ $name }}"
                 >
             </div>
+            <div class="col-6">
+                <label class="form-label fw-bolder">Chứng chỉ</label>
+                <select class="form-select" aria-label="Default select example">
+                    @foreach ($certificates as $certificate)
+                        <option value="{{ $certificate->id }}">{{ $certificate->name }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         <!-- Description -->
         <div class="row mt-3">
-            <div class="col-md-1">Mô tả</div>
-            <div class="col-md-10 pl-0">
-                <textarea class="form-control" name ="description" rows="4">{{ $description }}</textarea>
+            <div class="col">
+                <label class="form-label fw-bolder">Mô tả</label>
+                <textarea class="form-control" name ="description" rows="3">{{ $description }}</textarea>
             </div>
         </div>
 
+        <!-- Content -->
+        <div class="row mt-3">
+            <div class="col">
+                <label class="form-label fw-bolder">Nội dung</label>
+                <textarea class="form-control" name ="content" rows="5">{{ $description }}</textarea>
+            </div>
+        </div>
 
         <!-- Display -->
         <div class="row mt-3">
-            <div class="col-md-1">Hiển thị</div>
-            <div class="col-md-3 pl-0">
-                <div class="form-check p-0">
+            <div class="col-5">
+                <label class="form-label fw-bolder">Nội dung</label>
+                <div class="form-check form-check-inline ms-2">
+                    <input class="form-check-input" type="radio" name="display" value="1" {{ ($display == 1) ? 'checked' : '' }}>
+                    <label class="form-check-label">Hiển thị</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="display" value="0" {{ ($display == 0) ? 'checked' : '' }}>
+                    <label class="form-check-label">Ẩn</label>
+                </div>
+            </div>
+            <div class="col-5">
+                <label class="form-label fw-bolder">Nổi bật</label>
+                <div class="form-check form-check-inline ms-2">
                     <input
+                        class="form-check-input"
                         type="radio"
                         name="display"
                         value="1"
                         {{ ($display == 1) ? 'checked' : '' }}
                     >
-                    <label class="form-check-label mr-3">Hiển thị</label>
+                    <label class="form-check-label">Có</label>
+                </div>
+                <div class="form-check form-check-inline">
                     <input
+                        class="form-check-input"
                         type="radio"
                         name="display"
                         value="0"
                         {{ ($display == 0) ? 'checked' : '' }}
                     >
-                    <label class="form-check-label mr-3">Ẩn</label>
+                    <label class="form-check-label">Không</label>
                 </div>
             </div>
         </div>
@@ -96,7 +128,7 @@
         <!-- Buttons -->
         <div class="row mt-5">
             <div class="col-9"></div>
-            <div class="col-2 p-0">
+            <div class="col-3">
                 <a
                     type="button"
                     class="btn btn-primary mr-2"
@@ -111,6 +143,7 @@
                 >
             </div>
     </form>
+    </div>
 </div>
 @include('admin.form-error')
 @endsection

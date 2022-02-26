@@ -29,9 +29,8 @@ class Category extends Model
     /**
      * Get the course for a category
      */
-    public function products($order, $type)
+    public function products()
     {
-        $products = $this->hasMany('App\Models\Product', 'products_id');
-        return $products->orderBy($type, $order);
+        return $this->hasMany('App\Models\Product');
     }
 }

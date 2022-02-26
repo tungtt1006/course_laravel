@@ -1,8 +1,14 @@
 @extends("admin-layout.layout")
 
-@section("main")
-<h4 class="ps-3 mt-3">Quản lý tài khoản</h4>
+@section("header")
+<div class="row">
+    <div class="col-10">
+        <h3>Quản lý tài khoản</h3>
+    </div>
+</div>
+@endsection
 
+@section("main")
 <div class="row px-3 mt-4">
     @if (isset($data))
         <form method="post" action="{{ route('users.update', ['user' => $data->id]) }}" enctype="multipart/form-data">
@@ -154,7 +160,7 @@
         <div class="row mt-3">
             <div class="col-2">Quyền</div>
             <div class="col-3 pl-0">
-                <select name="role" class="form-control" required>
+                <select name="role" class="form-select" required>
                     <option
                         value="1"
                         {{ ($role == 1) ? 'selected' : '' }}

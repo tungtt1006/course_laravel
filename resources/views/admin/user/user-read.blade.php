@@ -1,20 +1,23 @@
 @extends("admin-layout.layout")
 
-@section("main")
-<h1 class="mt-4 text-center fw-normal">Tài Khoản</h1>
-<div class="row mt-2">
+@section("header")
+<div class="row">
     <div class="col-10">
+        <h3>Tài khoản</h3>
     </div>
     <div class="col-2">
-        <a href="{{ route('users.create') }}" type="button" class="btn btn-success btn-sm">
+        <a href="{{ route('users.create') }}" type="button" class="btn btn-light btn-sm text-success mt-1">
             <i class="fa fa-plus" aria-hidden="true"></i> Thêm mới
         </a>
     </div>
 </div>
-<div class="row mt-3">
+@endsection
+
+@section("main")
+<div class="row">
     <div class="col">
         <table class="table table-hover">
-            <thead  class="table-secondary">
+            <thead  class="table-light">
                 <tr>
                     <th>
                         <div class="dropdown">
