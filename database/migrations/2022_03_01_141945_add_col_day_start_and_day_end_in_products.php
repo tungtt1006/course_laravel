@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnAdminIdIntoOrders extends Migration
+class AddColDayStartAndDayEndInProducts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddColumnAdminIdIntoOrders extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->integer('admin_id')->unsigned()->default(1);
+        Schema::table('products', function (Blueprint $table) {
+            $table->date('day_start')->default(now());
+            $table->date('day_end')->default(now());
         });
     }
 
@@ -25,8 +26,9 @@ class AddColumnAdminIdIntoOrders extends Migration
      */
     public function down()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumn('admin_id');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('day_start');
+            $table->dropColumn('day_end');
         });
     }
 }

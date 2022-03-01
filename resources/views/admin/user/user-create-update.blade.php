@@ -218,7 +218,7 @@
                 <a
                     type="button"
                     class="btn btn-primary mr-2"
-                    href="{{ route('users.index') }}"
+                    href="{{ url()->previous() }}"
                 >
                     Hủy
                 </a>
