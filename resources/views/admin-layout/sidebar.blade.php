@@ -20,4 +20,10 @@
     >
         <i class="fa fa-th-list" aria-hidden="true"></i> Danh mục
     </a>
+    <a
+        href="{{ route('classes.index') }}"
+        class="list-group-item list-group-item-action p-3 {{ Route::currentRouteNamed('classes.index') ? 'active' : '' }}"
+    >
+        <i class="fa fa-address-book" aria-hidden="true"></i> Lớp học
+    </a>
 </div>

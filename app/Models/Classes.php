@@ -9,7 +9,7 @@ class Classes extends Model
 {
     use SoftDeletes;
 
-    protected $table = "news";
+    protected $table = "classes";
 
     /**
      * The attributes that are mass assignable.
@@ -30,4 +30,28 @@ class Classes extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    /**
+     * Get the post that owns the comment.
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * Get the post that owns the comment.
+     */
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
+
+    /**
+     * Users that belong to the class.
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User', 'orders', 'class_id', 'user_id');
+    }
 }

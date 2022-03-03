@@ -17,7 +17,7 @@ class CreateClassesTable extends Migration
             $table->increments('id');
             $table->char('name', 50);
             $table->integer('products_id')->unsigned();
-            $table->timestamp('start_day');
+            $table->date('start_day');
             $table->integer('sessions');
             $table->integer('teachers_id')->unsigned();
             $table->timestamps(); // Create fields: created_at, updated_at
