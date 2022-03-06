@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Classes;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Order;
+use Illuminate\Support\Facades\DB;
 
 class ClassController extends Controller
 {
@@ -17,8 +19,13 @@ class ClassController extends Controller
     {
         $type = isset($request->type) ? $request->type : 'id';
         $order = isset($request->order) ? $request->order : 'asc';
-        $classes = Classes::with(['product', 'teacher'])->orderBy($type, $order)->paginate(50);
-        return view('admin.class.class-read', ['data' => $classes]);
+        $arrangeClassIds = DB::table('orders')->select(DB::raw('count(class_id) as number, class_id'))
+            ->groupBy('class_id')
+            ->havingRaw('number < 15')
+            ->get()
+            ->pluck('class_id');
+        $arrangeClasses = Classes::whereIn('id', $arrangeClassIds)->with(['product', 'teacher'])->orderBy($type, $order)->paginate(50);
+        return view('admin.class.class-read', ['arrangeClasses' => $arrangeClasses]);
     }
 
     /**
