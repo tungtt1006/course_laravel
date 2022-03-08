@@ -21,7 +21,7 @@ class Classes extends Model
         'products_id',
         'start_day',
         'sessions',
-        'teachers_id'
+        'teachers_id',
     ];
 
     /**
@@ -53,5 +53,25 @@ class Classes extends Model
     public function users()
     {
         return $this->belongsToMany('App\Models\User', 'orders', 'class_id', 'user_id');
+    }
+
+    public function scopeWithClasses($query)
+    {
+        return $query->with(['product', 'teacher']);
+    }
+
+    public function scopeArrangeClasses($query)
+    {
+        return $query->where('status', 'arrange')->withClasses();
+    }
+
+    public function scopeLearningClasses($query)
+    {
+        return $query->where('status', 'learning')->withClasses();
+    }
+
+    public function scopeFinishClasses($query)
+    {
+        return $query->where('status', 'finish')->withClasses();
     }
 }

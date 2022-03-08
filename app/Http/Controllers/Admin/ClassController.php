@@ -19,13 +19,14 @@ class ClassController extends Controller
     {
         $type = isset($request->type) ? $request->type : 'id';
         $order = isset($request->order) ? $request->order : 'asc';
-        $arrangeClassIds = DB::table('orders')->select(DB::raw('count(class_id) as number, class_id'))
-            ->groupBy('class_id')
-            ->havingRaw('number < 15')
-            ->get()
-            ->pluck('class_id');
-        $arrangeClasses = Classes::whereIn('id', $arrangeClassIds)->with(['product', 'teacher'])->orderBy($type, $order)->paginate(50);
-        return view('admin.class.class-read', ['arrangeClasses' => $arrangeClasses]);
+        $arrangeClasses = Classes::arrangeClasses()->orderBy($type, $order)->paginate(50);
+        $learningClasses = Classes::learningClasses()->orderBy($type, $order)->paginate(50);
+        $finishClasses = Classes::finishClasses()->orderBy($type, $order)->paginate(50);
+        return view('admin.class.class-read', [
+            'arrangeClasses' => $arrangeClasses,
+            'learningClasses' => $learningClasses,
+            'finishClasses' => $finishClasses,
+        ]);
     }
 
     /**
