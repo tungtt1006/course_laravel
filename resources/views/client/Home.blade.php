@@ -1,15 +1,11 @@
-@extends("felayouts.layout")
-
-@section("css")
-    <link rel="stylesheet" href="{{ asset('client/assets/css/home.css') }}">
-@endsection
+@extends("client-layout.layout")
 
 @section("main")
     <!-- Banner List -->
     <div
         class="row pt-4 banner-list"
     >
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div id="carouselExampleControls" class="carousel slide border p-0" data-bs-ride="carousel">
             <div class="carousel-inner">
                 @foreach ($banners as $key => $banner)
                 <div
@@ -34,57 +30,62 @@
             </button>
         </div>
     </div>
-
     <!-- Highlight Course -->
-    <div class="row d-flex justify-content-around">
-        <h1 class="mt-3 title-category">Khóa học nổi bật</h1>
+    <div class="row mt-4">
+        <h1 class="fw-normal">Khóa học nổi bật</h1>
         @foreach ($highlightCourses as $highlightCourse)
-            <a href="{{ route('client.product.getDetailProduct', ['product' => $highlightCourse->id]) }}" class="card p-0 course-item">
-                <img src="{{ asset('upload/products/'.$highlightCourse->photo) }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $highlightCourse->name }}</h5>
-                    <p class="card-text course-item-description">{{ $highlightCourse->description }}</p>
-                    <p class="mt-5 mb-0 card-text course-item-discount-price">
-                        {{ number_format($highlightCourse->price) }} VND
-                    </p>
-                    <p class="mt-0 card-text course-item-price">
-                        {{ number_format($highlightCourse->price * (100 - $highlightCourse->discount) /100) }} VND
-                    </p>
-                </div>
-            </a>
+            <div class="col-3">
+                <a href="{{ route('client.product.show', $highlightCourse->id) }}" class="card w-90 text-black text-decoration-none shadow-sm">
+                    <img src="{{ asset('upload/products/python-course.jpg') }}" class="card-img-top border-bottom" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $highlightCourse->name }}</h5>
+                        <p class="card-text course-item-description">{{ $highlightCourse->description }}</p>
+                        <p class="mt-5 mb-0 text-decoration-line-through text-muted">
+                            {{ number_format($highlightCourse->price) }} VND
+                        </p>
+                        <p class="mt-0 fs-5 fw-bolder">
+                            {{ number_format($highlightCourse->price * (100 - $highlightCourse->discount) /100) }} VND
+                        </p>
+                    </div>
+                </a>
+           </div>
         @endforeach
     </div>
 
     <!-- Newest Course -->
-    <div class="row mt-3 d-flex justify-content-around">
-        <h1 class="mt-3 title-category">Khóa học Mới nhất</h1>
+    <div class="row mt-5">
+        <h1 class="fw-normal">Khóa học Mới nhất</h1>
         @foreach ($newestCourses as $newestCourse)
-            <a href="{{ route('client.product.getDetailProduct', ['product' => $newestCourse->id]) }}" class="card p-0 course-item">
-                <img src="{{ asset('upload/products/'.$newestCourse->photo) }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $newestCourse->name }}</h5>
-                    <p class="card-text course-item-description">{{ $newestCourse->description }}</p>
-                    <p class="mt-5 mb-0 card-text course-item-discount-price">
-                        {{ number_format($newestCourse->price) }} VND
-                    </p>
-                    <p class="mt-0 card-text course-item-price">
-                        {{ number_format($newestCourse->price * (100 - $newestCourse->discount) /100) }} VND
-                    </p>
-                </div>
-            </a>
+            <div class="col-3">
+                <a href="{{ route('client.product.show', $newestCourse->id) }}" class="card w-90 text-black text-decoration-none shadow-sm">
+                    <img src="{{ asset('upload/products/python-course.jpg') }}" class="card-img-top border-bottom" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $newestCourse->name }}</h5>
+                        <p class="card-text course-item-description">{{ $newestCourse->description }}</p>
+                        <p class="mt-5 mb-0 text-decoration-line-through text-muted">
+                            {{ number_format($newestCourse->price) }} VND
+                        </p>
+                        <p class="mt-0 fs-5 fw-bolder">
+                            {{ number_format($newestCourse->price * (100 - $newestCourse->discount) /100) }} VND
+                        </p>
+                    </div>
+                </a>
+            </div>
         @endforeach
     </div>
 
     <!-- Highlight News -->
-    <div class="row mt-5 highlight-news-list">
+    <div class="row mt-5">
         @foreach ($highlightNews as $highlightNew)
         <div class="col-md-11">
-            <a href="" class="card mb-3 p-0 card-news">
+            <a href="" class="card mb-3 p-0 shadow-sm">
                 <div class="row g-0">
                     <div class="col-md-4">
                         <img
                             src="{{ asset('upload/news/'.$highlightNew->photo) }}"
-                            class=" img-fluid rounded-start"
+                            class="img-fluid rounded-start"
+                            width="400px"
+                            height="300px"
                         >
                     </div>
                     <div class="col-md-8">

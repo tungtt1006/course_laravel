@@ -1,7 +1,7 @@
 <div>
-    <nav class="navbar navbar-expand-sm" style="background-color: white;">
+    <nav class="navbar navbar-expand-sm">
         <div class="col-md-8">
-            <h1 class="ps-3 m-0 fw-normal" style="color:#00c292;cursor: default;">&lt;!--XT--&gt;</h1>
+            <h1 class="ps-3 m-0 fw-bolder text-success">&lt;!--XT--&gt;</h1>
         </div>
         <div class="col-md-2 ps-3">
             <p class="m-0 fw-thin">Email</p>
@@ -12,24 +12,24 @@
             <p class="m-0 fs-5 fw-normal">0968.68.68.68</p>
         </div>
     </nav>
-    <nav class="navbar navbar-expand-lg header">
+    <nav class="navbar navbar-expand-lg bg-success">
         <div class="container-fluid">
-            <a class="navbar-brand nav_brand" href="{{ route('client.home.index') }}">Trang chủ</a>
+            <a class="navbar-brand text-white" href="{{ route('client.home.index') }}">Trang chủ</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle nav_item" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-white" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Khóa học
                         </a>
                         @php
-                            $categoryList = App\Models\Category::select('id', 'name')->get();
+                            $categoryList = App\Models\Category::where('display', 1)->get();
                         @endphp
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @foreach ($categoryList as $category)
                                 <li>
                                     <a
                                         class="dropdown-item"
-                                        href="{{ route('client.category.getCategoryWId', ['category' => $category->id, 'type' => 'name', 'order' => 'asc']) }}"
+                                        href="{{ route('client.category.show', $category->id) }}"
                                     >
                                         {{ $category->name }}
                                     </a>
@@ -38,17 +38,17 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav_item" href="">Tin tức</a>
+                        <a class="nav-link text-white" href="">Tin tức</a>
                     </li>
-                    <li class="nav-item nav_item">
-                        <a class="nav-link nav_item" href="">Giới thiệu</a>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="">Giới thiệu</a>
                     </li>
                 </ul>
             </div>
             <div></div>
-            <div v-else class="pe-3" style="color:white">
-                <a class="sign_in" href="">Đăng nhập</a> /
-                <a class="sign_up" href="">Đăng kí</a>
+            <div class="pe-3">
+                <a class="text-white text-decoration-none" href="">Đăng nhập /</a>
+                <a class="text-white text-decoration-none" href="">Đăng kí</a>
             </div>
         </div>
     </nav>

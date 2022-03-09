@@ -14,16 +14,16 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getCategoryWId(Request $request)
+    public function show(Category $category)
     {
-        $categoryId = $request->category;
-        $products = Category::find($categoryId)->products($request->order, $request->type)->paginate(5);
-        $category = Category::find($categoryId);
-        $anotherCategory = Category::where('id', '!=', $categoryId)->limit(3)->get();
-        return view('client.DetailCategory', [
-            'products' => $products,
-            'category' => $category ,
-            'anotherCategory' => $anotherCategory
-        ]);
+        // $categoryId = $request->category;
+        // $products = Category::find($categoryId)->products($request->order, $request->type)->paginate(5);
+        // $category = Category::find($categoryId);
+        // $anotherCategory = Category::where('id', '!=', $categoryId)->limit(3)->get();
+        // return view('client.DetailCategory', [
+        //     'products' => $products,
+        //     'category' => $category ,
+        //     'anotherCategory' => $anotherCategory
+        // ]);
     }
 }

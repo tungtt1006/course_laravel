@@ -28,4 +28,19 @@ class Product extends Model
         'sessions',
         'price',
     ];
+
+    public function scopeHighlightCourse($query)
+    {
+        return $query->where('hot', 1)->paginate(4);
+    }
+
+    public function scopeNewestCourse($query)
+    {
+        return $query->orderBy('created_at', 'desc')->paginate(4);
+    }
+
+    public function scopeDisplayed($query)
+    {
+        return $query->where('display', 1);
+    }
 }

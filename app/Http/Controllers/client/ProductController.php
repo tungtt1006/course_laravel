@@ -12,7 +12,7 @@ class ProductController extends Controller
      * Get detail prduct
      *
      */
-    public function getDetailProduct($id)
+    public function show(Product $product)
     {
         $product = Product::find($id);
         return view('client.DetailProduct', ['product' => $product]);
