@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Route;
 //     return redirect(url('/login'));
 // });
 
-Route::get('/', 'Client\HomeController@index')->name('client.home.index');
+Route::get('/', function () {
+    return view('client-layout.layout');
+});
 
 Route::get('/category/{category}', 'Client\CategoryController@show')->name('client.category.show');
 
