@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="bg-white">
         <nav class="navbar navbar-expand-sm">
             <div class="col-md-8">
                 <h1 class="ps-3 m-0 fw-bolder text-success">&lt;!--XT--&gt;</h1>
@@ -23,13 +23,9 @@
                                 Khóa học
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li>
-                                        <a
-                                            class="dropdown-item"
-                                            href=""
-                                        >
-                                        </a>
-                                    </li>
+                                <li v-for="item in categories" :key="item.id">
+                                    <a class="dropdown-item" href="#">{{ item.name }}</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -51,23 +47,21 @@
 </template>
 
 <script>
+import { categoryApi } from '@/api/category.js'
+
 export default {
+    data() {
+        return {
+            categories: [],
+        }
+    },
+    created() {
+        categoryApi
+            .getCategory()
+            .then(response => {
+                this.categories = response.data
+            })
+            .catch(error => alert("Fail"))
+    },
 }
 </script>
-
-<style scoped>
-.header {
-    background-color: #00c292;
-}
-.nav_brand, .nav_item {
-    color: white !important;
-}
-.sign_in, .sign_up {
-    color: white;
-    text-decoration: none;
-}
-.sign_in:hover, .sign_up:hover {
-    color: white;
-    text-decoration: underline;
-}
-</style>

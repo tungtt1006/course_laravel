@@ -1,8 +1,8 @@
 <template>
     <div class="container-fluid p-0">
         <TheHeading/>
-        <div class="container mt-3 bg-primary">
-            <h1>Hello World</h1>
+        <div class="container mt-3 shadow-sm bg-white">
+            <router-view/>
         </div>
     </div>
 </template>
@@ -20,7 +20,6 @@ export default {
 
 <style>
 body {
-    margin: 0;
-    padding: 0;
+    background-color: #f4f4f4;
 }
 </style>

@@ -9,21 +9,13 @@ use App\Models\Category;
 class CategoryController extends Controller
 {
     /**
-     * Display the specified resource.
-     * @param  Request $reuqest
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function index()
     {
-        // $categoryId = $request->category;
-        // $products = Category::find($categoryId)->products($request->order, $request->type)->paginate(5);
-        // $category = Category::find($categoryId);
-        // $anotherCategory = Category::where('id', '!=', $categoryId)->limit(3)->get();
-        // return view('client.DetailCategory', [
-        //     'products' => $products,
-        //     'category' => $category ,
-        //     'anotherCategory' => $anotherCategory
-        // ]);
+        $category = Category::orderBy('id', 'desc')->get();
+        return $category;
     }
 }
