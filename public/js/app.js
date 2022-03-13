@@ -34770,7 +34770,7 @@ var render = function () {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "container mt-3 shadow-sm bg-white" },
+        { staticClass: "container mt-3 shadow-sm bg-white px-4" },
         [_c("router-view")],
         1
       ),

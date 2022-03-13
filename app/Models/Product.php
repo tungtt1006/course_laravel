@@ -29,14 +29,14 @@ class Product extends Model
         'price',
     ];
 
-    public function scopeHighlightCourse($query)
+    public function scopeHighlightProducts($query)
     {
-        return $query->where('hot', 1)->paginate(4);
+        return $query->where('hot', 1);
     }
 
-    public function scopeNewestCourse($query)
+    public function scopeNewestProducts($query)
     {
-        return $query->orderBy('created_at', 'desc')->paginate(4);
+        return $query->orderBy('created_at', 'desc');
     }
 
     public function scopeDisplayed($query)

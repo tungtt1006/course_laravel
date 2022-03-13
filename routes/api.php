@@ -24,11 +24,13 @@ use Illuminate\Support\Facades\Route;
 
 // });
 
-// Products
+/**
+ * Products
+ */
+Route::get('products', 'Client\ProductController@index');
 // Route::get('products', 'ProductController@index');
 // Route::apiResource('products', ProductController::class);
 // Route::get('products/{id}', [ProductController::class, 'getCourse']);
-// Route::get('product/{id}', [ProductController::class, 'getACourse']);
 
 /**
  * Category
