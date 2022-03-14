@@ -3,7 +3,7 @@
 @section("header")
 <div class="row">
     <div class="col-10">
-        <h3>Danh Mục</h3>
+        <h3>Danh mục khóa học</h3>
     </div>
     <div class="col-2">
         <a href="{{ route('category.create') }}" type="button" class="btn btn-light btn-sm text-success mt-1">

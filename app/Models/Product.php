@@ -21,10 +21,6 @@ class Product extends Model
         'content',
         'display',
         'hot',
-        'time_start',
-        'time_end',
-        'day_start',
-        'day_end',
         'sessions',
         'price',
     ];

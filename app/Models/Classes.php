@@ -17,11 +17,11 @@ class Classes extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
         'products_id',
         'start_day',
         'sessions',
         'teachers_id',
+        'number',
     ];
 
     /**
@@ -31,25 +31,21 @@ class Classes extends Model
      */
     protected $dates = ['deleted_at'];
 
-    /**
-     * Get the post that owns the comment.
-     */
+    public function getName()
+    {
+        return $this->product->name.'-'.$this->number;
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class);
     }
 
-    /**
-     * Get the post that owns the comment.
-     */
     public function teacher()
     {
         return $this->belongsTo(Teacher::class);
     }
 
-    /**
-     * Users that belong to the class.
-     */
     public function users()
     {
         return $this->belongsToMany('App\Models\User', 'orders', 'class_id', 'user_id');
@@ -60,18 +56,8 @@ class Classes extends Model
         return $query->with(['product', 'teacher']);
     }
 
-    public function scopeArrangeClasses($query)
+    public function scopeOfStatus($query, $status)
     {
-        return $query->where('status', 'arrange')->withClasses();
-    }
-
-    public function scopeLearningClasses($query)
-    {
-        return $query->where('status', 'learning')->withClasses();
-    }
-
-    public function scopeFinishClasses($query)
-    {
-        return $query->where('status', 'finish')->withClasses();
+        return $query->where('status', $status)->withClasses();
     }
 }

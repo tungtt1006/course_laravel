@@ -15,7 +15,6 @@ class CreateClassesTable extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('name', 50);
             $table->integer('products_id')->unsigned();
             $table->date('start_day');
             $table->integer('sessions');

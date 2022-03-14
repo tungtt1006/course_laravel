@@ -24,7 +24,6 @@ class CreateProductsTable extends Migration
             $table->tinyInteger('hot');
             $table->timestamp('time_start')->default(null)->nullable();
             $table->timestamp('time_end')->default(null)->nullable();
-            $table->char('sessions', 50);
             $table->char('photo', 255)->default(null)->nullable();
             $table->integer('price');
             $table->timestamps(); // Create fields: created_at, updated_at

@@ -25,6 +25,43 @@
         </div>
     </div>
 
+    <div class="row mt-3">
+        <div  class="col-6">
+            <h3 class="m-0 fw-normal">Danh sách người học</h3>
+        </div>
+        <div class="col-6 d-flex justify-content-end">{{ $users->links() }}</div>
+    </div>
+    <table class="table table-bordered mt-3">
+        <thead class="table-light">
+            <tr>
+                <th class="text-center">Id</th>
+                <th class="text-center">Tên</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Chi tiết</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($users as $user)
+            <tr>
+                <td class="text-center">{{ $user->id }}</td>
+                <td class="text-center">{{ $user->name }}</td>
+                <td class="text-center">{{ $user->email }}</td>
+                <td class="text-center">
+                    <a class="btn btn-info btn-sm" href="{{ route('categories.products.index', $user->id) }}">
+                        <i class="fa fa-bars text-light" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <hr class="my-5">
+    <div class="row">
+        <div  class="col-6">
+            <h3 class="m-0 fw-normal">Danh sách buổi</h3>
+        </div>
+        <div class="col-6 d-flex justify-content-end">{{ $users->links() }}</div>
+    </div>
     <table class="table table-bordered mt-3">
         <thead class="table-light">
             <tr>

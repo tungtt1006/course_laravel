@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class OrderSeeder extends Seeder
 {
@@ -12,37 +12,9 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('orders')->insert([
-            [
-                'users_id' => 1,
-                'classes_id' => 2,
-                'price' => 300000,
-                'status' => 0
-            ],
-            [
-                'users_id' => 1,
-                'classes_id' => 2,
-                'price' => 300000,
-                'status' => 0
-            ],
-            [
-                'users_id' => 2,
-                'classes_id' => 1,
-                'price' => 300000,
-                'status' => 0
-            ],
-            [
-                'users_id' => 3,
-                'classes_id' => 1,
-                'price' => 300000,
-                'status' => 0
-            ],
-            [
-                'users_id' => 4,
-                'classes_id' => 2,
-                'price' => 300000,
-                'status' => 0
-            ],
-        ]);
+        $users = User::limit(15)->get();
+        foreach ($users as $user) {
+            factory(App\Models\Order::class, 1)->create(['user_id' => $user->id]);
+        }
     }
 }

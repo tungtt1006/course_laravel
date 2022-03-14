@@ -17,9 +17,9 @@ class ClassController extends Controller
     {
         $type = isset($request->type) ? $request->type : 'id';
         $order = isset($request->order) ? $request->order : 'asc';
-        $arrangeClasses = Classes::arrangeClasses()->orderBy($type, $order)->paginate(50);
-        $learningClasses = Classes::learningClasses()->orderBy($type, $order)->paginate(50);
-        $finishClasses = Classes::finishClasses()->orderBy($type, $order)->paginate(50);
+        $arrangeClasses = Classes::ofStatus('arrange')->orderBy($type, $order)->paginate(50);
+        $learningClasses = Classes::ofStatus('learning')->orderBy($type, $order)->paginate(50);
+        $finishClasses = Classes::ofStatus('finish')->orderBy($type, $order)->paginate(50);
         return view('admin.class.class-read', [
             'arrangeClasses' => $arrangeClasses,
             'learningClasses' => $learningClasses,
@@ -57,7 +57,7 @@ class ClassController extends Controller
     public function show(Classes $class)
     {
         return view('admin.class.class-show', [
-            'users' => $class->users,
+            'users' => $class->users()->paginate(5),
             'teacher' => $class->teacher,
             'product' => $class->product,
             'class' => $class,

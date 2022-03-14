@@ -53,10 +53,6 @@ class ProductController extends Controller
             'content' => $request->content,
             'display' => $request->display,
             'hot' => $request->hot,
-            'time_start' => $request->timestart,
-            'time_end' => $request->timeend,
-            'day_start' => $request->daystart,
-            'day_end' => $request->dayend,
             'sessions' => $request->sessions,
             'price' =>$request->price,
         ]);
@@ -98,10 +94,6 @@ class ProductController extends Controller
             'content' => $request->content,
             'display' => $request->display,
             'hot' => $request->hot,
-            'time_start' => $request->timestart,
-            'time_end' => $request->timeend,
-            'day_start' => $request->daystart,
-            'day_end' => $request->dayend,
             'sessions' => $request->sessions,
             'price' =>$request->price,
         ]);

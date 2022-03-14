@@ -61,34 +61,6 @@
                 $sessions = '';
 
             /**
-             * Day start && Day end
-             */
-            if (isset($data) && $data->day_start && $data->day_end) {
-                $dayStart = $data->day_start;
-                $dayEnd = $data->day_end;
-            } elseif (old('day_start') != '' && old('day_end') != '') {
-                $dayStart = old('day_start');
-                $dayEnd = old('day_end');
-            } else {
-                $dayStart = '';
-                $dayEnd = '';
-            }
-
-            /**
-             * Time start && Time end
-             */
-            if (isset($data) && $data->time_start && $data->time_end) {
-                $timeStart = $data->time_start;
-                $timeEnd = $data->time_end;
-            } elseif (old('time_start') != '' && old('time_end') != '') {
-                $timeStart = old('time_start');
-                $timeEnd = old('time_end');
-            } else {
-                $timeStart = '';
-                $timeEnd = '';
-            }
-
-            /**
              * Description
              */
             if (isset($data))
@@ -162,28 +134,8 @@
                 <input type="text" name="price" class="form-control" required value="{{ $price }}">
             </div>
             <div class="col-6">
-                <label class="form-label fw-bolder">Thứ học</label>
+                <label class="form-label fw-bolder">Số buổi</label>
                 <input type="text" name="sessions" class="form-control" required value="{{ $sessions }}" placeholder="2/4/6">
-            </div>
-        </div>
-
-        <!--Time start & Time end-->
-        <div class="row mt-3">
-            <div class="col-3">
-                <label class="form-label fw-bolder">Ngày bắt đầu</label>
-                <input type="date" name="daystart" class="form-control" required value="{{ $dayStart }}">
-            </div>
-            <div class="col-3">
-                <label class="form-label fw-bolder">Ngày kết thúc</label>
-                <input type="date" name="dayend" class="form-control" required value="{{ $dayEnd }}">
-            </div>
-            <div class="col-3">
-                <label class="form-label fw-bolder">Giờ vào</label>
-                <input type="time" name="timestart" class="form-control" required value="{{ $timeStart }}">
-            </div>
-            <div class="col-3">
-                <label class="form-label fw-bolder">Giờ tan</label>
-                <input type="time" name="timeend" class="form-control" required value="{{ $timeEnd }}">
             </div>
         </div>
 
