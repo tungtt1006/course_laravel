@@ -46,6 +46,11 @@ class Classes extends Model
         return $this->belongsTo(Teacher::class);
     }
 
+    public function periods()
+    {
+        return $this->hasMany('App\Models\Period', 'class_id');
+    }
+
     public function users()
     {
         return $this->belongsToMany('App\Models\User', 'orders', 'class_id', 'user_id');

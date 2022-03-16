@@ -20,7 +20,10 @@ class UserController extends Controller
         $type = isset($request->type) ? $request->type : 'id';
         $order = isset($request->order) ? $request->order : 'asc';
         $userList = User::orderBy($type, $order)->paginate(50);
-        return view('admin.user.user-read', ['data' => $userList]);
+        return view('admin.user.user-read', [
+            'data' => $userList,
+            'actions' => true,
+        ]);
     }
 
     /**

@@ -12,37 +12,11 @@ class PeriodSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('periods')->insert([
-            [
-                'classes_id' => 1,
-                'time_in' => date('Y-m-d H:i:s'),
-                'time_out' => date('Y-m-d H:i:s'),
-                'order' => 1
-            ],
-            [
-                'classes_id' => 1,
-                'time_in' => date('Y-m-d H:i:s'),
-                'time_out' => date('Y-m-d H:i:s'),
-                'order' => 2
-            ],
-            [
-                'classes_id' => 1,
-                'time_in' => date('Y-m-d H:i:s'),
-                'time_out' => date('Y-m-d H:i:s'),
-                'order' => 3
-            ],
-            [
-                'classes_id' => 1,
-                'time_in' => date('Y-m-d H:i:s'),
-                'time_out' => date('Y-m-d H:i:s'),
-                'order' => 4
-            ],
-            [
-                'classes_id' => 1,
-                'time_in' => date('Y-m-d H:i:s'),
-                'time_out' => date('Y-m-d H:i:s'),
-                'order' => 5
-            ],
-        ]);
+        $classes = DB::table('classes')->where('status', 'finish')->get();
+        foreach ($classes as $class) {
+            factory(App\Models\Period::class, $class->sessions)->create([
+                'class_id' => $class->id
+            ]);
+        }
     }
 }

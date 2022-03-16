@@ -57,7 +57,7 @@ class ClassController extends Controller
     public function show(Classes $class)
     {
         return view('admin.class.class-show', [
-            'users' => $class->users()->paginate(5),
+            'periods' => $class->periods()->orderBy('id', 'asc')->paginate(8),
             'teacher' => $class->teacher,
             'product' => $class->product,
             'class' => $class,

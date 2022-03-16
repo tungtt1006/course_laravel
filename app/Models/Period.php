@@ -14,10 +14,10 @@ class Period extends Model
      * @var array
      */
     protected $fillable = [
-        'classes_id',
+        'class_id',
         'time_in',
         'time_out',
-        'order'
+        'number'
     ];
 
     /**

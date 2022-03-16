@@ -5,11 +5,13 @@
     <div class="col-10">
         <h3>Tài khoản</h3>
     </div>
+    @if ($actions)
     <div class="col-2">
         <a href="{{ route('users.create') }}" type="button" class="btn btn-light btn-sm text-success mt-1">
             <i class="fa fa-plus" aria-hidden="true"></i> Thêm mới
         </a>
     </div>
+    @endif
 </div>
 @endsection
 
@@ -66,7 +68,9 @@
                         </div>
                     </th>
                     <th>Chức vụ</th>
-                    <th></th>
+                    @if ($actions)
+                        <th></th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -81,22 +85,24 @@
                     <td>
                         {{ ($rows->role == 1) ? 'Người quản trị' : 'Nhân viên' }}
                     </td>
-                    <td>
-                        <form
-                            action="{{ route('users.destroy', ['user' => $rows->id]) }}"
-                            method="POST"
-                            onsubmit="return confirm('Are you sure you want to delete?');"
-                        >
-                            @csrf
-                            @method('DELETE')
-                            <a class="btn btn-success btn-sm" href="{{ url('admin/users/'.$rows->id.'/edit') }}" role="button">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </a>
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            </button>
-                        </form>
-                    </td>
+                    @if ($actions)
+                        <td>
+                            <form
+                                action="{{ route('users.destroy', ['user' => $rows->id]) }}"
+                                method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete?');"
+                            >
+                                @csrf
+                                @method('DELETE')
+                                <a class="btn btn-success btn-sm" href="{{ url('admin/users/'.$rows->id.'/edit') }}" role="button">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>
@@ -104,6 +110,10 @@
     </div>
 </div>
 <div class="row">
-    {{ $data->links() }}
+    <div class="col-10"></div>
+    <div class="col-2">
+        {{ $data->links() }}
+    </div>
+</div>
 </div>
 @endsection

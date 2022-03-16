@@ -15,10 +15,10 @@ class CreatePeriodsTable extends Migration
     {
         Schema::create('periods', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('classes_id')->unsigned();
+            $table->integer('class_id')->unsigned();
             $table->timestamp('time_in')->default(null)->nullable();
             $table->timestamp('time_out')->default(null)->nullable();
-            $table->integer('order');
+            $table->integer('number');
             $table->timestamps(); // Create fields: created_at, updated_at
             $table->softDeletes(); // Create columns: deleted_at
             // $table->foreign('classes_id')->references('id')->on('classes'); // Set foreign key
