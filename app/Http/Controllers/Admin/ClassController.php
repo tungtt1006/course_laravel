@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Classes;
+use App\Models\Product;
+use App\Models\Teacher;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -34,7 +36,10 @@ class ClassController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.class.class-create-update', [
+            'products' => Product::all(),
+            'teachers' => Teacher::all(),
+        ]);
     }
 
     /**
@@ -45,7 +50,17 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $class = new Classes();
+        $class->product_id = $request->product;
+        $class->teacher_id = $request->teacher;
+        $class->sessions = $request->sessions;
+        $class->start_day = $request->startday;
+        $class->time_in = $request->timein;
+        $class->time_out = $request->timeout;
+        $class->days_of_week = $request->daysofweek;
+        $class->number = $class->caculateNumber($request->product) + 1;
+        $class->save();
+        return redirect()->route('classes.index');
     }
 
     /**

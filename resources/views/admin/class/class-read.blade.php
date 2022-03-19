@@ -319,7 +319,7 @@
                         @foreach($finishClasses as $rows)
                             <tr>
                                 <td>{{ $rows->id }}</td>
-                                <td>{{ $rows->name }}</td>
+                                <td>{{ $rows->getName() }}</td>
                                 <td>{{ $rows->product->name }}</td>
                                 <td>{{ $rows->teacher->name }}</td>
                                 <td>{{ $rows->start_day }}</td>

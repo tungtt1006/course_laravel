@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColNumberInClasses extends Migration
+class AddColsInClasses extends Migration
 {
     /**
      * Run the migrations.
@@ -15,6 +15,8 @@ class AddColNumberInClasses extends Migration
     {
         Schema::table('classes', function (Blueprint $table) {
             $table->integer('number')->default(1);
+            $table->time('time_in')->default('18:00:00');
+            $table->time('time_out')->default('21:00:00');
         });
     }
 
@@ -27,6 +29,8 @@ class AddColNumberInClasses extends Migration
     {
         Schema::table('classes', function (Blueprint $table) {
             $table->dropColumn('number');
+            $table->dropColumn('time_in');
+            $table->dropColumn('time_out');
         });
     }
 }

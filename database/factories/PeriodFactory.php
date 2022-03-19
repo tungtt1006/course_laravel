@@ -15,9 +15,9 @@ $factory->define(App\Models\Period::class, function (Faker $faker) use ($autoInc
     ];
 });
 
-function autoIncrement()
-{
-    for ($i = 0; $i < 1000; $i++) {
-        yield $i;
-    }
-}
+// function autoIncrement()
+// {
+//     for ($i = 0; $i < 1000; $i++) {
+//         yield $i;
+//     }
+// }

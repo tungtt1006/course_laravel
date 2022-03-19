@@ -65,4 +65,9 @@ class Classes extends Model
     {
         return $query->where('status', $status)->withClasses();
     }
+
+    public function caculateNumber($productId)
+    {
+        return $this->where('product_id', $productId)->count();
+    }
 }
