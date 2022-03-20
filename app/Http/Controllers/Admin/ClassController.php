@@ -50,6 +50,9 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
+        if (Classes::isArrange($request->product)) {
+            return back()->withInput();
+        }
         $class = new Classes();
         $class->product_id = $request->product;
         $class->teacher_id = $request->teacher;
@@ -58,7 +61,7 @@ class ClassController extends Controller
         $class->time_in = $request->timein;
         $class->time_out = $request->timeout;
         $class->days_of_week = $request->daysofweek;
-        $class->number = $class->caculateNumber($request->product) + 1;
+        $class->number = $class->caculateNumber($request->product);
         $class->save();
         return redirect()->route('classes.index');
     }
@@ -87,7 +90,11 @@ class ClassController extends Controller
      */
     public function edit(Classes $class)
     {
-        //
+        return view('admin.class.class-create-update', [
+            'products' => Product::all(),
+            'teachers' => Teacher::all(),
+            'class' => $class,
+        ]);
     }
 
     /**

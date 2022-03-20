@@ -19,24 +19,20 @@
         @csrf
         @php
             /**
-             * $product
+             * Product
              */
-            if (isset($data))
-                $product = $data->product;
-            elseif (old('product') != '')
-                $product = old('product');
-            else
-                $product = 1;
+            if (isset($class))
+                $productId = $class->product->id;
+            elseif (old('productId') != '')
+                $productId = old('product');
 
             /**
-             * $teacher
+             * Teachers
              */
-            if (isset($data))
-                $teacher = $data->teacher;
-            elseif (old('product') != '')
-                $teacher = old('teacher');
-            else
-                $teacher = 1;
+            if (isset($class))
+                $teacherId = $class->teacher_id;
+            elseif (old('teacher') != '')
+                $teacherId = old('teacher');
 
             /**
              * Sessions
@@ -56,7 +52,7 @@
                     @foreach ($products as $row)
                         <option
                             value="{{ $row->id }}"
-                            {{ ($product == $row->id) ? 'selected' : '' }}
+                            {{ ($productId == $row->id) ? 'selected' : '' }}
                         >
                             {{ $row->name }}
                         </option>
@@ -69,7 +65,7 @@
                     @foreach ($teachers as $row)
                         <option
                             value="{{ $row->id }}"
-                            {{ ($teacher == $row->id) ? 'selected' : '' }}
+                            {{ ($teacherId == $row->id) ? 'selected' : '' }}
                         >
                             {{ $row->name }}
                         </option>
@@ -108,7 +104,7 @@
                 <a
                     type="button"
                     class="btn btn-primary mr-2"
-                    href="{{ url()->previous() }}"
+                    href="{{ route('classes.index') }}"
                 >
                     Hủy
                 </a>

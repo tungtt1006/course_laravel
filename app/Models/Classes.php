@@ -66,8 +66,13 @@ class Classes extends Model
         return $query->where('status', $status)->withClasses();
     }
 
+    public static function isArrange($productId)
+    {
+        return self::where('status', 'arrange')->where('product_id', $productId)->count() != 0;
+    }
+
     public function caculateNumber($productId)
     {
-        return $this->where('product_id', $productId)->count();
+        return ($this->where('product_id', $productId)->count() + 1);
     }
 }
