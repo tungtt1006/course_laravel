@@ -3,15 +3,15 @@
 @section("header")
 <div class="row">
     <div class="col-10">
-        <h3>Quản lý lớp học</h3>
+        <h3>{{ isset($class) ? $class->getName() : 'Thêm mới lớp học' }}</h3>
     </div>
 </div>
 @endsection
 
 @section("main")
 <div class="row px-3 mt-4">
-    @if (isset($data))
-        <form method="post" action="{{ route('users.update', ['user' => $data->id]) }}" enctype="multipart/form-data">
+    @if (isset($class))
+        <form method="post" action="{{ route('classes.update', $class->id) }}" enctype="multipart/form-data">
             @method('PUT')
     @else
         <form method="post" action="{{ route('classes.store') }}" enctype="multipart/form-data">
@@ -25,6 +25,8 @@
                 $productId = $class->product->id;
             elseif (old('productId') != '')
                 $productId = old('product');
+            else
+                $productId = '';
 
             /**
              * Teachers
@@ -33,16 +35,38 @@
                 $teacherId = $class->teacher_id;
             elseif (old('teacher') != '')
                 $teacherId = old('teacher');
+            else
+                $teacherId = '';
 
             /**
              * Sessions
              */
-            if (isset($data) && $data->sessions)
-                $sessions = $data->sessions;
+            if (isset($class))
+                $sessions = $class->sessions;
             elseif (old('sessions') != '')
                 $sessions = old('sessions');
             else
                 $sessions = '';
+
+            /**
+             * Day & Time
+             */
+            if (isset($class)) {
+                $startDay = $class->start_day;
+                $timeIn = $class->time_in;
+                $timeOut = $class->time_out;
+                $daysOfWeek = $class->days_of_week;
+            } elseif (old('startday') != '') {
+                $startDay = old('startday');
+                $timeIn = old('timein');
+                $timeOut = old('timeout');
+                $daysOfWeek = old('daysofweek');
+            } else {
+                $startDay = '';
+                $timeIn = '';
+                $timeOut = '';
+                $daysOfWeek = '';
+            }
         @endphp
         <!--Products & Teachers & Sessions-->
         <div class="row">
@@ -81,19 +105,19 @@
         <div class="row mt-4">
             <div class="col-3">
                 <label class="form-label fw-bolder">Ngày bắt đầu</label>
-                <input type="date" name="startday" class="form-control" required>
+                <input type="date" name="startday" class="form-control" required value="{{ $startDay }}">
             </div>
             <div class="col-3">
                 <label class="form-label fw-bolder">Giờ vào</label>
-                <input type="time" name="timein" class="form-control" required>
+                <input type="time" name="timein" class="form-control" required value="{{ $timeIn }}">
             </div>
             <div class="col-3">
                 <label class="form-label fw-bolder">Giờ tan</label>
-                <input type="time" name="timeout" class="form-control" required>
+                <input type="time" name="timeout" class="form-control" required value="{{ $timeOut }}">
             </div>
             <div class="col-3">
                 <label class="form-label fw-bolder">Thứ học</label>
-                <input type="text" name="daysofweek" class="form-control" required>
+                <input type="text" name="daysofweek" class="form-control" required value="{{ $daysOfWeek }}">
             </div>
         </div>
 
@@ -110,7 +134,7 @@
                 </a>
                 <input
                     type="submit"
-                    value="{{ isset($data) ? 'Cập nhật' : 'Thêm mới' }}"
+                    value="{{ isset($class) ? 'Cập nhật' : 'Thêm mới' }}"
                     class="btn btn-success"
                 >
             </div>

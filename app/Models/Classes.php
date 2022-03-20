@@ -17,10 +17,13 @@ class Classes extends Model
      * @var array
      */
     protected $fillable = [
-        'products_id',
-        'start_day',
+        'product_id',
+        'teacher_id',
         'sessions',
-        'teachers_id',
+        'start_day',
+        'time_in',
+        'time_out',
+        'days_of_week',
         'number',
     ];
 
@@ -71,8 +74,13 @@ class Classes extends Model
         return self::where('status', 'arrange')->where('product_id', $productId)->count() != 0;
     }
 
-    public function caculateNumber($productId)
+    public static function isUpdate($class)
     {
-        return ($this->where('product_id', $productId)->count() + 1);
+        return self::where('status', 'arrange')->where('product_id', $class->product_id)->count() == 1;
+    }
+
+    public static function calculateNumber($productId)
+    {
+        return (self::where('product_id', $productId)->count() + 1);
     }
 }

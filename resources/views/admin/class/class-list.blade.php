@@ -75,7 +75,7 @@
                     <td>{{ $rows->start_day }}</td>
                     <td>
                         <form
-                            action="{{ route('classes.destroy', ['class' => $rows->id]) }}"
+                            action="{{ route('classes.destroy', $rows->id) }}"
                             method="POST"
                             onsubmit="return confirm('Are you sure you want to delete?');"
                         >

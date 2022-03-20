@@ -53,16 +53,16 @@ class ClassController extends Controller
         if (Classes::isArrange($request->product)) {
             return back()->withInput();
         }
-        $class = new Classes();
-        $class->product_id = $request->product;
-        $class->teacher_id = $request->teacher;
-        $class->sessions = $request->sessions;
-        $class->start_day = $request->startday;
-        $class->time_in = $request->timein;
-        $class->time_out = $request->timeout;
-        $class->days_of_week = $request->daysofweek;
-        $class->number = $class->caculateNumber($request->product);
-        $class->save();
+        Classes::create([
+            'product_id' => $request->product,
+            'teacher_id' => $request->teacher,
+            'sessions' => $request->sessions,
+            'start_day' => $request->startday,
+            'time_in' => $request->timein,
+            'time_out' => $request->timeout,
+            'days_of_week' => $request->daysofweek,
+            'number' => Classes::calculateNumber($request->product),
+        ]);
         return redirect()->route('classes.index');
     }
 
@@ -106,7 +106,19 @@ class ClassController extends Controller
      */
     public function update(Request $request, Classes $class)
     {
-        //
+        if ($class->status === 'arrange' && Classes::isUpdate($class)) {
+            return back()->withInput();
+        }
+        $class->update([
+            'product_id' => $request->product,
+            'teacher_id' => $request->teacher,
+            'sessions' => $request->sessions,
+            'start_day' => $request->startday,
+            'time_in' => $request->timein,
+            'time_out' => $request->timeout,
+            'days_of_week' => $request->daysofweek,
+        ]);
+        return redirect()->route('classes.index');
     }
 
     /**
@@ -117,6 +129,7 @@ class ClassController extends Controller
      */
     public function destroy(Classes $class)
     {
-        //
+        $class->delete();
+        return redirect()->route('classes.index');
     }
 }
