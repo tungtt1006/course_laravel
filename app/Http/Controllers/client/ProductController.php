@@ -19,7 +19,7 @@ class ProductController extends Controller
         } elseif ($request->query('type') === 'newest') {
             $products = Product::newestProducts()->paginate(4);
         } else {
-            $products = Product::orderBy('id', 'desc')->paginate(4);
+            $products = Product::orderBy('id', 'desc')->paginate(9);
         }
         return $products;
     }
