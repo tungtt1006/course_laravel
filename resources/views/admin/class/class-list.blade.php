@@ -73,24 +73,26 @@
                     <td>{{ $rows->product->name }}</td>
                     <td>{{ $rows->teacher->name }}</td>
                     <td>{{ $rows->start_day }}</td>
-                    <td>
-                        <form
-                            action="{{ route('classes.destroy', $rows->id) }}"
-                            method="POST"
-                            onsubmit="return confirm('Are you sure you want to delete?');"
-                        >
-                            @csrf
-                            @method('DELETE')
-                            <a class="btn btn-info btn-sm" href="{{ route('classes.show', $rows->id) }}">
-                                <i class="fa fa-bars text-light" aria-hidden="true"></i>
-                            </a>
-                            <a class="btn btn-success btn-sm" href="{{ route('classes.edit', $rows->id) }}" role="button">
+                    <td class="d-flex">
+                        <a class="btn btn-info btn-sm" href="{{ route('classes.show', $rows->id) }}">
+                            <i class="fa fa-bars text-light" aria-hidden="true"></i>
+                        </a>
+                        @if ($status != 'finish')
+                            <a class="btn btn-success btn-sm ms-2" href="{{ route('classes.edit', $rows->id) }}">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            </button>
-                        </form>
+                            <form
+                                action="{{ route('classes.destroy', $rows->id) }}"
+                                method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete?');"
+                            >
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm ms-2">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

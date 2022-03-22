@@ -34,17 +34,17 @@
 <div class="tab-content" id="myTabContent">
     <!--Arrange Classes-->
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-        @include('admin.class.class-list', ['classes' => $arrangeClasses])
+        @include('admin.class.class-list', ['classes' => $arrangeClasses, 'status' => 'arrange'])
     </div>
 
     <!--Learning Classes-->
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        @include('admin.class.class-list', ['classes' => $learningClasses])
+        @include('admin.class.class-list', ['classes' => $learningClasses, 'status' => 'learning'])
     </div>
 
     <!--Finish Classes-->
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-        @include('admin.class.class-list', ['classes' => $finishClasses])
+        @include('admin.class.class-list', ['classes' => $finishClasses, 'status' => 'finish'])
     </div>
 </div>
 @endsection

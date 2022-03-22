@@ -106,7 +106,7 @@ class ClassController extends Controller
      */
     public function update(Request $request, Classes $class)
     {
-        if ($class->status === 'arrange' && Classes::isUpdate($class)) {
+        if (!Classes::isUpdated($class)) {
             return back()->withInput();
         }
         $class->update([

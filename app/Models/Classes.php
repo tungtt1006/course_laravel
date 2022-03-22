@@ -74,7 +74,7 @@ class Classes extends Model
         return self::where('status', 'arrange')->where('product_id', $productId)->count() != 0;
     }
 
-    public static function isUpdate($class)
+    public static function isUpdated($class)
     {
         return self::where('status', 'arrange')->where('product_id', $class->product_id)->count() == 1;
     }
