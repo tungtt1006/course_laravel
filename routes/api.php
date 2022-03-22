@@ -43,8 +43,10 @@ Route::get('categories', 'Client\CategoryController@index');
 // Route::get('users', 'UserController@index');
 // Route::get('arrangeuser/{cate}/{type}',  [UserController::class, 'arrangeUser']);
 
-// Banners
-// Route::get('banners', 'BannerController@index');
+/**
+ * Banners
+ */
+Route::get('banners', 'Client\BannerController@index');
 
 // News
 // Route::get('news', 'NewController@index');
