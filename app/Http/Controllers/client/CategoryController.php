@@ -13,9 +13,14 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $category = Category::orderBy('id', 'desc')->get();
-        return $category;
+        $categories = [];
+        if ($request->filled('except')) {
+            $categories = Category::where('id', '!=', $request->except)->orderBy('id', 'desc')->limit(3)->get();
+        } else {
+            $categories = Category::orderBy('id', 'desc')->get();
+        }
+        return ['categories' => $categories];
     }
 }
