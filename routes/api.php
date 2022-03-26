@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
  * Products
  */
 Route::get('products', 'Client\ProductController@index');
+Route::get('products/{product}', 'Client\ProductController@show');
 Route::get('categories/{category}/products', 'Client\CategoryProductController@index');
 // Route::apiResource('products', ProductController::class);
 // Route::get('products/{id}', [ProductController::class, 'getCourse']);

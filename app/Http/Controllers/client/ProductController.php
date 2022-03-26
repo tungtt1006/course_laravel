@@ -23,4 +23,16 @@ class ProductController extends Controller
         }
         return $products;
     }
+
+    /**
+     * Get prducts
+     */
+    public function show(Product $product)
+    {
+        $class = $product->classes()->with('teacher')->where('status', 'arrange')->first();
+        return [
+            'product' => $product,
+            'class' => $class,
+        ];
+    }
 }

@@ -25,6 +25,11 @@ class Product extends Model
         'price',
     ];
 
+    public function classes()
+    {
+        return $this->hasMany('App\Models\Classes');
+    }
+
     public function scopeHighlightProducts($query)
     {
         return $query->where('hot', 1);
