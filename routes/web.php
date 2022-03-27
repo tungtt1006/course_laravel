@@ -12,22 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/login', 'Admin\Auth\AuthController@login')->name('auth.login');
+Route::post('/login', 'Admin\Auth\AuthController@authenticate')->name('auth.authenticate');
+Route::get('/register', 'Admin\Auth\AuthController@register')->name('auth.register');
+Route::post('/register', 'Admin\Auth\AuthController@authRegister')->name('auth.authRegister');
 
-// Auth::routes();
-// Route::get('/logout', function() {
-//     // Auth::Logout();
-//     return redirect(url('/login'));
-// });
-
-Route::get('/', function () {
-    return view('client-layout.layout');
-});
-
-Route::get('/category/{category}', 'Client\CategoryController@show')->name('client.category.show');
-
-Route::get('/product/{product}', 'Client\ProductController@show')->name('client.product.show');
-
-Route::group(["prefix" => "admin"], function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
         return view('welcome');
     })->name('home');
@@ -36,10 +26,10 @@ Route::group(["prefix" => "admin"], function () {
         return view('admin.403');
     })->name('403');
 
-    // Route::get('/login', 'backend\auth\AuthController@login')->name('auth.login');
-    // Route::post('/login', 'backend\auth\AuthController@authLogin')->name('auth.authLogin');
-    // Route::get('/register', 'backend\auth\AuthController@register')->name('auth.register');
-    // Route::post('/register', 'backend\auth\AuthController@authRegister')->name('auth.authRegister');
+    Route::get('/logout', function () {
+        Auth::Logout();
+        return redirect()->route('auth.login');
+    })->name('auth.logout');
 
     Route::resource('users', 'Admin\UserController');
     Route::resource('category', 'Admin\CategoryController');

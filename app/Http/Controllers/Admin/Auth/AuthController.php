@@ -3,34 +3,33 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegisterRequest;
+use Illuminate\Http\Request;
+// use App\Http\Requests\LoginRequest;
+// use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     /**
-     * show form login
+     * Show form login
      */
     public function login()
     {
-        return view('backend.auth.Login');
+        return view('admin.auth.login');
     }
 
     /**
-     * authentic account
+     * Handle an authentication attempt.
      */
-    public function authLogin(LoginRequest $request)
+    public function authenticate(Request $request)
     {
-        $user = User::where('email', '=', $request->email)->first();
-        if ($user != null
-            && Hash::check($request->password, $user->password)
-        ) {
-            return redirect(route('users.index'));
-        } else {
-            return redirect()->back()->withInput()->withErrors(['msg' => 'Kiểm tra lại mất khẩu hoặc email']);
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $request->session()->regenerate();
+            return redirect()->route('users.index');
         }
+        return back()->withInput();
     }
 
     /**

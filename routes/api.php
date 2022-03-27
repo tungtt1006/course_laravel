@@ -59,8 +59,8 @@ Route::get('banners', 'Client\BannerController@index');
 // Route::post('login', [CustomerController::class, 'login']);
 // Route::put('edit-password', [CustomerController::class, 'editPassword']);
 
-// // Order
-// Route::post('order/store', [OrderController::class, 'store']);
+// Order
+Route::post('order', 'Client\OrderController@store');
 // Route::get('get-order/{id}', [OrderController::class, 'getOrder']);
 // Route::delete('delete-order/{id}', [OrderController::class, 'destroy']);
 
