@@ -14,15 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Route::post('register', 'AuthController@register');
-// Route::post('login', 'AuthController@login');
-
-// Route::group([], function ($router) {
-//     Route::post('login', 'AuthController@login');
-//     Route::post('logout', 'AuthController@logout');
-//     Route::post('refresh', 'AuthController@refresh');
-//     Route::post('me', 'AuthController@me');
-
-// });
+Route::post('login', 'Client\AuthController@login');
+Route::post('logout', 'Client\AuthController@logout')->middleware('auth:api');
 
 /**
  * Products
@@ -60,7 +53,7 @@ Route::get('banners', 'Client\BannerController@index');
 // Route::put('edit-password', [CustomerController::class, 'editPassword']);
 
 // Order
-Route::post('order', 'Client\OrderController@store');
+Route::post('order', 'Client\OrderController@store')->middleware('auth:api');
 // Route::get('get-order/{id}', [OrderController::class, 'getOrder']);
 // Route::delete('delete-order/{id}', [OrderController::class, 'destroy']);
 

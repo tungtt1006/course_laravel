@@ -1,23 +1,14 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Client;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Validator;
+use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
-    }
-
     /**
      * Get a JWT via given credentials.
      *
@@ -25,17 +16,15 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $validator = Validator::make($request->all(), ['email' => 'required|email', 'password' => 'required|string|min:8|max:11']);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+        $token = auth('api')->attempt(['email' => $request->email, 'password' => $request->password]);
+        if (!$token) {
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
-
-        if (!$token = auth()->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
-        return $this->createNewToken($token);
+        return response([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth('api')->factory()->getTTL() * 60
+        ], 200);
     }
 
     /**
@@ -77,7 +66,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+        auth('api')->logout();
         return response()->json(['message' => 'User successfully signed out']);
     }
 
