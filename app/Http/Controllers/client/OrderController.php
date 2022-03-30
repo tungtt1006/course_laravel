@@ -16,9 +16,8 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        Order::create([
+        auth('api')->user()->orders()->create([
             'class_id' => $request->class_id,
-            'user_id' => $request->user_id,
             'price' => $request->price,
             'admin_id' => 1,
         ]);

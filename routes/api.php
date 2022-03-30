@@ -53,7 +53,7 @@ Route::get('banners', 'Client\BannerController@index');
 // Route::put('edit-password', [CustomerController::class, 'editPassword']);
 
 // Order
-Route::post('order', 'Client\OrderController@store')->middleware('auth:api');
+Route::post('orders', 'Client\OrderController@store')->middleware('auth:api');
 // Route::get('get-order/{id}', [OrderController::class, 'getOrder']);
 // Route::delete('delete-order/{id}', [OrderController::class, 'destroy']);
 
