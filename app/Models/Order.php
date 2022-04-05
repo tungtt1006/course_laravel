@@ -25,4 +25,9 @@ class Order extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public function class()
+    {
+        return $this->belongsTo('App\Models\Classes');
+    }
 }

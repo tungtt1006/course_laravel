@@ -25,6 +25,7 @@ class Classes extends Model
         'time_out',
         'days_of_week',
         'number',
+        'status'
     ];
 
     /**

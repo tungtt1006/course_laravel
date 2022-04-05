@@ -16,5 +16,16 @@ class OrderSeeder extends Seeder
         foreach ($users as $user) {
             factory(App\Models\Order::class, 1)->create(['user_id' => $user->id]);
         }
+
+        /**
+         * Seeder for testing event OrderRegisterd
+         */
+        // $users = User::limit(14)->get();
+        // foreach ($users as $user) {
+        //     factory(App\Models\Order::class, 1)->create([
+        //         'user_id' => $user->id,
+        //         'class_id' => 2
+        //     ]);
+        // }
     }
 }
