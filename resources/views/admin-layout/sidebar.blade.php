@@ -26,6 +26,12 @@
     >
         <i class="fa fa-address-book" aria-hidden="true"></i> Lớp học
     </a>
+    <a
+        href="{{ route('orders.index') }}"
+        class="list-group-item list-group-item-action p-3 {{ Route::currentRouteNamed('orders.index') ? 'active' : '' }}"
+    >
+        <i class="fa fa-address-book" aria-hidden="true"></i> Hóa đơn
+    </a>
     <a href="{{ route('auth.logout') }}" class="list-group-item list-group-item-action p-3">
         <i class="fa fa-address-book" aria-hidden="true"></i> Đăng xuất
     </a>

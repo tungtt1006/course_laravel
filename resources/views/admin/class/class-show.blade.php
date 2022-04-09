@@ -30,7 +30,7 @@
         <div  class="col-6">
             <h3 class="m-0 fw-normal">Danh sách học viên</h3>
         </div>
-        <div class="col-6 d-flex justify-content-end">{{ $users->links() }}</div>
+        <div class="col-6">{{ $users->links() }}</div>
     </div>
     <table class="table table-bordered mt-3">
         <thead class="table-light">

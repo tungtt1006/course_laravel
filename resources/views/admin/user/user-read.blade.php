@@ -110,10 +110,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-10"></div>
-    <div class="col-2">
-        {{ $data->links() }}
-    </div>
+    {{ $data->links() }}
 </div>
 </div>
 @endsection
