@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Classes;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends Controller
 {
@@ -104,5 +105,13 @@ class OrderController extends Controller
     {
         $order->delete();
         return redirect()->route('orders.index');
+    }
+
+    public function exportPdf($orderId)
+    {
+        $order = Order::with(['user', 'class'])->find($orderId);
+        // return view('pdf.bill', ['order' => $order]);
+        $pdf = Pdf::loadView('pdf.bill', compact('order'));
+        return $pdf->download('bill.pdf');
     }
 }

@@ -23,6 +23,7 @@
                     <th class="text-center">Người tạo</th>
                     <th class="text-center">Lớp</th>
                     <th class="text-center">Giá (VND)</th>
+                    <th class="text-center">Ngày tạo</th>
                     <th></th>
                 </tr>
             </thead>
@@ -33,7 +34,14 @@
                     <td class="text-center">{{ $rows->user->name }}</td>
                     <td class="text-center">{{ $rows->class->getName() }}</td>
                     <td class="text-center">{{ number_format($rows->price) }}</td>
-                    <td class="text-center">
+                    <td class="text-center">{{ $rows->created_at }}</td>
+                    <td class="text-center d-flex justify-content-center">
+                        <a class="btn btn-warning btn-sm" href="{{ route('orders.export_pdf', $rows->id) }}" target="_blank">
+                            <i class="fa fa-print" aria-hidden="true"></i>
+                        </a>
+                        <a class="btn btn-success btn-sm mx-2" href="{{ route('orders.edit', $rows->id) }}">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
                         <form
                             action="{{ route('orders.destroy', $rows->id) }}"
                             method="POST"
@@ -41,9 +49,6 @@
                         >
                             @csrf
                             @method('DELETE')
-                            <a class="btn btn-success btn-sm" href="{{ route('orders.edit', $rows->id) }}">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </a>
                             <button type="submit" class="btn btn-danger btn-sm">
                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </button>

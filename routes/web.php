@@ -32,9 +32,13 @@ Route::middleware(['auth'])->group(function () {
     })->name('auth.logout');
 
     Route::resource('users', 'Admin\UserController');
+
     Route::resource('category', 'Admin\CategoryController');
     Route::resource('categories.products', 'Admin\ProductController');
+
     Route::resource('classes', 'Admin\ClassController');
     Route::resource('classes.users', 'Admin\ClassUserController');
+
     Route::resource('orders', 'Admin\OrderController');
+    Route::get('orders/{order}/export-pdf', 'Admin\OrderController@exportPdf')->name('orders.export_pdf');
 });
