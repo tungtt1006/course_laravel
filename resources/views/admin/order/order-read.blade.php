@@ -20,7 +20,7 @@
             <thead class="table-light">
                 <tr>
                     <th>Id</th>
-                    <th class="text-center">Người tạo</th>
+                    <th class="text-center">Học viên</th>
                     <th class="text-center">Lớp</th>
                     <th class="text-center">Giá (VND)</th>
                     <th class="text-center">Ngày tạo</th>

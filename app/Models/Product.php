@@ -25,6 +25,18 @@ class Product extends Model
         'price',
     ];
 
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['photo_url'];
+
+    public function getPhotoUrlAttribute()
+    {
+        return env('WEB_HOST_NAME') . $this->attributes['photo'];
+    }
+
     public function classes()
     {
         return $this->hasMany('App\Models\Classes');
