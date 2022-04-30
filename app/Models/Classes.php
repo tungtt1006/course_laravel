@@ -21,6 +21,7 @@ class Classes extends Model
         'teacher_id',
         'sessions',
         'start_day',
+        'end_day',
         'time_in',
         'time_out',
         'days_of_week',
@@ -35,9 +36,9 @@ class Classes extends Model
      */
     protected $dates = ['deleted_at'];
 
-    public function getName()
+    public function getClassNameAttribute()
     {
-        return $this->product->name.'-'.$this->number;
+        return $this->product->name . '-' . $this->number;
     }
 
     public function product()

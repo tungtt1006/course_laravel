@@ -12,8 +12,8 @@
 <div class="container">
     <div class="row px-3 pt-4">
         <div class="col-4">
-        <p>Ngày bắt đầu: <span class="fw-bold">{{ $class->getName() }}</span></p>
-            <p>Ngày bắt đầu: <span class="fw-bold">{{ $class->start_day }}</span></p>
+            <p>Tên lớp: <span class="fw-bold">{{ $class->class_name }}</span></p>
+            <p>Ngày học: <span class="fw-bold">{{ $class->start_day }} ~ {{ $class->end_day }}</span></p>
             <p>Giờ học: <span class="fw-bold">{{ $class->time_in }} ~ {{ $class->time_out }}</span></p>
         </div>
         <div class="col-4">

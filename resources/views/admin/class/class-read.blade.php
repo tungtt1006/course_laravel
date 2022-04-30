@@ -85,7 +85,7 @@
             @foreach($classes as $rows)
                 <tr>
                     <td>{{ $rows->id }}</td>
-                    <td>{{ $rows->getName() }}</td>
+                    <td>{{ $rows->class_name }}</td>
                     <td>{{ $rows->product->name }}</td>
                     <td>{{ $rows->teacher->name }}</td>
                     <td>{{ $rows->start_day }}</td>
