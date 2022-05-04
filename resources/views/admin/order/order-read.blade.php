@@ -32,7 +32,7 @@
                 <tr>
                     <td>{{ $rows->id }}</td>
                     <td class="text-center">{{ $rows->user->name }}</td>
-                    <td class="text-center">{{ $rows->class->getName() }}</td>
+                    <td class="text-center">{{ $rows->class->class_name }}</td>
                     <td class="text-center">{{ number_format($rows->price) }}</td>
                     <td class="text-center">{{ $rows->created_at }}</td>
                     <td class="text-center d-flex justify-content-center">

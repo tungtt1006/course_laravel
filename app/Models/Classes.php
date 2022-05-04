@@ -36,6 +36,8 @@ class Classes extends Model
      */
     protected $dates = ['deleted_at'];
 
+    protected $appends = ['class_name'];
+
     public function getClassNameAttribute()
     {
         return $this->product->name . '-' . $this->number;
@@ -54,6 +56,11 @@ class Classes extends Model
     public function periods()
     {
         return $this->hasMany('App\Models\Period', 'class_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order', 'class_id');
     }
 
     public function users()

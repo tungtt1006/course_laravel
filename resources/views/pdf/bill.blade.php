@@ -48,7 +48,7 @@
                 <th>Thành tiền (VND)</th>
             </tr>
             <tr>
-                <td>{{ $order->class->getName() }}</td>
+                <td>{{ $order->class->class_name }}</td>
                 <td>{{ $order->created_at }}</td>
                 <td>0</td>
                 <td>{{ number_format($order->price) }}</td>

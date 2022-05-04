@@ -70,7 +70,7 @@
                 <select class="form-select" aria-label="Default select example" name="class">
                     @foreach ($classes as $row)
                         <option value="{{ $row->id }}" {{ ($classId == $row->id) ? 'selected' : '' }}>
-                            {{ $row->getName() }}
+                            {{ $row->class_name }}
                         </option>
                     @endforeach
                 </select>

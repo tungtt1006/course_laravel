@@ -33,6 +33,11 @@ Route::get('categories', 'Client\CategoryController@index');
 // Route::get('categories/show/{id}', [CategoryController::class, 'show']);
 // Route::get('categories/{id}', [CategoryController::class, 'getAcategory']);
 
+/**
+ * Class
+ */
+Route::get('classes/learning', 'Client\ClassController@getLearningClass');
+
 // // Users
 // Route::get('users', 'UserController@index');
 // Route::get('arrangeuser/{cate}/{type}',  [UserController::class, 'arrangeUser']);
