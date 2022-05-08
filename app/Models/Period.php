@@ -17,7 +17,8 @@ class Period extends Model
         'class_id',
         'time_in',
         'time_out',
-        'number'
+        'number',
+        'date',
     ];
 
     /**

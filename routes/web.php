@@ -37,6 +37,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('categories.products', 'Admin\ProductController');
 
     Route::resource('classes', 'Admin\ClassController');
+    Route::get('classes/{class}/periods', 'Admin\ClassController@createPeriods')->name('classes.periods.create_periods');
+    Route::post('classes/{class}/periods', 'Admin\ClassController@storePeriods')->name('classes.periods.store_periods');
     Route::resource('classes.users', 'Admin\ClassUserController');
 
     Route::resource('orders', 'Admin\OrderController');

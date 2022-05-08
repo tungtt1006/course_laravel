@@ -28,6 +28,7 @@
                             </div>
                         </div>
                     </div>
+                    @yield('content-1')
                 </div>
             </div>
         </div>
