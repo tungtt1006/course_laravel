@@ -10,7 +10,7 @@
 
 @section("main")
 <div class="row px-3 mt-4">
-    <form method="post" action="{{ route('classes.periods.store_periods', $class->id) }}" enctype="multipart/form-data">
+    <form method="post" action="{{ route('classes.periods.store', $class->id) }}" enctype="multipart/form-data">
         @csrf
         @for ($i = 1; $i <= $class->sessions; $i++)
             <div class="row {{ ($i !== 1) ? 'mt-4' : '' }} shadow-sm mx-2 p-3">
@@ -19,15 +19,33 @@
                 </div>
                 <div class="col-3">
                     <label class="form-label fw-bolder">Ngày học:</label>
-                    <input type="date" name="date[{{ $i }}]" class="form-control" required>
+                    <input
+                        type="date"
+                        name="date[{{ $i }}]"
+                        class="form-control"
+                        required
+                        value="{{ (count($periods) > 0) ? $periods[$i-1]->date : '' }}"
+                    >
                 </div>
                 <div class="col-3">
                     <label class="form-label fw-bolder">Giờ vào:</label>
-                    <input type="time" name="timeIn[{{ $i }}]" class="form-control" required value="18:00">
+                    <input
+                        type="time"
+                        name="timeIn[{{ $i }}]"
+                        class="form-control"
+                        required
+                        value="{{ (count($periods) > 0) ? $periods[$i-1]->timeIn : '18:00' }}"
+                    >
                 </div>
                 <div class="col-3">
                     <label class="form-label fw-bolder">Giờ tan:</label>
-                    <input type="time" name="timeOut[{{ $i }}]" class="form-control" required value="21:00">
+                    <input
+                        type="time"
+                        name="timeOut[{{ $i }}]"
+                        class="form-control"
+                        required
+                        value="{{ (count($periods) > 0) ? $periods[$i-1]->timeOut : '21:00' }}"
+                    >
                 </div>
             </div>
         @endfor

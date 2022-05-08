@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Classes;
 use App\Models\Product;
 use App\Models\Teacher;
-use App\Models\Period;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -123,28 +122,5 @@ class ClassController extends Controller
     {
         $class->delete();
         return redirect()->route('classes.index');
-    }
-
-    public function createPeriods(Classes $class)
-    {
-        return view('admin.class.periods.periods-create', [
-            'class' => $class,
-        ]);
-    }
-
-    public function storePeriods(Request $request, Classes $class)
-    {
-        $arr = [];
-        for ($i = 1; $i <= $class->sessions; $i++) {
-            $arr[] = [
-                'class_id' => $class->id,
-                'date' => $request->date[$i],
-                'number' => $i,
-                'time_in' => $request->timeIn[$i],
-                'time_out' => $request->timeOut[$i],
-            ];
-        }
-        Period::insert($arr);
-        return redirect()->route('classes.update', $class->id);
     }
 }

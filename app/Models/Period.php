@@ -27,4 +27,6 @@ class Period extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public $timestamps = true;
 }

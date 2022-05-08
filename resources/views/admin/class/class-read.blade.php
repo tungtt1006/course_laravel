@@ -90,7 +90,7 @@
                     <td>{{ $rows->teacher->name }}</td>
                     <td>{{ $rows->start_day }}</td>
                     <td class="d-flex">
-                        <a class="btn btn-info btn-sm" href="{{ route('classes.periods.create_periods', $rows->id) }}">
+                        <a class="btn btn-info btn-sm" href="{{ route('classes.periods.create', $rows->id) }}">
                             <i class="fa fa-bars text-light" aria-hidden="true"></i>
                         </a>
                         <a class="btn btn-success btn-sm ms-2" href="{{ route('classes.edit', $rows->id) }}">
