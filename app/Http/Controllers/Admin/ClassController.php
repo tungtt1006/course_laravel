@@ -7,7 +7,8 @@ use App\Models\Product;
 use App\Models\Teacher;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
+use Excel;
+use App\Exports\UserExport;
 
 class ClassController extends Controller
 {
@@ -118,5 +119,10 @@ class ClassController extends Controller
     {
         $class->delete();
         return redirect()->route('classes.index');
+    }
+
+    public function exportUsers(Classes $class)
+    {
+        return Excel::download(new UserExport($class), 'users.xlsx');
     }
 }
