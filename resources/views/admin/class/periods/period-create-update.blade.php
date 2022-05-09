@@ -10,11 +10,26 @@
 
 @section("main")
 <div class="row px-3 mt-4">
+    <div class="col-2">
+        <p class="fs-5 text-center">Lớp: <b class="fs-4">{{ $class->className }}</b></p>
+    </div>
+    <div class="col-3">
+        <p class="fs-5 text-center">Ngày bắt đầu: <b class="fs-4">{{ $class->start_day }}</b></p>
+    </div>
+    <div class="col-3">
+        <p class="fs-5 text-center">Thứ học: <b class="fs-4">{{ $class->days_of_week }}</b></p>
+    </div>
+    <div class="col-4">
+        <p class="fs-5 text-center">Giờ học: <b class="fs-4">{{ $class->time_in }} ~ {{ $class->time_out }}</b></p>
+    </div>
+</div>
+
+<div class="row px-3 mt-4">
     <form method="post" action="{{ route('classes.periods.store', $class->id) }}" enctype="multipart/form-data">
         @csrf
         @for ($i = 1; $i <= $class->sessions; $i++)
             <div class="row {{ ($i !== 1) ? 'mt-4' : '' }} shadow-sm mx-2 p-3">
-            <div class="col-1">
+                <div class="col-1">
                     <p class="fw-bolder mt-3">Buổi {{ $i }}</p>
                 </div>
                 <div class="col-3">
@@ -63,7 +78,7 @@
                 </a>
                 <input
                     type="submit"
-                    value="{{ isset($class) ? 'Cập nhật' : 'Thêm mới' }}"
+                    value="{{ (count($periods) > 0) ? 'Cập nhật' : 'Thêm mới' }}"
                     class="btn btn-success"
                 >
             </div>

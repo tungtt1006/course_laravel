@@ -47,23 +47,23 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        if (Carbon::parse($request->startday)->dayOfWeek !== 1) {
-            return back()->withInput();
-        }
-        $daysOfWeek = explode("/", $request->daysofweek);
-        $weekNumber = ceil($request->sessions / count($daysOfWeek)) - 1;
-        if ($request->sessions % count($daysOfWeek) == 0) {
-            $addDay = $weekNumber * 7 + ((int) $daysOfWeek[count($daysOfWeek) - 1] - 1);
-        } else {
-            $restDay = $request->sessions % count($daysOfWeek);
-            $addDay = $weekNumber * 7 + ((int) $daysOfWeek[$restDay - 1] - 1);
-        }
+        // if (Carbon::parse($request->startday)->dayOfWeek !== 1) {
+        //     return back()->withInput();
+        // }
+        // $daysOfWeek = explode("/", $request->daysofweek);
+        // $weekNumber = ceil($request->sessions / count($daysOfWeek)) - 1;
+        // if ($request->sessions % count($daysOfWeek) == 0) {
+        //     $addDay = $weekNumber * 7 + ((int) $daysOfWeek[count($daysOfWeek) - 1] - 1);
+        // } else {
+        //     $restDay = $request->sessions % count($daysOfWeek);
+        //     $addDay = $weekNumber * 7 + ((int) $daysOfWeek[$restDay - 1] - 1);
+        // }
         Classes::create([
             'product_id' => $request->product,
             'teacher_id' => $request->teacher,
             'sessions' => $request->sessions,
             'start_day' => $request->startday,
-            'end_day' => Carbon::parse($request->startday)->addDays($addDay - 1),
+            // 'end_day' => Carbon::parse($request->startday)->addDays($addDay - 1),
             'time_in' => $request->timein,
             'time_out' => $request->timeout,
             'days_of_week' => $request->daysofweek,
@@ -97,11 +97,7 @@ class ClassController extends Controller
      */
     public function update(Request $request, Classes $class)
     {
-        if (!Classes::isUpdated($class)) {
-            return back()->withInput();
-        }
         $class->update([
-            'product_id' => $request->product,
             'teacher_id' => $request->teacher,
             'sessions' => $request->sessions,
             'start_day' => $request->startday,

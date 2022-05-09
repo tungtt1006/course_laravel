@@ -68,11 +68,10 @@
                 $daysOfWeek = '';
             }
         @endphp
-        <!--Products & Teachers & Sessions-->
         <div class="row">
             <div class="col-4">
                 <label class="form-label fw-bolder">Khóa học</label>
-                <select class="form-select" aria-label="Default select example" name="product">
+                <select class="form-select" aria-label="Default select example" name="product" {{ isset($class) ? 'disabled' : '' }}>
                     @foreach ($products as $row)
                         <option
                             value="{{ $row->id }}"
