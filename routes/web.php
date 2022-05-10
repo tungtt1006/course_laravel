@@ -18,9 +18,7 @@ Route::get('/register', 'Admin\Auth\AuthController@register')->name('auth.regist
 Route::post('/register', 'Admin\Auth\AuthController@authRegister')->name('auth.authRegister');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('home');
+    Route::get('statistics', 'Admin\StatisticController@index')->name('statistics.index');
 
     Route::get('/403', function () {
         return view('admin.403');

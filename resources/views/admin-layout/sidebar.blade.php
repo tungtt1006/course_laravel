@@ -1,10 +1,10 @@
 <div class="list-group rounded-0">
     <a
-        href="{{ route('home') }}"
+        href="{{ route('statistics.index') }}"
         class="list-group-item list-group-item-action p-3 {{ Route::currentRouteNamed('home') ? 'active' : '' }}"
         aria-current="true"
     >
-        <i class="menu-icon fa fa-laptop"></i> Trang chủ
+        <i class="menu-icon fa fa-laptop"></i> Thống kê
     </a>
 
     <a
