@@ -73,7 +73,7 @@
                     <p class="fw-bolder">Tổng doanh thu đến tháng {{ date("m") }} năm {{ date("Y") }}: {{ number_format($annualIncome) }}</p>
                 </div>
             </div>
-            <p class="fw-bolder ms-3">*Đơn vị được tính bằng VND*</p>
+            <p class="fw-bolder text-center text-danger">*Đơn vị được tính bằng VND*</p>
         </div>
     </div>
 </div>

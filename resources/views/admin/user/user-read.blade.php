@@ -88,13 +88,13 @@
                     @if ($actions)
                         <td>
                             <form
-                                action="{{ route('users.destroy', ['user' => $rows->id]) }}"
+                                action="{{ route('users.destroy', $rows->id) }}"
                                 method="POST"
                                 onsubmit="return confirm('Are you sure you want to delete?');"
                             >
                                 @csrf
                                 @method('DELETE')
-                                <a class="btn btn-success btn-sm" href="{{ url('admin/users/'.$rows->id.'/edit') }}" role="button">
+                                <a class="btn btn-success btn-sm" href="{{ route('users.edit', $rows->id) }}" role="button">
                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                 </a>
                                 <button type="submit" class="btn btn-danger btn-sm">
