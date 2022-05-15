@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Classes;
+use App\Http\Controllers\Client\ClientController;
 
-class ClassController extends Controller
+class ClassController extends ClientController
 {
     public function getLearningClass()
     {
-        $class = Classes::where('start_day', '<=', now())
+        $class = $this->auth()->user()->classes()
+            ->where('start_day', '<=', now())
             ->where('end_day', '>=', now())
             ->first();
-        return $class->orders()->with('class')->where('user_id', auth('api')->user()->id)->first();
+        return $this->responseSuccess($class);
     }
 }

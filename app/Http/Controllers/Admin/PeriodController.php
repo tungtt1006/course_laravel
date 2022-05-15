@@ -21,7 +21,7 @@ class PeriodController extends Controller
                 ];
             }
         }
-        return view('admin.class.periods.period-create-update', [
+        return view('admin.class.periods.create-update', [
             'class' => $class,
             'periods' => $periods,
         ]);
@@ -45,6 +45,10 @@ class PeriodController extends Controller
             ];
         }
         Period::insert($arr);
+        $class->update([
+            'start_day' => $request->date[1],
+            'end_day' => $request->date[$class->sessions],
+        ]);
         return redirect()->route('classes.periods.create', $class->id);
     }
 }
