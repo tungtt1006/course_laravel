@@ -27,7 +27,11 @@ Route::get('classes/learning', 'Client\ClassController@getLearningClass');
 Route::get('banners', 'Client\BannerController@index');
 
 Route::middleware('auth:api')->group(function () {
-    Route::post('logout', 'Client\AuthController@logout');
+    Route::get('auth/health', function () {
+        return response()->json(['status' => 200]);
+    });
+
+    Route::get('logout', 'Client\AuthController@logout');
 
     Route::post('orders', 'Client\OrderController@store');
 
