@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-
+use Faker\Factory as Faker;
 class CertificateSeeder extends Seeder
 {
     /**
@@ -13,26 +13,27 @@ class CertificateSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create();
         DB::table('certificates')->insert([
             [
-                'name' => 'Bằng xuấst sắc',
-                'description' => Str::random(255),
+                'name' => 'Bằng xuất sắc',
+                'description' => $faker->text(),
             ],
             [
                 'name' => 'Bằng giỏi',
-                'description' => Str::random(255),
+                'description' => $faker->text(),
             ],
             [
                 'name' => 'Bằng khá',
-                'description' => Str::random(255),
+                'description' => $faker->text(),
             ],
             [
                 'name' => 'Bằng trung bình',
-                'description' => Str::random(255),
+                'description' => $faker->text(),
             ],
             [
                 'name' => 'Bằng đặc biệt',
-                'description' => Str::random(255),
+                'description' => $faker->text(),
             ],
         ]);
     }

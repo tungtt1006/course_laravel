@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Client\ClientController;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
-class ProductController extends Controller
+class ProductController extends ClientController
 {
-    /**
-     * Get prducts
-     */
     public function index(Request $request)
     {
         $products = [];
@@ -24,15 +21,17 @@ class ProductController extends Controller
         return $products;
     }
 
-    /**
-     * Get a product
-     */
     public function show(Product $product)
     {
-        $class = $product->classes()->with('teacher')->where('status', 'arrange')->first();
-        return [
+        $class = $product->classes()->with('teacher')
+            ->where('start_day', '>', now())
+            ->whereNotNull('end_day')
+            ->first();
+        $product = $product::with('certificate')->find($product->id);
+
+        return $this->responseSuccess([
             'product' => $product,
             'class' => $class,
-        ];
+        ]);
     }
 }

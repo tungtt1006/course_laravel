@@ -42,6 +42,11 @@ class Product extends Model
         return $this->hasMany('App\Models\Classes');
     }
 
+    public function certificate()
+    {
+        return $this->belongsTo('App\Models\Certificate');
+    }
+
     public function scopeHighlightProducts($query)
     {
         return $query->where('hot', 1);
