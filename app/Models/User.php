@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -80,6 +81,9 @@ class User extends Authenticatable implements JWTSubject
 
     public function classes()
     {
-        return $this->belongsToMany('App\Models\Classes', 'orders', 'user_id', 'class_id');
+        return $this->belongsToMany('App\Models\Classes', 'orders', 'user_id', 'class_id')
+            ->whereHas('orders', function (Builder $query) {
+                $query->whereNull('deleted_at');
+            });
     }
 }

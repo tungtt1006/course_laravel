@@ -22,14 +22,16 @@ Route::get('categories/{category}/products', 'Client\CategoryProductController@i
 
 Route::get('categories', 'Client\CategoryController@index');
 
-Route::get('classes/learning', 'Client\ClassController@getLearningClass');
-
 Route::get('banners', 'Client\BannerController@index');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('auth/health', function () {
         return response()->json(['status' => 200]);
     });
+
+    Route::get('classes/learning', 'Client\ClassController@getLearningClass');
+    Route::get('classes/register', 'Client\ClassController@getRegisterClass');
+    Route::delete('classes/{class}', 'Client\ClassController@destroy');
 
     Route::get('logout', 'Client\AuthController@logout');
 
