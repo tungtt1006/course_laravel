@@ -3,26 +3,36 @@
 @section("header")
 <div class="row">
     <div class="col-10">
-        <h3>Thêm sản phẩm mới</h3>
+        <h3>{{ isset($data) ? $data->name : 'Thêm sản phẩm mới' }}</h3>
     </div>
 </div>
 @endsection
 
 @section("main")
-<div class="row m-3">
-    <div class="col-4"></div>
+@if (isset($data))
+    <form method="post" action="{{ route('categories.products.update', ['category' => $category->id, 'product' => $data->id]) }}" class="row m-3" enctype="multipart/form-data">
+        @method('PUT')
+@else
+    <form method="post" action="{{ route('categories.products.store', $category->id) }}" enctype="multipart/form-data" class="row m-3">
+@endif
+    @csrf
+    <div class="col-4">
+        <img
+            id="output"
+            src="{{ isset($data->photo) ? asset($data->photo) : '#' }}"
+            class="img-fluid shadow-sm border border-success w-100"
+            style="height: 250px"
+            alt="..."
+        >
+        <div class="mt-4 px-3">
+            <input class="form-control" type="file" name="photo" onchange="loadFile(event)">
+        </div>
+    </div>
     <div class="col-8">
-    @if (isset($data))
-        <form method="post" action="{{ route('categories.products.update',  ['category' => $category->id, 'product' => $data->id]) }}" enctype="multipart/form-data">
-            @method('PUT')
-    @else
-        <form method="post" action="{{ route('categories.products.store', $category->id) }}" enctype="multipart/form-data">
-    @endif
-        @csrf
         @php
             /**
-             * Name
-             */
+            * Name
+            */
             if (isset($data) && $data->name)
                 $name = $data->name;
             elseif (old('name') != '')
@@ -31,8 +41,8 @@
                 $name = '';
 
             /**
-             * Certificate
-             */
+            * Certificate
+            */
             if (isset($data) && $data->certificate_id)
                 $certificateId = $data->certificate_id;
             elseif (old('certificate_id') != '')
@@ -41,8 +51,8 @@
                 $certificateId = $certificates[0]->id;
 
             /**
-             * Price
-             */
+            * Price
+            */
             if (isset($data) && $data->price)
                 $price = $data->price;
             elseif (old('price') != '')
@@ -51,8 +61,8 @@
                 $price = '';
 
             /**
-             * Sessions
-             */
+            * Sessions
+            */
             if (isset($data) && $data->sessions)
                 $sessions = $data->sessions;
             elseif (old('sessions') != '')
@@ -61,8 +71,8 @@
                 $sessions = '';
 
             /**
-             * Description
-             */
+            * Description
+            */
             if (isset($data))
                 $description = $data->description;
             elseif (old('description') != '')
@@ -71,19 +81,53 @@
                 $description = '';
 
             /**
-             * Content
-             */
+            * Content
+            */
             if (isset($data))
                 $content = $data->content;
             elseif (old('content') != '')
                 $content = old('content');
             else
-                $content = '';
+                $content = '[
+                    {
+                        "title": "Chương số 1",
+                        "content": [
+                        "Bài 1",
+                        "Bài 2",
+                        "Bài 3",
+                        "Bài 4",
+                        "Bài 5",
+                        "Bài 6"
+                        ]
+                    },
+                    {
+                        "title": "Chương số 2",
+                        "content": [
+                        "Bài 1",
+                        "Bài 2",
+                        "Bài 3",
+                        "Bài 4",
+                        "Bài 5",
+                        "Bài 6"
+                        ]
+                    },
+                    {
+                        "title": "Chương số 3",
+                        "content": [
+                        "Bài 1",
+                        "Bài 2",
+                        "Bài 3",
+                        "Bài 4",
+                        "Bài 5",
+                        "Bài 6"
+                        ]
+                    }
+                ]';
 
             /**
-             * Display
-             */
-            if (isset($data) && $data->display)
+            * Display
+            */
+            if (isset($data))
                 $display = $data->display;
             elseif (old('display') != '')
                 $display= old('display');
@@ -91,9 +135,9 @@
                 $display = 1;
 
             /**
-             * Hot
-             */
-            if (isset($data) && $data->hot)
+            * Hot
+            */
+            if (isset($data))
                 $hot = $data->hot;
             elseif (old('hot') != '')
                 $hot= old('hot');
@@ -102,7 +146,7 @@
         @endphp
         <!-- Name & Certificates-->
         <div class="row">
-            <div class="col-6">
+            <div class="col-4">
                 <label class="form-label fw-bolder">Tên</label>
                 <input
                     type="text"
@@ -112,7 +156,7 @@
                     value="{{ $name }}"
                 >
             </div>
-            <div class="col-6">
+            <div class="col-4">
                 <label class="form-label fw-bolder">Chứng chỉ</label>
                 <select class="form-select" aria-label="Default select example" name="certificateid">
                     @foreach ($certificates as $certificate)
@@ -125,17 +169,9 @@
                     @endforeach
                 </select>
             </div>
-        </div>
-
-        <!-- Price & Sessions-->
-        <div class="row mt-3">
-            <div class="col-6">
+            <div class="col-4">
                 <label class="form-label fw-bolder">Giá (VNĐ)</label>
                 <input type="text" name="price" class="form-control" required value="{{ $price }}">
-            </div>
-            <div class="col-6">
-                <label class="form-label fw-bolder">Số buổi</label>
-                <input type="text" name="sessions" class="form-control" required value="{{ $sessions }}" placeholder="2/4/6">
             </div>
         </div>
 
@@ -150,7 +186,7 @@
         <!-- Content -->
         <div class="row mt-3">
             <div class="col">
-                <label class="form-label fw-bolder">Nội dung</label>
+                <label class="form-label fw-bolder">Nội dung khóa học</label>
                 <textarea class="form-control" name ="content" rows="5">{{ $content }}</textarea>
             </div>
         </div>
@@ -188,7 +224,7 @@
                 <a
                     type="button"
                     class="btn btn-primary mr-2"
-                    href="{{ url()->previous() }}"
+                    href="{{ route('categories.products.index', ['category' => $category->id]) }}"
                 >
                     Hủy
                 </a>
@@ -198,8 +234,17 @@
                     class="btn btn-success"
                 >
             </div>
-    </form>
     </div>
-</div>
+</form>
 @include('admin.form-error')
+
+<script>
+    var loadFile = function(event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+        URL.revokeObjectURL(output.src) // free memory
+        }
+    }
+</script>
 @endsection

@@ -40,13 +40,15 @@
                     <td class="text-center">
                         @if ($rows->display == 1)
                             <i class="fa fa-check-circle text-success" aria-hidden="true"></i>
-                        @elseif ($rows->display == 0)
+                        @else
                             <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
                         @endif
                     </td>
                     <td class="text-center">
                         @if ($rows->hot == 1)
                             <i class="fa fa-check-circle text-success" aria-hidden="true"></i>
+                        @else
+                            <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
                         @endif
                     </td>
                     <td class="text-center">

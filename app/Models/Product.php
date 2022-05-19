@@ -23,6 +23,7 @@ class Product extends Model
         'hot',
         'sessions',
         'price',
+        'photo',
     ];
 
     /**

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Certificate;
+use App\Http\Requests\ProductRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -44,8 +45,11 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Category $category)
+    public function store(ProductRequest $request, Category $category)
     {
+        $request->validate(['photo' => 'required|image']);
+
+        $photoName = time() . '_' . str_replace(' ', '', $request->name) . '.' . $request->photo->extension();
         $product = $category->products()->create([
             'name' => $request->name,
             'certificate_id' => $request->certificateid,
@@ -53,10 +57,11 @@ class ProductController extends Controller
             'content' => $request->content,
             'display' => $request->display,
             'hot' => $request->hot,
-            'sessions' => $request->sessions,
-            'price' =>$request->price,
+            'price' => $request->price,
+            'photo' => '/storage/img/products/' . $photoName,
         ]);
         if ($product) {
+            $request->photo->storeAs('img/products', $photoName, 'public');
             return redirect()->route('categories.products.index', $category->id);
         }
         return redirect()->route('403');
@@ -85,22 +90,34 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category, Product $product)
+    public function update(ProductRequest $request, Category $category, Product $product)
     {
-        $product = $product->update([
+        $arr = [
             'name' => $request->name,
             'certificate_id' => $request->certificateid,
             'description' => $request->description,
             'content' => $request->content,
             'display' => $request->display,
             'hot' => $request->hot,
-            'sessions' => $request->sessions,
-            'price' =>$request->price,
-        ]);
-        if ($product) {
-            return redirect()->route('categories.products.index', $category->id);
+            'price' => $request->price,
+        ];
+
+        if ($request->hasFile('photo')) {
+            $nameImg = substr($product->photo, 9);
+            $photoName = time() . '_' . str_replace(' ', '', $request->name) . '.' . $request->photo->extension();
+            $arr['photo'] = '/storage/img/products/' . $photoName;
         }
-        return redirect()->route('403');
+
+        $rowUpdated = $product->update($arr);
+        if (!$rowUpdated) {
+            return redirect()->back()->withInput();
+        }
+
+        if ($request->hasFile('photo') && Storage::disk('public')->exists($nameImg)) {
+            Storage::disk('public')->delete($nameImg);
+            $request->photo->storeAs('img/products', $photoName, 'public');
+        }
+        return redirect()->route('categories.products.index', $category->id);
     }
 
     /**
