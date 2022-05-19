@@ -39,7 +39,7 @@
                         name="date[{{ $i }}]"
                         class="form-control"
                         required
-                        value="{{ (count($periods) > 0) ? $periods[$i-1]->date : '' }}"
+                        value="{{ (count($periods) > 0) && isset($periods[$i-1]) ? $periods[$i-1]->date : '' }}"
                     >
                 </div>
                 <div class="col-3">
@@ -49,7 +49,7 @@
                         name="timeIn[{{ $i }}]"
                         class="form-control"
                         required
-                        value="{{ (count($periods) > 0) ? $periods[$i-1]->timeIn : '18:00' }}"
+                        value="{{ (count($periods) > 0) && isset($periods[$i-1]) ? $periods[$i-1]->timeIn : '18:00' }}"
                     >
                 </div>
                 <div class="col-3">
@@ -59,7 +59,7 @@
                         name="timeOut[{{ $i }}]"
                         class="form-control"
                         required
-                        value="{{ (count($periods) > 0) ? $periods[$i-1]->timeOut : '21:00' }}"
+                        value="{{ (count($periods) > 0) && isset($periods[$i-1]) ? $periods[$i-1]->timeOut : '21:00' }}"
                     >
                 </div>
             </div>

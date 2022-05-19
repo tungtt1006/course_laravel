@@ -11,9 +11,11 @@ class ClientController extends Controller
         return auth('api');
     }
 
-    public function responseError($data = [], $statusCode = 400)
+    public function responseError($message = 'Fail', $statusCode = 400)
     {
-        return response()->json($data, $statusCode);
+        return response()->json([
+            'message' => $message,
+        ], $statusCode);
     }
 
     public function responseSuccess($data = [], $statusCode = 200)

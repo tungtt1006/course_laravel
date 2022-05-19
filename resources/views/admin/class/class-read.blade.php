@@ -78,6 +78,7 @@
                         </div>
                     </th>
                     <th>Ngày bắt đầu</th>
+                    <th class="text-center">Buổi học</th>
                     <th></th>
                 </tr>
             </thead>
@@ -89,6 +90,13 @@
                     <td>{{ $rows->product->name }}</td>
                     <td>{{ $rows->teacher->name }}</td>
                     <td>{{ $rows->start_day }}</td>
+                    <td class="text-center">
+                        @if ($rows->end_day)
+                            <i class="fa fa-check-circle text-success" aria-hidden="true"></i>
+                        @else
+                            <i class="fa fa-times-circle text-danger" aria-hidden="true"></i>
+                        @endif
+                    </td>
                     <td class="d-flex">
                         <a class="btn btn-info btn-sm" href="{{ route('classes.periods.create', $rows->id) }}">
                             <i class="fa fa-bars text-light" aria-hidden="true"></i>

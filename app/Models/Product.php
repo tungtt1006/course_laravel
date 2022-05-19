@@ -50,15 +50,15 @@ class Product extends Model
 
     public function scopeHighlightProducts($query)
     {
-        return $query->where('hot', 1);
+        return $query->where('hot', 1)->isDisplayed();
     }
 
     public function scopeNewestProducts($query)
     {
-        return $query->orderBy('created_at', 'desc');
+        return $query->orderBy('created_at', 'desc')->isDisplayed();
     }
 
-    public function scopeDisplayed($query)
+    public function scopeIsDisplayed($query)
     {
         return $query->where('display', 1);
     }

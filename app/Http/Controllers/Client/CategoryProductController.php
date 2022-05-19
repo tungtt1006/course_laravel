@@ -15,7 +15,7 @@ class CategoryProductController extends Controller
     public function index(Category $category)
     {
         return [
-            'products' => $category->products()->paginate(9),
+            'products' => $category->products()->isDisplayed()->paginate(9),
             'category' => $category
         ];
     }

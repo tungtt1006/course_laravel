@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Client\ClientController;
 use Illuminate\Http\Request;
-use App\Models\Order;
-use App\Events\OrderRegisterd;
-use App\Models\Classes;
 
-class OrderController extends Controller
+class OrderController extends ClientController
 {
     /**
      * Store a newly created resource in storage.
@@ -18,15 +15,20 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        if (auth('api')->user()->orders()->where('class_id', $request->class_id)->first()) {
-            return response()->json(['message' => 'Bạn đã đăng kí lớp này'], 400);
+        $user = $this->auth()->user();
+        if ($user->orders()->where('class_id', $request->class_id)->exists()) {
+            return $this->responseError('Hiện tại bạn đã đăng kí lớp này');
         }
+
+        if ($user->classes()->where('end_day', '>=', now())->exists()) {
+            return $this->responseError('Hiện tại bạn đang trong một lớp học khác');
+        }
+
         $order = auth('api')->user()->orders()->create([
             'class_id' => $request->class_id,
             'price' => $request->price,
             'admin_id' => 1,
         ]);
-        event(new OrderRegisterd($order));
         return response()->json(['message' => 'Success']);
     }
 }
