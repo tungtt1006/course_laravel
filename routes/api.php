@@ -29,6 +29,9 @@ Route::middleware('auth:api')->group(function () {
         return response()->json(['status' => 200]);
     });
 
+    Route::get('users/show', 'Client\UserController@show')->name('client.users.show');
+    Route::put('users/update', 'Client\UserController@update')->name('client.users.update');
+
     Route::get('classes/learning', 'Client\ClassController@getLearningClass');
     Route::get('classes/register', 'Client\ClassController@getRegisterClass');
     Route::delete('classes/{class}', 'Client\ClassController@destroy');
