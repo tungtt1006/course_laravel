@@ -29,6 +29,8 @@ Route::middleware('auth:api')->group(function () {
         return response()->json(['status' => 200]);
     });
 
+    Route::get('notices/new-class', 'Client\NoticeController@storeNotiNewClass');
+
     Route::get('users/show', 'Client\UserController@show')->name('client.users.show');
     Route::put('users/update', 'Client\UserController@update')->name('client.users.update');
 

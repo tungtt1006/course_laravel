@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Excel;
 use App\Exports\UserExport;
+use App\Events\ClassCreated;
 
 class ClassController extends Controller
 {
@@ -48,7 +49,7 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        Classes::create([
+        $class = Classes::create([
             'product_id' => $request->product,
             'teacher_id' => $request->teacher,
             'sessions' => $request->sessions,
@@ -58,6 +59,7 @@ class ClassController extends Controller
             'days_of_week' => $request->daysofweek,
             'number' => Classes::calculateNumber($request->product),
         ]);
+        event(new ClassCreated($class));
         return redirect()->route('classes.index');
     }
 
