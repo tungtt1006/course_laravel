@@ -47,6 +47,16 @@
                 $price = old('price');
             else
                 $price = '';
+
+            /**
+             * Thanh toán
+             */
+            if (isset($data))
+                $status = $data->status;
+            elseif (old('status') != '')
+                $status= old('status');
+            else
+                $status = 1;
         @endphp
         <!-- Users -->
         <div class="row">
@@ -84,6 +94,23 @@
             </div>
             <div class="col-5">
                 <input type="text" name="price" class="form-control" required value="{{ $price }}">
+            </div>
+        </div>
+
+        <!-- Trạng thái -->
+        <div class="row mt-4">
+            <div class="col-2">
+                <label class="form-label fw-bolder">Trạng thái</label>
+            </div>
+            <div class="col-5">
+                <div class="form-check form-check-inline ms-2">
+                    <input class="form-check-input" type="radio" name="status" value="1" {{ ($status == 1) ? 'checked' : '' }}>
+                    <label class="form-check-label">Đã thanh toán</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="status" value="0" {{ ($status == 0) ? 'checked' : '' }}>
+                    <label class="form-check-label">Chưa thanh toán</label>
+                </div>
             </div>
         </div>
 

@@ -10,6 +10,7 @@ class ClassController extends ClientController
     public function getLearningClass()
     {
         $class = $this->auth()->user()->classes()
+            ->wherePivot('status', 1)
             ->where('start_day', '<=', now())
             ->where('end_day', '>=', now())
             ->first();

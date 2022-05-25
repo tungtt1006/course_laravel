@@ -37,6 +37,7 @@ class StatisticController extends Controller
     {
         return DB::table('orders')
             ->select(DB::raw('MONTH(created_at) as month, COUNT(MONTH(created_at)) as total'))
+            ->whereNull('deleted_at')
             ->whereYear('created_at', date("Y"))
             ->groupByRaw('MONTH(created_at)')
             ->get();
@@ -46,6 +47,7 @@ class StatisticController extends Controller
     {
         return DB::table('orders')
             ->select(DB::raw('MONTH(created_at) as month, SUM(price) as income'))
+            ->whereNull('deleted_at')
             ->whereYear('created_at', date("Y"))
             ->groupByRaw('MONTH(created_at)')
             ->get();
@@ -55,6 +57,7 @@ class StatisticController extends Controller
     {
         $classRegisterNum = DB::table('orders')
             ->select('class_id', DB::raw('COUNT(class_id) as total'))
+            ->whereNull('deleted_at')
             ->whereYear('created_at', date("Y"))
             ->groupBy('class_id');
         $k = DB::table('classes')
@@ -63,6 +66,8 @@ class StatisticController extends Controller
                 $join->on('classes.id', '=', 'class_register_num.class_id');
             })
             ->join('products', 'products.id', '=', 'classes.product_id')
+            ->whereNull('classes.deleted_at')
+            ->whereNull('products.deleted_at')
             ->groupByRaw('classes.product_id')
             ->get();
         $productRegisters = [];

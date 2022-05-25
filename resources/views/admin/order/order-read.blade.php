@@ -5,11 +5,11 @@
     <div class="col-10">
         <h3>Quản lý hóa đơn</h3>
     </div>
-    <div class="col-2">
+    <!-- <div class="col-2">
         <a href="{{ route('orders.create') }}" type="button" class="btn btn-light btn-sm text-success mt-1">
             <i class="fa fa-plus" aria-hidden="true"></i> Thêm mới
         </a>
-    </div>
+    </div> -->
 </div>
 @endsection
 
@@ -24,6 +24,7 @@
                     <th class="text-center">Lớp</th>
                     <th class="text-center">Giá (VND)</th>
                     <th class="text-center">Ngày tạo</th>
+                    <th class="text-center">Trạng thái</th>
                     <th></th>
                 </tr>
             </thead>
@@ -35,6 +36,13 @@
                     <td class="text-center">{{ $rows->class->class_name }}</td>
                     <td class="text-center">{{ number_format($rows->price) }}</td>
                     <td class="text-center">{{ $rows->created_at }}</td>
+                    <td class="text-center">
+                        @if ($rows->status)
+                            <span class="badge bg-success">Đã thanh toán</span>
+                        @else
+                            <span class="badge bg-danger">Chưa thanh toán</span>
+                        @endif
+                    </td>
                     <td class="text-center d-flex justify-content-center">
                         <a class="btn btn-warning btn-sm" href="{{ route('orders.export_pdf', $rows->id) }}" target="_blank">
                             <i class="fa fa-print" aria-hidden="true"></i>

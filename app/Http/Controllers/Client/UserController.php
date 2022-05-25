@@ -11,7 +11,7 @@ class UserController extends ClientController
     public function show()
     {
         $user = $this->auth()->user();
-        $orders = $user->orders()->withTrashed()->get();
+        $orders = $user->orders()->get();
         $user->orderNumber = $orders->count();
         foreach ($orders as $order) {
             $user->totalMoney += $order->price;

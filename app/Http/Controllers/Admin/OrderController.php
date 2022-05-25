@@ -47,7 +47,8 @@ class OrderController extends Controller
         Order::create([
             'class_id' => $request->class,
             'user_id' => $request->userId,
-            'price' => $request->price
+            'price' => $request->price,
+            'status' => 0,
         ]);
         return redirect()->route('orders.index');
     }
@@ -90,7 +91,8 @@ class OrderController extends Controller
         $order->update([
             'class_id' => $request->class,
             'user_id' => $request->userId,
-            'price' => $request->price
+            'price' => $request->price,
+            'status' => $request->status,
         ]);
         return redirect()->route('orders.index');
     }
