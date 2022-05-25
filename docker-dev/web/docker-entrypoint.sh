@@ -4,8 +4,8 @@
 set -e
 
 # Composer install
-# composer install --no-autoloader --no-scripts --no-interaction --dev
-composer install --ignore-platform-reqs
+composer install --no-autoloader --no-scripts --no-interaction --dev
+# composer install --ignore-platform-reqs
 
 composer dump-autoload --optimize --no-interaction
 

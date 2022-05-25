@@ -23,6 +23,7 @@ Route::get('categories/{category}/products', 'Client\CategoryProductController@i
 Route::get('categories', 'Client\CategoryController@index');
 
 Route::get('banners', 'Client\BannerController@index');
+// Route::post('stripe/webhook', 'Client\OrderController@handleWebhook');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('auth/health', function () {

@@ -6,17 +6,16 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories
 
-ARG BUILD_PACKAGES="build-base curl-dev git supervisor libpng libpng-dev libjpeg-turbo-dev libwebp-dev zlib-dev libxpm-dev imagemagick imagemagick-libs imagemagick-dev"
+ARG BUILD_PACKAGES="build-base curl-dev git supervisor libpng libpng-dev libjpeg-turbo-dev libwebp-dev zlib-dev libxpm-dev imagemagick imagemagick-libs imagemagick-dev libzip-dev zip libxml2-dev"
 ARG DEV_PACKAGES="bash"
-
 RUN apk add --update \
     $BUILD_PACKAGES \
     $DEV_PACKAGES
 
 RUN docker-php-ext-configure gd --enable-gd --with-jpeg
 
-RUN docker-php-ext-install pdo pdo_mysql gd\
-    && docker-php-ext-enable pdo_mysql gd
+RUN docker-php-ext-install pdo pdo_mysql gd zip bcmath\
+    && docker-php-ext-enable pdo_mysql gd zip
 
 RUN curl -sS https://getcomposer.org/installer | php -- \
     --install-dir=/usr/local/bin \
