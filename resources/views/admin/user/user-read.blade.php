@@ -34,9 +34,6 @@
                             </ul>
                         </div>
                     </th>
-                    <th class="">
-                    Ảnh đại diện
-                    </th>
                     <th>
                         <div class="dropdown">
                             <button class="btn dropdown-toggle pb-0  fw-bold" type="button" id="user-name" data-bs-toggle="dropdown" aria-expanded="false">
@@ -77,13 +74,13 @@
             @foreach($data as $rows)
                 <tr>
                     <td>{{ $rows->id }}</td>
-                    <td>
+                    <!-- <td>
                         <img class="rounded-circle" src="{{ asset('upload/users/'.$rows->photo) }}">
-                    </td>
+                    </td> -->
                     <td>{{ $rows->name }}</td>
                     <td>{{ $rows->email }}</td>
                     <td>
-                        {{ ($rows->role == 1) ? 'Người quản trị' : 'Nhân viên' }}
+                        {{ ($rows->role == 1) ? 'Quản trị' : 'Người dùng' }}
                     </td>
                     @if ($actions)
                         <td>

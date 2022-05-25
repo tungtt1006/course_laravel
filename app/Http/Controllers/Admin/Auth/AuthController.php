@@ -25,6 +25,10 @@ class AuthController extends Controller
      */
     public function authenticate(Request $request)
     {
+        $user = User::where('email', $request->email)->firstOrFail();
+        if (!$user->role) {
+            return back()->withErrors(['message1' => 'Đăng nhập thất bại']);
+        }
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
             return redirect()->route('users.index');

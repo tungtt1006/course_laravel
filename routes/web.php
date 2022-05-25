@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/login', 'Admin\Auth\AuthController@login')->name('auth.login');
 Route::post('/login', 'Admin\Auth\AuthController@authenticate')->name('auth.authenticate');
-Route::get('/register', 'Admin\Auth\AuthController@register')->name('auth.register');
-Route::post('/register', 'Admin\Auth\AuthController@authRegister')->name('auth.authRegister');
+// Route::get('/register', 'Admin\Auth\AuthController@register')->name('auth.register');
+// Route::post('/register', 'Admin\Auth\AuthController@authRegister')->name('auth.authRegister');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware('auth', 'role')->group(function () {
     Route::get('/', 'Admin\StatisticController@index')->name('statistics.index');
 
     Route::get('/403', function () {
