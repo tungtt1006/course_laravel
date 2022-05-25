@@ -59,6 +59,7 @@ class ProductController extends Controller
             'hot' => $request->hot,
             'price' => $request->price,
             'photo' => '/storage/img/products/' . $photoName,
+            'discount' => $request->discount,
         ]);
         if ($product) {
             $request->photo->storeAs('img/products', $photoName, 'public');
@@ -100,6 +101,7 @@ class ProductController extends Controller
             'display' => $request->display,
             'hot' => $request->hot,
             'price' => $request->price,
+            'discount' => $request->discount,
         ];
 
         if ($request->hasFile('photo')) {

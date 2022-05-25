@@ -26,6 +26,7 @@
                     <th>Id</th>
                     <th class="text-center">Tên</th>
                     <th class="text-center">Giá (VNĐ)</th>
+                    <th class="text-center">Giảm giá (%)</th>
                     <th class="text-center">Hiển thị</th>
                     <th class="text-center">Nổi bật</th>
                     <th></th>
@@ -37,6 +38,7 @@
                     <td>{{ $rows->id }}</td>
                     <td class="text-center">{{ $rows->name }}</td>
                     <td class="text-center">{{ number_format($rows->price) }}</td>
+                    <td class="text-center">{{ $rows->discount }}</td>
                     <td class="text-center">
                         @if ($rows->display == 1)
                             <i class="fa fa-check-circle text-success" aria-hidden="true"></i>

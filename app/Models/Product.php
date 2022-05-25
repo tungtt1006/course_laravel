@@ -21,9 +21,9 @@ class Product extends Model
         'content',
         'display',
         'hot',
-        'sessions',
         'price',
         'photo',
+        'discount',
     ];
 
     /**

@@ -58,7 +58,17 @@
             elseif (old('price') != '')
                 $price = old('price');
             else
-                $price = '';
+                $price = 0;
+
+            /**
+             * Discount
+             */
+            if (isset($data) && $data->discount)
+                $discount = $data->discount;
+            elseif (old('discount') != '')
+                $discount = old('discount');
+            else
+                $discount = 0;
 
             /**
             * Sessions
@@ -146,7 +156,7 @@
         @endphp
         <!-- Name & Certificates-->
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
                 <label class="form-label fw-bolder">Tên</label>
                 <input
                     type="text"
@@ -156,7 +166,7 @@
                     value="{{ $name }}"
                 >
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <label class="form-label fw-bolder">Chứng chỉ</label>
                 <select class="form-select" aria-label="Default select example" name="certificateid">
                     @foreach ($certificates as $certificate)
@@ -169,9 +179,13 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <label class="form-label fw-bolder">Giá (VNĐ)</label>
-                <input type="text" name="price" class="form-control" required value="{{ $price }}">
+                <input type="number" min="0" name="price" class="form-control" required value="{{ $price }}">
+            </div>
+            <div class="col-3">
+                <label class="form-label fw-bolder">Giảm giá (%)</label>
+                <input type="number" min="0" max="100" name="discount" class="form-control" required value="{{ $discount }}">
             </div>
         </div>
 

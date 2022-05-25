@@ -81,9 +81,6 @@ class User extends Authenticatable implements JWTSubject
 
     public function classes()
     {
-        return $this->belongsToMany('App\Models\Classes', 'orders', 'user_id', 'class_id')
-            ->whereHas('orders', function (Builder $query) {
-                $query->whereNull('deleted_at');
-            });
+        return $this->belongsToMany('App\Models\Classes', 'orders', 'user_id', 'class_id')->wherePivot('deleted_at', null);
     }
 }

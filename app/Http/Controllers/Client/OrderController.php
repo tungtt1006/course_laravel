@@ -16,9 +16,8 @@ class OrderController extends ClientController
      */
     public function store(Request $request)
     {
-        $user = $this->auth()->user();
         $class = Classes::with('product')->findOrFail($request->class_id);
-
+        $user = $this->auth()->user();
         if ($user->orders()->where('class_id', $class->id)->exists()) {
             return $this->responseError('Hiện tại bạn đã đăng kí lớp này');
         }
@@ -27,9 +26,11 @@ class OrderController extends ClientController
             return $this->responseError('Hiện tại bạn đang trong một lớp học khác');
         }
 
-        auth('api')->user()->orders()->create([
+        $price = $class->product->price * ((100 - $class->product->discount) / 100);
+
+        $user->orders()->create([
             'class_id' => $class->id,
-            'price' => $class->product->price,
+            'price' => $price,
             'admin_id' => 1,
         ]);
         return response()->json(['message' => 'Success']);

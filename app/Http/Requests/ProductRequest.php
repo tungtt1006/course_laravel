@@ -31,6 +31,7 @@ class ProductRequest extends FormRequest
             'display' => 'required|boolean',
             'hot' => 'required|boolean',
             'price' => 'required|numeric',
+            'discount' => 'required|numeric|between:0,100',
         ];
     }
 }
