@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <script src="{{ asset('js/app.js') }}"></script>
+    @yield('pre-script')
 </head>
 
 <body>
@@ -17,7 +19,7 @@
             <div class="col-3 ps-0 h-100">
                 @include('admin-layout.sidebar')
             </div>
-            <div class="col-9">
+            <div class="col-9 pb-4">
                 <div class="container-fluid p-0">
                     <div class="container shadow-sm p-0 mt-3">
                         <div class="card">
@@ -30,10 +32,10 @@
                         </div>
                     </div>
                     @yield('content-1')
+                    @yield('content-2')
                 </div>
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
