@@ -73,6 +73,11 @@ class Classes extends Model
         return $query->with(['product', 'teacher']);
     }
 
+    public function scopeLearningClass($query)
+    {
+        return $query->where('start_day', '<=', now())->where('end_day', '>=', now());
+    }
+
     public function scopeOfStatus($query, $status)
     {
         return $query->where('status', $status)->withClasses();

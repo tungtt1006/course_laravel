@@ -11,8 +11,7 @@ class ClassController extends ClientController
     {
         $class = $this->auth()->user()->classes()
             ->wherePivot('status', 1)
-            ->where('start_day', '<=', now())
-            ->where('end_day', '>=', now())
+            ->learningClass()
             ->first();
         return $this->responseSuccess($class);
     }

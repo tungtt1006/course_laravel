@@ -77,7 +77,7 @@
                             </ul>
                         </div>
                     </th>
-                    <th>Ngày bắt đầu</th>
+                    <th>Thời gian học</th>
                     <th class="text-center">Buổi học</th>
                     <th></th>
                 </tr>
@@ -89,7 +89,7 @@
                     <td>{{ $rows->class_name }}</td>
                     <td>{{ $rows->product->name }}</td>
                     <td>{{ $rows->teacher->name }}</td>
-                    <td>{{ $rows->start_day }}</td>
+                    <td>{{ $rows->start_day }} {{ isset($rows->end_day) ? '~ ' . $rows->end_day : '' }}</td>
                     <td class="text-center">
                         @if ($rows->end_day)
                             <i class="fa fa-check-circle text-success" aria-hidden="true"></i>

@@ -37,7 +37,7 @@ class ClassController extends Controller
     {
         return view('admin.class.class-create-update', [
             'products' => Product::all(),
-            'teachers' => Teacher::all(),
+            'teachers' => $this->getFreeTeachers(),
         ]);
     }
 
@@ -73,7 +73,7 @@ class ClassController extends Controller
     {
         return view('admin.class.class-create-update', [
             'products' => Product::all(),
-            'teachers' => Teacher::all(),
+            'teachers' => $this->getFreeTeachers(),
             'users' => $class->users()->paginate(10),
             'class' => $class,
         ]);
@@ -114,5 +114,11 @@ class ClassController extends Controller
     public function exportUsers(Classes $class)
     {
         return Excel::download(new UserExport($class), 'users.xlsx');
+    }
+
+    private function getFreeTeachers()
+    {
+        $teacherIds = Classes::where('end_day', '>=', now())->get()->pluck(['teacher_id']);
+        return Teacher::whereNotIn('id', $teacherIds)->get();
     }
 }
