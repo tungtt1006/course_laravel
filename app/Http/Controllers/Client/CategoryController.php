@@ -17,9 +17,9 @@ class CategoryController extends Controller
     {
         $categories = [];
         if ($request->filled('except')) {
-            $categories = Category::where('id', '!=', $request->except)->orderBy('id', 'desc')->limit(3)->get();
+            $categories = Category::where('id', '!=', $request->except)->where('display', 1)->orderBy('id', 'desc')->limit(3)->get();
         } else {
-            $categories = Category::orderBy('id', 'desc')->get();
+            $categories = Category::where('display', 1)->orderBy('id', 'desc')->get();
         }
         return ['categories' => $categories];
     }

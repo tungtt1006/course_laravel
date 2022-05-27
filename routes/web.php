@@ -40,4 +40,6 @@ Route::middleware('auth', 'role')->group(function () {
 
     Route::resource('orders', 'Admin\OrderController');
     Route::get('orders/{order}/export-pdf', 'Admin\OrderController@exportPdf')->name('orders.export_pdf');
+
+    Route::resource('teachers', 'Admin\TeacherController')->except('show');
 });

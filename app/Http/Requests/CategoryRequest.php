@@ -25,7 +25,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name' => 'bail| required| alpha| between: 1, 10',
-            'description' => 'bail| between: 1, 100',
+            'description' => 'bail| between: 1, 1000',
             'display' => 'bail| required| numeric| between: 0, 1'
         ];
     }
@@ -41,7 +41,7 @@ class CategoryRequest extends FormRequest
             'name.required' => 'Tên không được bỏ trống',
             'name.between' => 'Tên phải có độ dài từ 1 đến 10 chữ cái',
             'name.alpha' => 'Tên chỉ được chứa chữ cái',
-            'description.between' => 'Mô tả không được quá 100 kí tự',
+            'description.between' => 'Mô tả không được quá 1000 kí tự',
             'display.required' => 'Giới tính không được bỏ trống',
             'display.numeric' => 'Giới tính không được là chữ',
             'display.between' => 'Chỉ được chọn các giá trị cho sẵn',

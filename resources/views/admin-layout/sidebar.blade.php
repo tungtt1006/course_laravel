@@ -34,6 +34,8 @@
             $currentRoute = 'classes';
         elseif (Route::currentRouteNamed('orders.index', 'orders.create', 'orders.edit'))
             $currentRoute = 'orders';
+        elseif (Route::currentRouteNamed('teachers.index', 'teachers.create', 'teachers.edit'))
+            $currentRoute = 'teachers';
     @endphp
     <div class="list-group rounded-0 mt-4">
         <a
@@ -41,36 +43,42 @@
             class="list-group-item list-group-item-action p-3 {{ ($currentRoute === 'statistics') ? 'active' : '' }}"
             aria-current="true"
         >
-            <i class="fa fa-bar-chart ($currentRoute === 'statistics') ? 'text-white' : 'text-success'" aria-hidden="true"></i> Thống kê
+            <i class="fa fa-bar-chart {{ ($currentRoute === 'statistics') ? 'text-white' : 'text-success' }}" aria-hidden="true"></i> Thống kê
         </a>
 
         <a
             href="{{ route('users.index') }}"
             class="list-group-item list-group-item-action p-3 {{ ($currentRoute === 'users') ? 'active' : '' }}"
         >
-            <i class="fa fa-user ($currentRoute === 'users') ? 'text-white' : 'text-success'" aria-hidden="true"></i> Tài khoản
+            <i class="fa fa-user {{ ($currentRoute === 'users') ? 'text-white' : 'text-success' }}" aria-hidden="true"></i> Tài khoản
         </a>
 
         <a
             href="{{ route('category.index') }}"
             class="list-group-item list-group-item-action p-3 {{ ($currentRoute === 'categories') ? 'active' : '' }}"
         >
-            <i class="fa fa-th-list ($currentRoute === 'categories') ? 'text-white' : 'text-success'" aria-hidden="true"></i> Danh mục
+            <i class="fa fa-th-list {{ ($currentRoute === 'categories') ? 'text-white' : 'text-success' }}" aria-hidden="true"></i> Danh mục
         </a>
         <a
             href="{{ route('classes.index') }}"
             class="list-group-item list-group-item-action p-3 {{ ($currentRoute === 'classes') ? 'active' : '' }}"
         >
-            <i class="fa fa-book ($currentRoute === 'classes') ? 'text-white' : 'text-success'" aria-hidden="true"></i> Lớp học
+            <i class="fa fa-book {{ ($currentRoute === 'classes') ? 'text-white' : 'text-success' }}" aria-hidden="true"></i> Lớp học
         </a>
         <a
             href="{{ route('orders.index') }}"
-            class="list-group-item list-group-item-action p-3 {{ ( $currentRoute === 'orders') ? 'active' : '' }}"
+            class="list-group-item list-group-item-action p-3 {{ ($currentRoute === 'orders') ? 'active' : '' }}"
         >
-        <i class="fa fa-money ($currentRoute === 'orders') ? 'text-white' : 'text-success'" aria-hidden="true"></i> Hóa đơn
+            <i class="fa fa-money {{ ($currentRoute === 'orders') ? 'text-white' : 'text-success' }}" aria-hidden="true"></i> Hóa đơn
+        </a>
+        <a
+            href="{{ route('teachers.index') }}"
+            class="list-group-item list-group-item-action p-3 {{ ($currentRoute === 'teachers') ? 'active' : '' }}"
+        >
+            <i class="fa fa-user-secret {{ ($currentRoute === 'teachers') ? 'text-white' : 'text-success' }}" aria-hidden="true"></i> Giáo viên
         </a>
         <a href="{{ route('auth.logout') }}" class="list-group-item list-group-item-action p-3">
-        <i class="fa fa-sign-out text-success" aria-hidden="true"></i> Đăng xuất
+            <i class="fa fa-sign-out text-success" aria-hidden="true"></i> Đăng xuất
         </a>
     </div>
 </div>

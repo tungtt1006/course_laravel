@@ -15,7 +15,8 @@ class Teacher extends Model
      */
     protected $fillable = [
         'name',
-        'description'
+        'product_id',
+        'description',
     ];
 
     /**
@@ -24,4 +25,9 @@ class Teacher extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public function product()
+    {
+        return $this->belongsTo('App\Models\Product');
+    }
 }
