@@ -23,7 +23,6 @@ Route::get('categories/{category}/products', 'Client\CategoryProductController@i
 Route::get('categories', 'Client\CategoryController@index');
 
 Route::get('banners', 'Client\BannerController@index');
-// Route::post('stripe/webhook', 'Client\OrderController@handleWebhook');
 
 Route::resource('teachers', 'Client\TeacherController')->only(['index'])->names([
     'index' => 'client.teachers.index',
@@ -33,6 +32,8 @@ Route::middleware('auth:api')->group(function () {
     Route::get('auth/health', function () {
         return response()->json(['status' => 200]);
     });
+
+    Route::post('stripe/webhook', 'Client\OrderController@handleWebhook');
 
     Route::get('notices/new-class', 'Client\NoticeController@storeNotiNewClass');
 
