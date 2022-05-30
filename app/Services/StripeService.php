@@ -3,9 +3,12 @@
 namespace App\Services;
 
 use Stripe\StripeClient;
+use App\Traits\ProductHelper;
 
 class StripeService
 {
+    use ProductHelper;
+
     private $stripe;
 
     public function __construct()
@@ -15,23 +18,29 @@ class StripeService
         );
     }
 
-    private function createPrice($productId, $unitAmount)
+    public function createPrice($productId, $unitAmount)
     {
         return $this->stripe->prices->create([
-            'unit_amount' => $unitAmount,
-            'currency' => 'vnd',
             'product' => $productId,
+            'unit_amount_decimal' => (string) $unitAmount,
+            'currency' => 'vnd',
+            'billing_scheme' => 'per_unit',
         ]);
     }
 
-    public function createProduct()
+    public function createProduct($product)
     {
-        $this->createPrice();
-        return $this->stripe->prices->create([
-            'unit_amount' => $unitAmount,
-            'currency' => 'vnd',
-            'product' => $productId,
+        $stripeProduct = $this->stripe->products->create([
+            'name' => $product->name,
         ]);
+
+        $unitAmount = $this->calcPrice($product->price, $product->discount);
+        $productPrice = $this->createPrice($stripeProduct->id, $unitAmount);
+
+        return [
+            'stripe_product_id' => $stripeProduct->id,
+            'stripe_price_id' => $productPrice->id,
+        ];
     }
 
     public function createSession($class)
