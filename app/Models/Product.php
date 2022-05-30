@@ -24,6 +24,8 @@ class Product extends Model
         'price',
         'photo',
         'discount',
+        'stripe_product_id',
+        'stripe_price_id',
     ];
 
     /**

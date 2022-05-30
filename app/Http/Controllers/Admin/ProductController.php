@@ -8,9 +8,13 @@ use App\Models\Category;
 use App\Models\Certificate;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Services\StripeService;
+use App\Traits\ProductHelper;
 
 class ProductController extends Controller
 {
+    use ProductHelper;
+
     /**
      * Get category
      *
@@ -50,7 +54,7 @@ class ProductController extends Controller
         $request->validate(['photo' => 'required|image']);
 
         $photoName = time() . '_' . str_replace(' ', '', $request->name) . '.' . $request->photo->extension();
-        $product = $category->products()->create([
+        $product = $category->products()->make([
             'name' => $request->name,
             'certificate_id' => $request->certificateid,
             'description' => $request->description,
@@ -61,7 +65,13 @@ class ProductController extends Controller
             'photo' => '/storage/img/products/' . $photoName,
             'discount' => $request->discount,
         ]);
-        if ($product) {
+        $stripe = new StripeService;
+        $productInfo = $stripe->createProduct($product);
+        $product->stripe_product_id = $productInfo['stripe_product_id'];
+        $product->stripe_price_id = $productInfo['stripe_price_id'];
+        $result = $category->products()->create($product->toArray());
+
+        if ($result) {
             $request->photo->storeAs('img/products', $photoName, 'public');
             return redirect()->route('categories.products.index', $category->id);
         }
@@ -108,6 +118,15 @@ class ProductController extends Controller
             $nameImg = substr($product->photo, 9);
             $photoName = time() . '_' . str_replace(' ', '', $request->name) . '.' . $request->photo->extension();
             $arr['photo'] = '/storage/img/products/' . $photoName;
+        }
+
+        if ($product->discount != (int) $request->discount
+            || $product->price != (int) $request->price
+        ) {
+            $newPrice = $this->calcPrice($request->price, $request->discount);
+            $stripe = new StripeService;
+            $productPrice = $stripe->createPrice($product->stripe_product_id, $newPrice);
+            $arr['stripe_price_id'] = $productPrice->id;
         }
 
         $rowUpdated = $product->update($arr);
