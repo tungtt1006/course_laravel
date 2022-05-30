@@ -3,7 +3,7 @@
 @section("header")
 <div class="row">
     <div class="col-10">
-        <h3>Quản lý tài khoản</h3>
+        <h3>{{ isset($data) ? $data->name : 'Thêm mới danh mục'  }}</h3>
     </div>
 </div>
 @endsection

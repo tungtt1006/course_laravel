@@ -3,7 +3,7 @@
 @section("header")
 <div class="row">
     <div class="col-10">
-        <h3>Thêm mới buổi học</h3>
+        <h3>{{ (count($periods) > 0) ? 'Cập nhật' : 'Thêm mới' }} buổi học</h3>
     </div>
 </div>
 @endsection
