@@ -90,7 +90,7 @@
                             value="{{ $row->id }}"
                             {{ ($teacherId == $row->id) ? 'selected' : '' }}
                         >
-                            {{ $row->name }}
+                            {{ $row->name . ' (' . $row->product->name . ')' }}
                         </option>
                     @endforeach
                 </select>

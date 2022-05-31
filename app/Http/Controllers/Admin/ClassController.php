@@ -73,7 +73,7 @@ class ClassController extends Controller
     {
         return view('admin.class.class-create-update', [
             'products' => Product::all(),
-            'teachers' => $this->getFreeTeachers(),
+            'teachers' => $this->getFreeTeachers()->where('product_id', $class->product_id),
             'users' => $class->users()->paginate(10),
             'class' => $class,
         ]);
@@ -119,6 +119,6 @@ class ClassController extends Controller
     private function getFreeTeachers()
     {
         $teacherIds = Classes::where('end_day', '>=', now())->get()->pluck(['teacher_id']);
-        return Teacher::whereNotIn('id', $teacherIds)->get();
+        return Teacher::with('product')->whereNotIn('id', $teacherIds)->get();
     }
 }
