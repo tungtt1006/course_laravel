@@ -8,6 +8,7 @@ use App\Models\Teacher;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\UserExport;
 use App\Events\ClassCreated;
 
@@ -114,6 +115,18 @@ class ClassController extends Controller
     public function exportUsers(Classes $class)
     {
         return Excel::download(new UserExport($class), 'users.xlsx');
+    }
+
+    public function exportPeriods($classId)
+    {
+        $class = Classes::with(['periods', 'teacher'])->findOrFail($classId);
+
+        if ($class->periods->count() <= 0) {
+            return redirect()->back();
+        }
+
+        $pdf = Pdf::loadView('pdf.class-list', compact('class'));
+        return $pdf->download('class_list.pdf');
     }
 
     private function getFreeTeachers()

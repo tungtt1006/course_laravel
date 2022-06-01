@@ -35,7 +35,8 @@ Route::middleware('auth', 'role')->group(function () {
     Route::resource('categories.products', 'Admin\ProductController');
 
     Route::resource('classes', 'Admin\ClassController');
-    Route::get('classes/{class}/export', 'Admin\ClassController@exportUsers')->name('classes.export_users');
+    Route::get('classes/{class}/export-users', 'Admin\ClassController@exportUsers')->name('classes.export_users');
+    Route::get('classes/{class}/export-periods', 'Admin\ClassController@exportPeriods')->name('periods.export_pdf');
     Route::resource('classes.periods', 'Admin\PeriodController');
 
     Route::resource('orders', 'Admin\OrderController');

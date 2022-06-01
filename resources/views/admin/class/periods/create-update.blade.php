@@ -5,6 +5,11 @@
     <div class="col-10">
         <h3>{{ (count($periods) > 0) ? 'Cập nhật' : 'Thêm mới' }} buổi học</h3>
     </div>
+    <div class="col-2">
+        <a href="{{ route('periods.export_pdf', $class->id) }}" type="button" class="btn btn-warning btn-sm mt-1">
+          <i class="fa fa-print" aria-hidden="true"></i> In danh sách
+        </a>
+    </div>
 </div>
 @endsection
 
