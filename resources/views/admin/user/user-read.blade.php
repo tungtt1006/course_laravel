@@ -109,5 +109,4 @@
 <div class="row">
     {{ $data->links() }}
 </div>
-</div>
 @endsection

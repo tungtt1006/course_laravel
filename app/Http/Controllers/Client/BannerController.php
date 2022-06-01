@@ -16,7 +16,7 @@ class BannerController extends Controller
     {
         $banners = Banner::where('display', '=', 1)->limit(3)->get();
         foreach ($banners as $banner) {
-            $banner->photo = env('WEB_HOST_NAME').'/storage/img/banners/'.$banner->photo;
+            $banner->photo = env('WEB_HOST_NAME') . $banner->photo;
         }
         return $banners;
     }

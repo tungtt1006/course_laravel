@@ -42,4 +42,6 @@ Route::middleware('auth', 'role')->group(function () {
     Route::get('orders/{order}/export-pdf', 'Admin\OrderController@exportPdf')->name('orders.export_pdf');
 
     Route::resource('teachers', 'Admin\TeacherController')->except('show');
+
+    Route::resource('banners', 'Admin\BannerController');
 });

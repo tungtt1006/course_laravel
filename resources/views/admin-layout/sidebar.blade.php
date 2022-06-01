@@ -22,7 +22,8 @@
             'category.create',
             'category.edit',
             'categories.products.index',
-            'categories.products.index'
+            'categories.products.edit',
+            'categories.products.create'
         ))
             $currentRoute = 'categories';
         elseif (Route::currentRouteNamed(
@@ -36,6 +37,8 @@
             $currentRoute = 'orders';
         elseif (Route::currentRouteNamed('teachers.index', 'teachers.create', 'teachers.edit'))
             $currentRoute = 'teachers';
+        elseif (Route::currentRouteNamed('banners.index', 'banners.create', 'banners.edit'))
+            $currentRoute = 'banners';
     @endphp
     <div class="list-group rounded-0 mt-4">
         <a
@@ -76,6 +79,12 @@
             class="list-group-item list-group-item-action p-3 {{ ($currentRoute === 'teachers') ? 'active' : '' }}"
         >
             <i class="fa fa-user-secret {{ ($currentRoute === 'teachers') ? 'text-white' : 'text-success' }}" aria-hidden="true"></i> Giáo viên
+        </a>
+        <a
+            href="{{ route('banners.index') }}"
+            class="list-group-item list-group-item-action p-3 {{ ($currentRoute === 'banners') ? 'active' : '' }}"
+        >
+            <i class="fa fa-bell {{ ($currentRoute === 'banners') ? 'text-white' : 'text-success' }}" aria-hidden="true"></i> Quảng cáo
         </a>
         <a href="{{ route('auth.logout') }}" class="list-group-item list-group-item-action p-3">
             <i class="fa fa-sign-out text-success" aria-hidden="true"></i> Đăng xuất

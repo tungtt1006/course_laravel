@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    <h4 style="text-align: center;">Hóa đơn đăng ký học</h4>
+    <h2 style="text-align: center;">Hóa đơn đăng ký học</h2>
     <div>
         <table style="margin:auto;" class="main">
             <tr>
@@ -51,7 +51,7 @@
                 <td>{{ $order->class->class_name }}</td>
                 <td>{{ $order->created_at }}</td>
                 <td>0</td>
-                <td>{{ number_format($order->price) }}</td>
+                <td>{{ 0 }}</td>
                 <td>{{ number_format($order->price) }}</td>
             </tr>
             <tr>
