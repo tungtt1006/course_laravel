@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
 
@@ -14,26 +13,11 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $type = isset($request->type) ? $request->type : 'display';
-        $order = isset($request->order) ? $request->order : 'desc';
-        $category = Category::orderBy($type, $order)->paginate(5);
+        $category = Category::get();
         return view('admin.category.category-read', ["data" => $category]);
     }
-
-    /**
-     * Sắp xếp theo request
-     *
-     * return data được sắp xếp
-     */
-    // public function arrangeCategory($cate, $type)
-    // {
-    //     $data = Category::select('id', 'name', 'display')
-    //         ->orderBy($cate, $type)
-    //         ->paginate(5);
-    //     return view('admin.category_read', ["data" => $data]);
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -59,9 +43,8 @@ class CategoryController extends Controller
         $category->display = $request->display;
         if ($category->save()) {
             return redirect(route('category.index'));
-        } else {
-            return redirect(route("403"));
         }
+        return redirect(route("403"));
     }
 
     /**

@@ -26,6 +26,13 @@ class Category extends Model
      */
     protected $dates = ['deleted_at'];
 
+    protected $appends = ['photoUrl'];
+
+    public function getPhotoUrlAttribute()
+    {
+        return config('app.url') . $this->attributes['photo'];
+    }
+
     /**
      * Get the course for a category
      */
