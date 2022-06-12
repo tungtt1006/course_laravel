@@ -13,6 +13,7 @@ class UserController extends ClientController
         $user = $this->auth()->user();
         $orders = $user->orders()->get();
         $user->orderNumber = $orders->count();
+        $user->photoUrl = config('app.url') . $user->photo;
         foreach ($orders as $order) {
             $user->totalMoney += $order->price;
         }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -37,9 +38,8 @@ class UserController extends Controller
         $user = User::find($id);
         if ($user) {
             return view("admin.user.user-create-update", ["data" => $user]);
-        } else {
-            return redirect(route("403"));
         }
+        return redirect()->route("403");
     }
 
     /**
@@ -49,43 +49,25 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        $users = User::find($id);
-        $users->name = $request->name;
-        $users->email = $request->email;
+        $user->name = $request->name;
+        $user->email = $request->email;
         if (isset($request->password)
-            && $users->password === $request->password_confirmation
+            && isset($request->password_confirmation)
+            && Hash::check($request->password_confirmation, $user->password)
         ) {
-            $users->password = bcrypt($request->password);
+            $user->password = bcrypt($request->password);
         }
-        $users->address = $request->address;
-        $users->phone = $request->phone;
-        $users->role = $request->role;
-        $users->gender = $request->gender;
-        // Upload file
-        // if ($request->photo != '') {
-        //     $path = public_path().'/upload/users/';
-        //     // code for remove old file
-        //     if ($users->photo != '' && $users->photo != null) {
-        //         unlink($path.$users->photo);
-        //     }
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->role = $request->role;
+        $user->gender = $request->gender;
 
-        //     // Upload new file
-        //     $image = $request->file('photo');
-        //     $storedPath = $image->move('upload/users', $image->getClientOriginalName());
-
-        //     if ($image->getClientOriginalName() != null) {
-        //         $users->photo = $image->getClientOriginalName();
-        //     } else {
-        //         $users->photo = '';
-        //     }
-        // }
-        if ($users->save()) {
+        if ($user->save()) {
             return redirect(route("users.index"));
-        } else {
-            return redirect(route("403"));
         }
+        return redirect(route("403"));
     }
 
     /**

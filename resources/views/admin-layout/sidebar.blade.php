@@ -1,15 +1,18 @@
-<div style="position:fixed; top: 0; left: 0; border-right: 1px solid rgba(0,0,0,.125);" class="bg-body h-100 w-25 shadow-sm">
+<div
+    style="position:fixed; top: 0; left: 0; border-right: 1px solid rgba(0,0,0,.125);"
+    class="bg-body h-100 w-25 shadow-sm"
+>
     <h1 class="text-white m-0 p-2 bg-success">XT Admin</h1>
     <div class="mt-4 text-center">
         <img
             class="shadow-sm rounded-circle"
             width="100px"
             height="100px"
-            src="{{ asset('storage/img/avatar' . Auth::user()->photo) }}"
+            src="{{ asset(auth()->user()->photo) }}"
             alt="Avatar"
         >
-        <h5 class="mt-1">{{ Auth::user()->name }}</h5>
-        <h6 class="text-secondary">{{ Auth::user()->email }}</h6>
+        <h5 class="mt-1">{{ auth()->user()->name }}</h5>
+        <h6 class="text-secondary">{{ auth()->user()->email }}</h6>
     </div>
     @php
         $currentRoute = '';

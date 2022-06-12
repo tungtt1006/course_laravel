@@ -133,11 +133,11 @@
         <div class="row mt-3">
             <div class="col-2">Điện thoại</div>
             <div class="col-10 pl-0">
-                <input 
-                    type="text" 
-                    value="{{ $phone }}" 
-                    name="phone" 
-                    class="form-control" 
+                <input
+                    type="text"
+                    value="{{ $phone }}"
+                    name="phone"
+                    class="form-control"
                     required
                 >
             </div>
@@ -171,7 +171,7 @@
                         value="0"
                         {{ ($role == 0) ? 'selected' : '' }}
                     >
-                        Nhân viên
+                        Học viên
                     </option>
                 </select>
             </div>

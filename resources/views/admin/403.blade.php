@@ -1,7 +1,7 @@
-@extends("layouts.layout")
+@extends("admin-layout.layout")
 
 @section("main")
-<div style="padding-bottom: 400px;">
-    <h4>Not Found!!</h4>
+<div>
+    <h1 class="text-center my-4">Lỗi !!!</h1>
 </div>
 @endsection
