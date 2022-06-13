@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -37,29 +38,22 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $category = new Category;
-        $category->name = $request->name;
-        $category->description = isset($request->description) ? $request->description : '';
-        $category->display = $request->display;
-        if ($category->save()) {
+        $request->validate(['photo' => 'required|image']);
+
+        $photoName = time() . '_' . str_replace(' ', '', $request->name) . '.' . $request->photo->extension();
+        $category = Category::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'display' => $request->display,
+            'photo' => '/storage/img/categories/' . $photoName,
+        ]);
+
+        if ($category) {
+            $request->photo->storeAs('img/categories', $photoName, 'public');
             return redirect(route('category.index'));
         }
-        return redirect(route("403"));
+        return redirect()->route("403");
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public function show($id)
-    // {
-    //     $products = Category::find($id)->products()->paginate(5);
-    //     $category = Category::find($id);
-    //     // dd($data);
-    //     return view('client.DetailCategory', ["products" => $products, "category" => $category]);
-    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -67,14 +61,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        $category = Category::find($id);
-        if ($category) {
-            return view('admin.category.category-create-update', ['data' => $category]);
-        } else {
-            return redirect(route("403"));
-        }
+        return view('admin.category.category-create-update', ['data' => $category]);
     }
 
     /**
@@ -84,17 +73,28 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(CategoryRequest $request, Category $category)
     {
-        $category = Category::find($id);
-        $category->name = $request->name;
-        $category->description = isset($request->description) ? $request->description : '';
-        $category->display = $request->display;
-        if ($category->save()) {
-            return redirect(route('category.index'));
-        } else {
+        $arr = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'display' => $request->display,
+        ];
+        if ($request->hasFile('photo')) {
+            $nameImg = substr($category->photo, 9);
+            $photoName = time() . '_' . str_replace(' ', '', $request->name) . '.' . $request->photo->extension();
+            $arr['photo'] = '/storage/img/categories/' . $photoName;
+        }
+
+        if (!$category->update($arr)) {
             return redirect(route("403"));
         }
+
+        if ($request->hasFile('photo') && Storage::disk('public')->exists($nameImg)) {
+            Storage::disk('public')->delete($nameImg);
+            $request->photo->storeAs('img/categories', $photoName, 'public');
+        }
+        return redirect()->route('category.index');
     }
 
     /**
@@ -103,14 +103,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        $category = Category::find($id);
-        if ($category != null) {
-            $category->delete();
-            return redirect(route("category.index"));
-        } else {
-            return redirect(route("403"));
+        if ($category->delete()) {
+            return redirect()->route("category.index");
         }
+        return redirect()->route("403");
     }
 }

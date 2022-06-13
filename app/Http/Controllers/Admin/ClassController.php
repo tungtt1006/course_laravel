@@ -23,7 +23,7 @@ class ClassController extends Controller
     {
         $type = isset($request->type) ? $request->type : 'id';
         $order = isset($request->order) ? $request->order : 'desc';
-        $classes = Classes::orderBy($type, $order)->paginate(50);
+        $classes = Classes::orderBy($type, $order)->paginate(10);
         return view('admin.class.class-read', [
             'classes' => $classes,
         ]);
