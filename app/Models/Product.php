@@ -64,4 +64,9 @@ class Product extends Model
     {
         return $query->where('display', 1);
     }
+
+    public static function isSetHot()
+    {
+        return self::where('hot', 1)->count() < 4;
+    }
 }

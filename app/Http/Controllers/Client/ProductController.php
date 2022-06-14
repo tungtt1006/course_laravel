@@ -8,30 +8,28 @@ use App\Models\Product;
 
 class ProductController extends ClientController
 {
-    public function index(Request $request)
+    public function getNewestProducts(Request $request)
     {
-        $products = [];
-        $type = $request->query('type');
-        switch ($type) {
-            case 'hightlight':
-                $products = Product::highlightProducts()->paginate(4);
-                break;
-            case 'newest':
-                $products = Product::newestProducts()->paginate(4);
-                break;
-            default:
-                $products = Product::orderBy('id', 'desc')->paginate(9);
+        if (!isset($request->page_size)) {
+            return $this->responseError();
         }
-        return $products;
+        $newestProducts = Product::newestProducts()->simplePaginate($request->page_size);
+        return $this->responseSuccess($newestProducts);
     }
 
-    public function show(Product $product)
+    public function getHotProducts()
     {
+        $hotProducts = Product::highlightProducts()->limit(4)->get();
+        return $this->responseSuccess($hotProducts);
+    }
+
+    public function show($productId)
+    {
+        $product = Product::with('certificate')->findOrFail($productId);
         $class = $product->classes()->with('teacher')
             ->where('start_day', '>', now())
             ->whereNotNull('end_day')
             ->first();
-        $product = $product::with('certificate')->find($product->id);
 
         return $this->responseSuccess([
             'product' => $product,

@@ -53,6 +53,12 @@ class ProductController extends Controller
     {
         $request->validate(['photo' => 'required|image']);
 
+        if ($request->hot && !Product::isSetHot()) {
+            return back()
+                ->withErrors('Số lượng khóa học nổi bật không được quá 4 !!')
+                ->withInput();
+        }
+
         $photoName = time() . '_' . str_replace(' ', '', $request->name) . '.' . $request->photo->extension();
         $product = $category->products()->make([
             'name' => $request->name,
@@ -103,6 +109,12 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Category $category, Product $product)
     {
+        if ($request->hot && !Product::isSetHot()) {
+            return back()
+                ->withErrors('Số lượng khóa học nổi bật không được quá 4 !!')
+                ->withInput();
+        }
+
         $arr = [
             'name' => $request->name,
             'certificate_id' => $request->certificateid,

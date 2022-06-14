@@ -1,17 +1,20 @@
-version: '3.4'
+version: '3.8'
+
 services:
     db:
         image: mysql:5.7
         volumes:
-            - mysql-data:/var/lib/mysql
+            - mysql:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: 12345
+            MYSQL_USER: dbuser
+            MYSQL_PASSWORD: dbpass
             MYSQL_DATABASE: course_laravel
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         ports:
-            - 8081:80
+            - "8081:80"
         links:
             - db
         environment:
@@ -19,6 +22,7 @@ services:
             PMA_HOST: db
             PMA_USER: root
             PMA_PASSWORD: 12345
+
     web:
         tty: true
         stdin_open: true
@@ -27,7 +31,7 @@ services:
         links:
             - db
         ports:
-            - 8000:8000
+            - "8000:8000"
         environment:
             APP_DEBUG: 'true'
             XDEBUG_MODE: coverage
@@ -35,21 +39,13 @@ services:
         volumes:
             - .:/app:cached
             - ./docker-dev/web/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
-            # - composer_caches:/app/vendor
 
     mailhog:
         image: mailhog/mailhog
         logging:
             driver: 'none'  # disable saving logs
         ports:
-        - 1025:1025
-        - 8025:8025
-    # cron:
-    #     build: ./docker-dev/cron
-    #     command: crond -f
-    #     volumes:
-    #     - .:/app
-    #     - composer_caches:/app/vendor
+        - "8025:8025"
 volumes:
   composer_caches:
-  mysql-data:
+  mysql:
