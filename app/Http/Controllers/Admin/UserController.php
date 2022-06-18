@@ -99,29 +99,17 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->address = isset($request->address) ? $request->address : '';
-        $user->phone = $request->phone;
-        $user->role = $request->role;
-        $user->gender = $request->gender;
-        // $user->file = '';
-        $user->save();
-        return redirect(route("users.index"));
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'address' => isset($request->address) ? $request->address : '',
+            'phone' => $request->phone,
+            'role' => $request->role,
+            'gender' => $request->gender,
+        ]);
+        return redirect()->route("users.index");
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public function show($id)
-    // {
-    //     //
-    // }
 
     /**
      * Remove the specified resource from storage.

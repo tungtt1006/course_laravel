@@ -204,12 +204,12 @@
         </div>
 
         <!-- Upload image -->
-        <div class="row mt-3">
+        <!-- <div class="row mt-3">
             <div class="col-2">Ảnh đại diện</div>
             <div class="col-10 pl-0">
                 <input type="file" name="photo">
             </div>
-        </div>
+        </div> -->
 
         <!-- Buttons -->
         <div class="row mt-5 mb-2">

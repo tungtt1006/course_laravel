@@ -24,12 +24,12 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail| required| between: 50',
-            'email' => 'bail| required| email',
-            'password' => 'bail| required| confirmed| between: 8, 11',
-            'phone' => 'bail| required| regex: /[0-9]/| size: 10',
-            'role' => 'bail| required| numeric',
-            'gender' => 'bail| required| numeric| between: 0,2'
+            'name' => 'bail|required|between: 1, 50',
+            'email' => 'bail|required|email|unique:users',
+            'password' => 'bail|required|confirmed|between: 8, 11',
+            'phone' => 'bail|required|regex: /[0-9]/|size: 10',
+            'role' => 'bail|required|numeric',
+            'gender' => 'bail|required|numeric|between: 0,2'
         ];
     }
 
@@ -45,7 +45,8 @@ class UserRequest extends FormRequest
             'name.between' => 'Tên phải có độ dài từ 1 đến 10 chữ cái',
             'name.alpha' => 'Tên chỉ được chứa chữ cái',
             'email.required' => 'Email không được bỏ trống',
-            'email.required' => 'Bạn chưa nhập đúng định dạng email',
+            'email.email' => 'Bạn chưa nhập đúng định dạng email',
+            'email.unique' => 'Email đã tồn tại',
             'password.required' => 'Mật khẩu không được bỏ trống',
             'password.between' => 'Mật khẩu phải có độ dài từ 8 đến 10 kí tự',
             'password.confirmed' => 'Mật khẩu nhập lại không khớp',

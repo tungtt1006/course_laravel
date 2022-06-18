@@ -17,6 +17,7 @@ class Teacher extends Model
         'name',
         'product_id',
         'description',
+        'photo'
     ];
 
     /**

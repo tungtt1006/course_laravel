@@ -21,7 +21,18 @@
         <form method="post" action="{{ route('teachers.store') }}" enctype="multipart/form-data" class="row">
     @endif
         @csrf
-        <div class="col-4"></div>
+        <div class="col-4">
+            <img
+                id="output"
+                src="{{ isset($teacher->photo) ? asset($teacher->photo) : '#' }}"
+                class="img-fluid shadow-sm border border-success w-100"
+                style="height: 250px"
+                alt="..."
+            >
+            <div class="mt-4 px-3">
+                <input class="form-control" type="file" name="photo" onchange="loadFile(event)">
+            </div>
+        </div>
         @php
             /**
              * Name
@@ -110,6 +121,16 @@
     </form>
 </div>
 @include('admin.form-error')
+
+<script>
+    var loadFile = function(event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+        URL.revokeObjectURL(output.src) // free memory
+        }
+    }
+</script>
 @endsection
 
 

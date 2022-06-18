@@ -19,73 +19,32 @@
         <table class="table table-hover">
             <thead  class="table-light">
                 <tr>
-                    <th>
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle pb-0 fw-bold" type="button" id="class-id" data-bs-toggle="dropdown" aria-expanded="false">
+                    <th class="text-center">
+                        <div class="dropdown p-0">
+                            <button class="btn dropdown-toggle p-0 fw-bold" type="button" id="class-id" data-bs-toggle="dropdown" aria-expanded="false">
                                 Id
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="class-id">
                                 <li>
                                     <a class="dropdown-item" href="{{ route('classes.index', ['type' => 'id', 'order' => 'desc']) }}">Giảm dần</a>
                                 </li>
-                                <li><a class="dropdown-item" href="{{ route('classes.index', ['type' => 'id', 'order' => 'asc']) }}">Tăng dần</a></li>
-                            </ul>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle pb-0  fw-bold" type="button" id="class-name" data-bs-toggle="dropdown" aria-expanded="false">
-                                Tên
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="class-name">
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('classes.index', ['type' => 'name', 'order' => 'asc']) }}">A-Z</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('classes.index', ['type' => 'name', 'order' => 'desc']) }}">Z-A</a>
+                                    <a class="dropdown-item" href="{{ route('classes.index', ['type' => 'id', 'order' => 'asc']) }}">Tăng dần</a>
                                 </li>
                             </ul>
                         </div>
                     </th>
-                    <th>
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle pb-0  fw-bold" type="button" id="product-name" data-bs-toggle="dropdown" aria-expanded="false">
-                                Môn
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="product-name">
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('classes.index', ['type' => 'email', 'order' => 'asc']) }}">A-Z</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('classes.index', ['type' => 'email', 'order' => 'desc']) }}">Z-A</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle pb-0  fw-bold" type="button" id="teacher-name" data-bs-toggle="dropdown" aria-expanded="false">
-                                Giáo viên
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="teacher-name">
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('classes.index', ['type' => 'email', 'order' => 'asc']) }}">A-Z</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('classes.index', ['type' => 'email', 'order' => 'desc']) }}">Z-A</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </th>
+                    <th>Môn</th>
+                    <th>Giáo viên</th>
                     <th>Thời gian học</th>
                     <th class="text-center">Buổi học</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-            @foreach($classes as $rows)
+            @foreach ($classes as $rows)
                 <tr>
-                    <td>{{ $rows->id }}</td>
+                    <td class="text-center">{{ $rows->id }}</td>
                     <td>{{ $rows->class_name }}</td>
                     <td>{{ $rows->product->name }}</td>
                     <td>{{ $rows->teacher->name }}</td>

@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Teacher;
 use App\Models\Product;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Admin\TeacherRequest;
 
 class TeacherController extends Controller
 {
@@ -37,12 +38,16 @@ class TeacherController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TeacherRequest $request)
     {
+        $request->validate(['photo' => 'bail|required|image']);
+
+        $photoName = time() . '_' . str_replace(' ', '', $request->name) . '.' . $request->photo->extension();
         $teacher = Teacher::create([
             'name' => $request->name,
             'product_id' => $request->product,
             'description' => $request->editor,
+            'photo' => '/storage/img/avatar/' . $photoName,
         ]);
         return redirect()->route('teachers.index');
     }
@@ -69,13 +74,30 @@ class TeacherController extends Controller
      * @param  \App\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Teacher $teacher)
+    public function update(TeacherRequest $request, Teacher $teacher)
     {
-        $rowNumber = $teacher->update([
+        $arr = [
             'name' => $request->name,
             'product_id' => $request->product,
             'description' => $request->editor,
-        ]);
+        ];
+
+        if ($request->hasFile('photo')) {
+            $nameImg = substr($teacher->photo, 9);
+            $photoName = time() . '_' . str_replace(' ', '', $request->name) . '.' . $request->photo->extension();
+            $arr['photo'] = '/storage/img/avatar/' . $photoName;
+        }
+
+        $rowUpdated = $teacher->update($arr);
+        if (!$rowUpdated) {
+            return redirect()->back()->withInput();
+        }
+
+        if ($request->hasFile('photo') && Storage::disk('public')->exists($nameImg)) {
+            Storage::disk('public')->delete($nameImg);
+            $request->photo->storeAs('img/avatar', $photoName, 'public');
+        }
+
         return redirect()->route('teachers.index');
     }
 
