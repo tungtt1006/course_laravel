@@ -69,4 +69,9 @@ class Product extends Model
     {
         return self::where('hot', 1)->count() < 4;
     }
+
+    public function isUpdatedHot()
+    {
+        return $this->where('id', '!=', $this->id)->where('hot', 1)->count() < 4;
+    }
 }

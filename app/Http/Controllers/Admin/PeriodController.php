@@ -29,11 +29,20 @@ class PeriodController extends Controller
 
     public function store(Request $request, Classes $class)
     {
+        $classSessions = $class->sessions;
+        for ($i = 2; $i <= $classSessions; $i++) {
+            if (strtotime($request->date[$i-1]) >= strtotime($request->date[$i])) {
+                return back()
+                    ->withErrors('Các ngày phải theo thứ tự tăng dần!')
+                    ->withInput();
+            }
+        }
+
         if ($class->periods->count() > 0) {
             Period::where('class_id', $class->id)->forceDelete();
         }
         $arr = [];
-        for ($i = 1; $i <= $class->sessions; $i++) {
+        for ($i = 1; $i <= $classSessions; $i++) {
             $arr[] = [
                 'class_id' => $class->id,
                 'date' => $request->date[$i],

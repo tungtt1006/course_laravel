@@ -7,7 +7,7 @@
     </div>
     <div class="col-2">
         <a href="{{ route('periods.export_pdf', $class->id) }}" type="button" class="btn btn-warning btn-sm mt-1">
-          <i class="fa fa-print" aria-hidden="true"></i> In danh sách
+            <i class="fa fa-print" aria-hidden="true"></i> In danh sách
         </a>
     </div>
 </div>
@@ -29,7 +29,7 @@
     </div>
 </div>
 
-<div class="row px-3 mt-4">
+<div class="row p-3">
     <form method="post" action="{{ route('classes.periods.store', $class->id) }}" enctype="multipart/form-data">
         @csrf
         @for ($i = 1; $i <= $class->sessions; $i++)
@@ -71,7 +71,7 @@
         @endfor
 
         <!-- Buttons -->
-        <div class="row mt-5 mb-2">
+        <div class="row mt-3">
             <div class="col-10"></div>
             <div class="col-2 p-0">
                 <a
@@ -89,5 +89,7 @@
             </div>
     </form>
 </div>
+
+@include('admin.form-error')
 @endsection
 
