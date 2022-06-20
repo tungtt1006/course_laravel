@@ -1,5 +1,19 @@
 @extends("admin-layout.layout")
 
+@php
+    $queryString = [];
+    $queryString['from'] = '';
+    $queryString['to'] = '';
+
+    if (isset($_GET['from'])) {
+        $queryString['from'] = $_GET['from'];
+    }
+
+    if (isset($_GET['to'])) {
+        $queryString['to'] = $_GET['to'];
+    }
+@endphp
+
 @section("header")
 <div class="row">
     <div class="col-10">
@@ -13,43 +27,34 @@
 </div>
 @endsection
 
+@section("content-0")
+    @include('admin.class.range-day')
+@endsection
+
 @section("main")
 <div class="row">
     <div class="col">
         <table class="table table-hover">
             <thead  class="table-light">
-                <tr>
-                    <th class="text-center">
-                        <div class="dropdown p-0">
-                            <button class="btn dropdown-toggle p-0 fw-bold" type="button" id="class-id" data-bs-toggle="dropdown" aria-expanded="false">
-                                Id
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="class-id">
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('classes.index', ['type' => 'id', 'order' => 'desc']) }}">Giảm dần</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('classes.index', ['type' => 'id', 'order' => 'asc']) }}">Tăng dần</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </th>
+                <tr class="text-center">
+                    <th>Id</th>
+                    <th>Tên lớp</th>
                     <th>Môn</th>
                     <th>Giáo viên</th>
                     <th>Thời gian học</th>
-                    <th class="text-center">Buổi học</th>
+                    <th>Buổi học</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
             @foreach ($classes as $rows)
-                <tr>
-                    <td class="text-center">{{ $rows->id }}</td>
+                <tr class="text-center">
+                    <td>{{ $rows->id }}</td>
                     <td>{{ $rows->class_name }}</td>
                     <td>{{ $rows->product->name }}</td>
                     <td>{{ $rows->teacher->name }}</td>
                     <td>{{ $rows->start_day }} {{ isset($rows->end_day) ? '~ ' . $rows->end_day : '' }}</td>
-                    <td class="text-center">
+                    <td>
                         @if ($rows->end_day)
                             <i class="fa fa-check-circle text-success" aria-hidden="true"></i>
                         @else
@@ -82,6 +87,9 @@
     </div>
 </div>
 <div class="row">
-    {{ $classes->links() }}
+    {{ $classes->links('custom-pagination.admin-class', [
+        'from' => $queryString['from'],
+        'to' => $queryString['to'],
+    ]) }}
 </div>
 @endsection

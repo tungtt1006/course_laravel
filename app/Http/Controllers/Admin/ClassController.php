@@ -21,9 +21,15 @@ class ClassController extends Controller
      */
     public function index(Request $request)
     {
-        $type = isset($request->type) ? $request->type : 'id';
-        $order = isset($request->order) ? $request->order : 'desc';
-        $classes = Classes::with('teacherWithTrashed')->orderBy($type, $order)->paginate(10);
+        $from = $request->from;
+        $to = $request->to;
+        $query = Classes::with('teacherWithTrashed');
+
+        if ($from && $to) {
+            $query = $query->where('start_day', '>=', $from)->where('start_day', '<=', $to);
+        }
+        $classes = $query->orderBy('id', 'desc')->paginate(10);
+
         return view('admin.class.class-read', [
             'classes' => $classes,
         ]);
@@ -89,14 +95,19 @@ class ClassController extends Controller
      */
     public function update(Request $request, Classes $class)
     {
-        $class->update([
-            'teacher_id' => $request->teacher,
+        $arr = [
             'sessions' => $request->sessions,
             'start_day' => $request->startday,
             'time_in' => $request->timein,
             'time_out' => $request->timeout,
             'days_of_week' => $request->daysofweek,
-        ]);
+        ];
+
+        if ($request->teacher) {
+            $arr['teacher_id'] = $request->teacher;
+        }
+
+        $class->update($arr);
         return redirect()->route('classes.index');
     }
 

@@ -21,6 +21,7 @@
             </div>
             <div class="col-9 pb-4">
                 <div class="container-fluid p-0">
+                    @yield('content-0')
                     <div class="container shadow-sm p-0 mt-3">
                         <div class="card">
                             <div class="card-header text-white bg-success">

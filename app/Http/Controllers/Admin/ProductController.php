@@ -109,7 +109,7 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Category $category, Product $product)
     {
-        if ($request->hot && !Product::isSetHot()) {
+        if ($request->hot && !$product->isUpdatedHot()) {
             return back()
                 ->withErrors('Số lượng khóa học nổi bật không được quá 4 !!')
                 ->withInput();
