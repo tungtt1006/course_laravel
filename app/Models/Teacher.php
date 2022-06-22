@@ -27,6 +27,13 @@ class Teacher extends Model
      */
     protected $dates = ['deleted_at'];
 
+    protected $appends = ['photo_url'];
+
+    public function getPhotoUrlAttribute()
+    {
+        return env('WEB_HOST_NAME') . $this->attributes['photo'];
+    }
+
     public function product()
     {
         return $this->belongsTo('App\Models\Product');
