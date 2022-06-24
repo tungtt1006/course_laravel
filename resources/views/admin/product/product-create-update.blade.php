@@ -3,7 +3,7 @@
 @section("header")
 <div class="row">
     <div class="col-10">
-        <h3>{{ isset($data) ? $data->name : 'Thêm sản phẩm mới' }}</h3>
+        <h3>{{ isset($data) ? $data->name : 'Thêm khóa học mới' }}</h3>
     </div>
 </div>
 @endsection

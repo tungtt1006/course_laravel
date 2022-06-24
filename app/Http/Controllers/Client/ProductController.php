@@ -29,6 +29,7 @@ class ProductController extends ClientController
         $class = $product->classes()->with('teacher')
             ->where('start_day', '>', now())
             ->whereNotNull('end_day')
+            ->orderBy('id', 'asc')
             ->first();
 
         return $this->responseSuccess([

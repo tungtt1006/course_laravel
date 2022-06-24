@@ -56,6 +56,23 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
+        $teacher = Teacher::find($request->teacher);
+
+        if ($teacher == null) {
+            return back()->withErrors('Giáo viên không tồn tại!')->withInput();
+        }
+
+        if ($teacher->product_id != $request->product) {
+            return back()->withErrors('Giáo viên không khớp với khóa học!')->withInput();
+        }
+
+        $sameProductClass = Classes::where('product_id', $request->product)
+            ->where('end_day', '>=', now())
+            ->count();
+        if ($sameProductClass) {
+            return back()->withErrors('Khóa học này đang có lớp mở!')->withInput();
+        }
+
         $class = Classes::create([
             'product_id' => $request->product,
             'teacher_id' => $request->teacher,
