@@ -15,8 +15,6 @@ services:
         image: phpmyadmin/phpmyadmin
         ports:
             - "8081:80"
-        links:
-            - db
         environment:
             PMA_ARBITRARY: 1
             PMA_HOST: db
@@ -26,19 +24,19 @@ services:
     web:
         tty: true
         stdin_open: true
-        command: sh /docker-entrypoint.sh
-        build: ./docker-dev/web
-        links:
+        build:
+            context: "."
+            dockerfile: ./docker/web/Dockerfile
+        command: /scripts/entrypoint.sh
+        # environment:
+        #     PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/app/vendor/bin
+        volumes:
+            - .:/var/www/html
+            - ./docker/web/scripts:/scripts
+        depends_on:
             - db
         ports:
             - "8000:8000"
-        environment:
-            APP_DEBUG: 'true'
-            XDEBUG_MODE: coverage
-            PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/app/vendor/bin
-        volumes:
-            - .:/app:cached
-            - ./docker-dev/web/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
 
     mailhog:
         image: mailhog/mailhog
@@ -47,5 +45,4 @@ services:
         ports:
         - "8025:8025"
 volumes:
-  composer_caches:
   mysql:
