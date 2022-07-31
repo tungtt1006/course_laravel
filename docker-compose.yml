@@ -28,15 +28,25 @@ services:
             context: "."
             dockerfile: ./docker/web/Dockerfile
         command: /scripts/entrypoint.sh
-        # environment:
-        #     PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/app/vendor/bin
         volumes:
             - .:/var/www/html
             - ./docker/web/scripts:/scripts
         depends_on:
             - db
         ports:
-            - "8000:8000"
+            - "9000"
+
+    nginx:
+        tty: true
+        stdin_open: true
+        image: nginx:alpine
+        volumes:
+            - ./nginx/app.conf:/etc/nginx/conf.d/default.conf
+            - ./public/:/var/www/html/public/
+        depends_on:
+            - web
+        ports:
+            - "80:80"
 
     mailhog:
         image: mailhog/mailhog

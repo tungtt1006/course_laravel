@@ -15,7 +15,7 @@ $dir/wait-for-it.sh db:3306 -t 300
 php artisan migrate
 
 # Start services
-php artisan serve --host=0.0.0.0
+php-fpm
 
 # Finally call command issued to the docker service
 exec "$@"
